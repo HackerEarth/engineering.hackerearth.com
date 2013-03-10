@@ -3,7 +3,6 @@ layout: page
 title: we love to code 
 ---
 {% include JB/setup %}
-{% include JB/sharing %}
 {% include JB/analytics %}
 
 ### Posts
