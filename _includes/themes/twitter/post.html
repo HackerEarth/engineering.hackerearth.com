@@ -1,14 +1,13 @@
 <div class="page-header">
-  <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-</div>
-
-{% include JB/follow %}
-
-<div class="row-fluid post-full">
-  <div class="span12">
+    <h2>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h2>
     <div class="date">
       <span>{{ page.date | date_to_long_string }}</strong>
     </div>
+    {% include JB/follow %}
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
     <div class="content">
       {{ content }}
     </div>
@@ -29,7 +28,8 @@
     </ul>
   {% endunless %}  
 
-    <hr>
+  {% include JB/sharing %}
+    <!--
     <div class="pagination">
       <ul>
       {% if page.previous %}
@@ -45,6 +45,7 @@
       {% endif %}
       </ul>
     </div>
+    -->
     <hr>
     {% include JB/comments %}
   </div>

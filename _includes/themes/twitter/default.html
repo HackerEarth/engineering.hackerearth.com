@@ -30,6 +30,24 @@
     <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
     <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
 
+    <style>
+        ul.custom {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul.custom li {
+            display: inline;
+            margin-right:10px;
+        }
+        a.no-color {
+            color: #333;
+        }
+        .separator {
+            margin-left: 7px;
+            color: #707070;
+        }
+    </style>
   </head>
 
   <body>
@@ -53,10 +71,36 @@
       </div>
       <hr>
       <footer>
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
-          <!-- with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> 
-          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a> -->
-        </p>
+      <div style="margin-bottom:20px;">
+        <ul class="custom">
+            <li>
+                &copy; {{ site.time | date: '%Y' }} <a href="http://www.hackerearth.com" target="_blank" class="no-color">{{ site.author.name }}</a>
+                <span class="separator">&middot;</span>
+            </li>
+            <li> 
+                <a href="/about/" target="_blank" class="no-color">About</a> 
+                <span class="separator">&middot;</span>
+            </li>
+            <li> 
+                <a href="http://developer.hackerearth.com"
+                    target="_blank" class="no-color">API</a> 
+                <span class="separator">&middot;</span>
+            </li>
+            <li> 
+                <a href="http://blog.hackerearth.com" class="no-color" target="_blank">Blog</a> 
+                <span class="separator">&middot;</span>
+            </li>
+            <li> 
+                <a
+                    href="http://webchat.freenode.net/?channels=hackerearth&uio=d4"
+                    class="no-color" target="_blank">#hackerearth (IRC)</a> 
+                <span class="separator">&middot;</span>
+            </li>
+             <li>
+                <a href="mailto:admin@hackerearth.com"
+                    class="no-color" target="_blank">Contact</a>
+            </li>
+        </div>
       </footer>
 
     </div>

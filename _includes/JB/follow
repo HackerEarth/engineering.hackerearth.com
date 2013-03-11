@@ -1,16 +1,9 @@
-<style>
-ul.follow-buttons li {
-    list-style: none;
-    float:left;
-    margin-right:10px;
-}
-</style>
-<ul class='follow-buttons' style='margin-left:0px;margin-bottom:10px;'>
+<div style="margin-top:15px;">
+<ul class="custom">
   <li>
     <a href="https://twitter.com/HackerEarth" class="twitter-follow-button"
     data-show-count="false" data-lang="en" data-size="small">Follow
     @HackerEarth</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </li>
   <li>
     <iframe
@@ -18,21 +11,31 @@ ul.follow-buttons li {
     allowtransparency="true" frameborder="0" width="145px" height="20px" scrolling="0"></iframe>
   </li>
   <li>
+  <!--
       <div class="fb-like nav-bar float-left"
       data-href="https://www.facebook.com/HackerEarth" data-send="false"
       data-layout="button_count" data-width="100" data-show-faces="false"
       data-colorscheme="light"></div>
-
-        <script>
-        <!-- facebook button -->
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=109964005787822";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        </script>
+    -->
   </li>
 </ul>
 <div class='clear'></div>
+</div>
+
+<script>
+    <!-- google+ button -->
+    (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    <!-- facebook button -->
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=109964005787822";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: we love to code 
+title: < code > is beautiful
 ---
 {% include JB/setup %}
 {% include JB/analytics %}
