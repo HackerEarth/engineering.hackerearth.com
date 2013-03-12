@@ -10,5 +10,7 @@
 <div style="margin-top: 20px;">
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{site.production_url}}{{page.url}}" data-text="{{page.title}}" data-via="HackerEarth">Tweet</a>
     <g:plusone size="medium" href="{{site.production_url}}{{page.url}}"></g:plusone>
-    <div class="fb-like" data-href="{{site.production_url}}{{page.url}}" data-send="false" data-width="450" data-show-faces="false"></div>
+    <div class="fb-like" data-href="{{site.production_url}}{{page.url}}"
+    data-send="false" data-layout="button_count" data-width="450"
+    data-show-faces="false" data-font="arial"></div>
 </div>
