@@ -1,6 +1,6 @@
 ---
 layout: page
-title: < code > is beautiful
+title: code is beautiful
 ---
 {% include JB/setup %}
 {% include JB/analytics %}
