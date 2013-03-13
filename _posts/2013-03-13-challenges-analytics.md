@@ -7,6 +7,10 @@ tags: [Challenge, Analytics, Google Charts]
 ---
 {% include JB/setup %}
 
+First view the awesome charts and graph for [HackerEarth Practice Challenge] (http://www.hackerearth.com/hackerearth-practice-challenge/analytics/). I will
+explain it's implementation details later in the post.
+
+<br>
 **Why bother for Challenge Analytics?**
 
 We thrive on challenge but challenge is no fun without a detailed analytics.
