@@ -1,54 +1,78 @@
 ---
 layout: post
-title: "The Realtime Server"
+title: "The Robust Realtime Server"
 description: ""
 category: 
-tags: [Tornado, Realtime]
+tags: [Tornado, Realtime, nowjs, RabbitMQ]
 ---
 {% include JB/setup %}
 
-- - -
 This is going to be a long blog post but I promise you will find some interesting
 piece of engineering here, so stay till the end.
 
 <br>
-####Problem with NowJS
-I was told beforehand that I will be primarily working first on writing a realtime server
-beside many other things. [Vivek Prakash](http://www.hackerearth.com/users/vivekprakash), co-founder of HackerEarth told me he had himself
-written a realtime server [sometime
-ago](http://engineering.hackerearth.com/2013/03/12/100000-strong) with [NowJS](https://github.com/Flotype/now), but the problem with it was that it
-doesn't scale well beyond 150 online users. There was a problem in file descriptor leak and
-NowJS project was abandoned in December, 2012. So there was need of some good alternative
-which can handle good amount of simultaneous connections(users). I didn't have to do much research
-as Vivek already researched about it. He found [Tornado](ihttp://www.tornadoweb.org/en/stable/) and [Meteor.js](http://meteor.com/) to be good
-alternative. Going by order of preference and popularity I choose Tornado.
+The realtime server manages the live update of webpages when the data changes
+in the data storage system (database or cache). We had a realtime server
+in-place but there was a big problem with scaling it.
 
 <br>
-####The process
+####Problem with nowjs
+I was told beforehand that I will be primarily working first on writing a realtime server
+beside many other things. [Vivek Prakash](http://www.hackerearth.com/users/vivekprakash) told me he had
+written a realtime server implementation [sometime
+ago](http://engineering.hackerearth.com/2013/03/12/100000-strong) with
+[nowjs](https://github.com/Flotype/now). But the problem with it is that it
+doesn't scale well beyond ~200 simultaneous connections. In a conversation on
+Google Groups, I came across this:
+
+<br>
+*In my experience, the underlying "socket.io" module is not able to scale well
+(more than 150 connections was a problem for me), so I had to  retreat from
+using "nowjs" or more specifically, "socket.io" in one of my applications.*
+
+<br>
+After further inspection, we also saw that there was an issue with file
+descriptor leak and nowjs server reported ENFILE/EMFILE (Too many open files). 
+Also nowjs project was abandoned in 2012 and last commit in github repo is that
+of [1 year ago](https://github.com/Flotype/now/commit/957e7ac7f86ab60163dc5566653c186971f5ad09).
+So there was need of some good alternative
+which can handle large number of simultaneous connections (or users). I didn't have to do much research
+as Vivek had already researched about it. He found [Tornado](http://www.tornadoweb.org/en/stable/) and [Meteor.js](http://meteor.com/) to be good
+alternative. Going by order of preference and popularity I chose Tornado, and
+also because it's integration with existing system looked simpler and more
+efficient.
+
+<br>
+####The Use Case
 Vivek pretty much explained me how different components of code
-submission works. Here is a quick explanation of it. User submits his/her code
-and a AJAX request is sent to webserver which further sends submission details
-to [RabbitMQ server](http://www.rabbitmq.com/)(a message broker to connect various application components).
-Code checker engine(consumer of RabbitMQ here) takes out the submission details
-and evaluates the code and submit result back to RabbitMQ. Nowjs server takes it
-out from RabbitMQ and finally sends it to the client(browser). Below flowchart
+submission works. Here is a quick explanation of it. User submits the code
+and a POST request is sent to webserver which further sends submission details
+to a message queue in [RabbitMQ server](http://www.rabbitmq.com/) (a message broker to connect various application components).
+Code-checker engine (consumer of RabbitMQ here) gets the submission details,
+evaluates the code and submits result back to another message queue. It also
+notifies the web-servers about the result so that appropriate databse entry is
+made. The whole process is completely asynchronous. An amqp listener also takes
+the result out from message queue and finally sends it to the client(browser)
+using the nowjs communication APIs. The flowchart
 will give you a good idea of how different components are connected.
 
 <img src="/images/flowchart.png" />
-Now my job was to replace the last part(NowJS) with Tornado.
+
+<br>
+<br>
+**Now my first job was to replace the nowjs module with Tornado.**
 
 <br>
 ####A basic implementation
 Let's code! Now I knew tornado server must read submission results from
-RabbitMQ and send it back to submission page('pages' in case user has opened
-the same submission problem page in more than one tab). <br>I used [pika
+message queue and send it back to submission page (*'pages'* in case user has opened
+the same submission problem page in more than one tab). I used [pika
 module](https://github.com/pika/pika)
 inside Tornado IO loop to connect with RabbitMQ and read messages from it.
-A request handler from Tornado api to send and receive messages from client.
 On client side I used [HTML5 WebSocket](http://www.html5rocks.com/en/tutorials/websockets/basics/)
 to connect to the tornado server. This basic implementation was completed in two days.
 
-#####Front-end
+#####Frontend *(code snippet)*
     ...
     function openWebSocketConnection() {
         var ws = new WebSocket(url);
@@ -68,7 +92,9 @@ to connect to the tornado server. This basic implementation was completed in two
         };
     }
     ...
-#####Back-end
+
+<br>
+#####Backend *(code snippet)*
     ...
     class RealtimeWebSocketHandler(websocket.WebSocketHandler):
 
@@ -121,17 +147,17 @@ to connect to the tornado server. This basic implementation was completed in two
 ####Testing locally
 Everything was working as expected in modern browsers but
 when I tested it on IE 7, 8, 9. This was my reaction- “IE sucks man!”.
-Ofcourse, IE [doesn't support](http://caniuse.com/websockets) websocket, how it
+Of course, IE [doesn't support](http://caniuse.com/websockets) websocket, how it
 didn't occur to me. So I was left with only one option to write a fallback
-implementation in [long polling(also called comet programming)](http://en.wikipedia.org/wiki/Comet_(programming))
+implementation in [long polling (also called comet programming)](http://en.wikipedia.org/wiki/Comet_(programming))
 on both client and server side. Wait the problem is not yet solved. Cross domain requests are not supported.
-HackerEarth web server and tornado are on different domains. I either have to use
+HackerEarth webserver and realtime server (tornado) are on different top-level domains. I either have to use
 [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) long polling
 (only supported in major browsers but more secure) or [JSONP](http://en.wikipedia.org/wiki/JSONP)
 long polling(supported in every browser but insecure). I eventually used both.
 Here is a code snippet:
 
-#####Front-end
+#####Frontend
     function connectToTornado() {
         // check for browser's websocket support
         if("WebSocket" in window) {
@@ -184,7 +210,8 @@ Here is a code snippet:
         });
     }
 
-#####Back-end
+<br>
+#####Backend
     class RealtimeLongPollingHandler(web.RequestHandler):
 
         @tornado.web.asynchronous
@@ -218,7 +245,7 @@ messages and when client(browser) reconnects, the server will look into
 the buffer for latest message and will send it back to client and then again it
 will listen for new messages from RabbitMQ. Here is code snippet:
 
-#####Reconnect with tornado
+#####Reconnect with tornado  *(JavaScript)*
     function reconnectToTornado(callback) {
         // Sleep time is constant after 5 minutes
         if(errorSleepTime<300000)
@@ -227,7 +254,7 @@ will listen for new messages from RabbitMQ. Here is code snippet:
         window.setTimeout(callback, errorSleepTime);
     }
  
-#####Look for unsent messages.
+#####Look for unsent messages *(Python)*
     ...
         newest_message = self.application.pc.unsent_messages.newest(self.name)
         if(newest_message is not None):
@@ -261,13 +288,22 @@ will listen for new messages from RabbitMQ. Here is code snippet:
                     self.remove(message)
             return newest_message
                 
-That's all! Everything was working fine(atleast on my localhost :P).
+<br>
+It was also taken care of that older messages don't replace the newer messages
+on browser if the delivery order is not sequential. I also wrote lot of
+fallback code to prevent the issue in older browsers, did testing with thousand
+simultaneous connections and fixed some bugs that were already present before.
+And that's all that I did in just two weeks! Everything was working fine in my
+local machine now.
 
 <br>
-Few days ago, we tested it on development server. And after successfull
-testing, it was pushed to production :)
+Few days ago, we tested it on development server. And after successful
+testing and few more bug fixes, it was pushed to production on 30th May, 2013 :)
+Some bugs still might be there and we are fixing them, but I am confident it
+would be more robust than ever before!
 
 P.S. I am an undergraduate student at IIT Roorkee. You can find me
-[@LalitKhattar](https://twitter.com/LalitKhattar)
+[@LalitKhattar](https://twitter.com/LalitKhattar) or on
+[HackerEarth](http://www.hackerearth.com/users/lalitkhattar).
 
 *Posted by Lalit Khattar, Summer Intern 2013 @HackerEarth*
