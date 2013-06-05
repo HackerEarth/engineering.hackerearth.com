@@ -24,11 +24,18 @@ good method, atleast for those tasks those have to run only once in the
 lifetime.
 
 <br>
-####Solution
+####Django-Celery
 [Django-Celery](http://docs.celeryproject.org/en/latest/django/index.html)
 comes to the rescue here.
+Celery gets tasks done asynchronously and also supports scheduling of tasks as well.
 Integrating Celery with Django codebase is easy enough, you just need to have some
-patience and go through the documentation given in the official Celery site.
+patience and go through the steps given in the official Celery site.
+There are two sides in Celery technology: Broker & Worker. Celery requires a
+solution to send and receive messages, usually this comes in the form of a
+separate service called a message broker. We use the default broker 
+[RabbitMQ](http://www.rabbitmq.com/) to get this done. 
+Worker fetches the tasks from the queue at time at which they were scheduled 
+to run asynchronously.
 You will have to download celery init scripts to run the worker as daemon on
 Production. You can get those init scripts from 
 [GitHub](https://github.com/celery/celery/tree/master/extra/generic-init.d)
@@ -195,15 +202,15 @@ Check if the task has already been scheduled assossiated with a participation ob
 <br>
 Get the AsyncResult object
 
-        async_result = send_email_on_participation_complete.AsyncResult(participation)
         # Returns the async_result object of the scheduled task that is assossiated
         # with given Model instance (participation in our case)
+        async_result = send_email_on_participation_complete.AsyncResult(participation)
 
-        aync_result.status
         # gives the status of the scheduled task : PENDING/STARTED/SUCCESS/FAILURE
+        aync_result.status
 
-        async_result.result
         # Contains the return value of the task (None in our case)
+        async_result.result
 
 <br>
 All this replaced the cron jobs, custom scripts and some manual tasks with a
@@ -213,9 +220,9 @@ up by me. And this will certainly make us more efficient and help us to focus
 on other core products, while tasks are performed asynchronously and we can
 enjoy the awesome weather on a fine day! :)
 
-P.S. I am an undergraduate student at IIT Roorkee. Reach out to me at
+P.S. I am an undergraduate student at IIT Roorkee.You can reach out to me at
 shubham@hackerearth.com for any suggestion, bug or improvement.
-You can find me 
+You can also find me 
 [@ShubhamJain](http://in.linkedin.com/pub/shubham-jain/54/4a/931/).
 
 *Posted by Shubham Jain, Summer Intern 2013 @HackerEarth*
