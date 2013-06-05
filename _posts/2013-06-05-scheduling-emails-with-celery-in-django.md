@@ -3,7 +3,7 @@ layout: post
 title: "Scheduling emails with celery in Django"
 description: ""
 category: 
-tags: [Celery, Scheduling tasks, Periodic tasks, Django]
+tags: [Celery, Scheduling tasks, Scheduling emails, Periodic tasks, Crontab, Django, RabbitMQ]
 ---
 {% include JB/setup %}
 
