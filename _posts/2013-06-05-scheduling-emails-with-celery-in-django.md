@@ -1,50 +1,82 @@
 ---
 layout: post
-title: "Tracking Celery tasks in Django"
+title: "Scheduling emails with celery in Django"
 description: ""
 category: 
 tags: [Celery, Scheduling tasks, Periodic tasks, Django]
 ---
 {% include JB/setup %}
 
-Don't you have popcorn and coke? Go get it first!
-
-After a long journey with Django, you come to a place where you feel a need to
+After a long journey with Django, you come to a place where you feel the need to
 get some tasks done asynchronously without any supervision of human. Some tasks
 need to be scheduled to run once at a particular time or after some time and
-some tasks have to be run periodically like crontab.
+some tasks have to be run periodically like
+[crontab](http://en.wikipedia.org/wiki/Cron). One of the tasks is
+sending emails on specific triggers.
 
 Here at [HackerEarth](http://www.hackerearth.com/)
-, we send emails to recruiters and participants after 
+, one of the major chunk of emails is sent to recruiters and participants after 
 a contest is finished or when participant triggers finish-test button. 
-And only solution we had to get this done was crontab. But things have changed now. 
-Looking in to database if there is any task that has to be done with crontab process is not a
+Till now we had done this using crontab. But things have changed now and
+scaling with such process is time and resource consuming.
+Also, looking in to database if there is any task that has to be done with crontab process is not a
 good method, atleast for those tasks those have to run only once in the
 lifetime.
 
 <br>
 ####Solution
-Tanaaaaa.... Here is the solution to get all these tasks done : 
-[Django-Celery](http://docs.celeryproject.org/en/latest/django/index.html).
-Integrating Celery with your Django codebase is easy enough, you just need to have some
+[Django-Celery](http://docs.celeryproject.org/en/latest/django/index.html)
+comes to the rescue here.
+Integrating Celery with Django codebase is easy enough, you just need to have some
 patience and go through the documentation given in the official Celery site.
 You will have to download celery init scripts to run the worker as daemon on
 Production. You can get those init scripts from 
 [GitHub](https://github.com/celery/celery/tree/master/extra/generic-init.d)
 <br>
-And you are done !!
+This is the configuration we used to run celery in our project:
+<br>
+
+    # Name of nodes to start
+    CELERYD_NODES="w1 w2 w3"
+
+    # Where to chdir at start.
+    CELERYD_CHDIR="/hackerearth/"
+
+    # How to call "manage.py celeryd_multi"
+    CELERYD_MULTI="$CELERYD_CHDIR/manage.py celeryd_multi"
+
+    # How to call "manage.py celeryctl"
+    CELERYCTL="$CELERYD_CHDIR/manage.py celeryctl --settings=settings.hackerearth_settings"
+
+    # Extra arguments to celeryd
+    CELERYD_OPTS="--time-limit=300 --concurrency=8"
+
+    # %n will be replaced with the nodename.
+    CELERYD_LOG_FILE="/var/log/celery/%n.log"
+    CELERYD_PID_FILE="/var/run/celery/%n.pid"
+
+    # Workers should run as an unprivileged user.
+    CELERYD_USER="hackerearth"
+    CELERYD_GROUP="hackerearth"
+
+    # Name of the projects settings module.
+    export DJANGO_SETTINGS_MODULE="settings.hackerearth_settings"
 
 <br>
 ####Another Problem
-All things are working properly, you can schedule a task to run asynchronously 
+After linking triggers to send emails after the contest time is finished or the
+participant has finished the test prematurely, all things were working
+properly. Now I could easily schedule a task to run asynchronously 
 at any time. But I met a problem that there is no method to check if a
 particular task has already been scheduled that is assosiated with some Model instance.
-To get this done you'll have to store the task_id with that model instance into database.
-Thanks Django that there is generic ContentType. So here is the hack that I
+This happens when there are more than one triggers for the same task, and it
+can easily happen in a fairly complicated system.
+To get this done I had to store the task_id with that model instance into
+database using generic ContentType. So here is the hack that I
 came up with:
 
 <br>
-- Generic ModelTask
+**Generic ModelTask**
 
 This model stores the information of the scheduled task(task_id, name)
 and the information of the Model instance to which the task is assossiated.
@@ -79,10 +111,9 @@ and the information of the Model instance to which the task is assossiated.
                         object_id=object_id, name=task.name)
 
 <br>
-- A custom overridden task decorator 'model_task'
+**A custom overridden task decorator 'model_task'**
 
 Overrides the methods : 'apply_async' & 'AsyncResult'
-<br>
 And attaches a new method : 'exists_for'
 
         import types
@@ -124,9 +155,9 @@ And attaches a new method : 'exists_for'
 That's it.
 
 <br>
-####Here is how we use it
+####The Use Case
 
-- Participation Model
+**Participation Model**
     
 This model contains the information of a User participating in a Event.
     
@@ -137,7 +168,7 @@ This model contains the information of a User participating in a Event.
             ...
 
 <br>
-- Task for sending email to participant
+Task for sending email to participant
 
         @model_task()
         def send_email_on_participation_complete(participation):
@@ -146,22 +177,23 @@ This model contains the information of a User participating in a Event.
             ...
 
 <br>
-- Schedule the task
+Scheduling the task
     
         duration = calculate_duration_in_seconds(participation)
-        send_email_on_participation_complete.apply_async((participation,),
-                countdown=duration, instance=participation)
 
         # The extra keyword argument 'instance' is necessary as it will create a 
         # ModelTask object.
+        send_email_on_participation_complete.apply_async((participation,),
+                countdown=duration, instance=participation)
+
 
 <br>
-- Check if the task has already been scheduled assossiated with a participation object
+Check if the task has already been scheduled assossiated with a participation object
 
-        boolean_value = send_email_on_participation_complete.exists_for(participation)
+        is_scheduled_before = send_email_on_participation_complete.exists_for(participation)
 
 <br>
-- Get the AsyncResult object
+Get the AsyncResult object
 
         async_result = send_email_on_participation_complete.AsyncResult(participation)
         # Returns the async_result object of the scheduled task that is assossiated
@@ -174,6 +206,13 @@ This model contains the information of a User participating in a Event.
         # Contains the return value of the task (None in our case)
 
 <br>
+All this replaced the cron jobs, custom scripts and some manual tasks with a
+robust task (email) scheduling mechanism. This also lays the foundation for
+triggering many other types of tasks on top of django-celery architecture set
+up by me. And this will certainly make us more efficient and help us to focus
+on other core products, while tasks are performed asynchronously and we can
+enjoy the awesome weather on a fine day! :)
+
 P.S. I am an undergraduate student at IIT Roorkee. Reach out to me at
 shubham@hackerearth.com for any suggestion, bug or improvement.
 You can find me 
