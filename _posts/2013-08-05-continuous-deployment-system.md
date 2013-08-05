@@ -7,19 +7,34 @@ tags: [Continuous Deployment System, Fabric, RabbitMQ, Django]
 ---
 {% include JB/setup %}
 
-This is one of the coolest things we recently built at HackerEarth. 
+This is one of the coolest and important thing we recently built at HackerEarth. 
 What's so cool about it? Just have a little patience, you will soon 
-find out, but make sure you read till the end :)
+find out. But make sure you read till the end :)
 
 I will try to make this post as resourceful, and clear so 
-that people who always wondered how to setup a [Continuous Deployment 
-System(CDS)](http://en.wikipedia.org/wiki/Continuous_integration) can achieve it now.
+that people who always wondered how to implement a [Continuous Deployment 
+System(CDS)](http://en.wikipedia.org/wiki/Continuous_integration) can gain
+insights.
 
 At HackerEarth, we iterate over our product quickly and roll out new 
-features as soon as they are production ready. With such speed of 
-work, we needed a CDS. A CDS leverages developers to roll out features 
-in production with just a push of  a button(actually, it's <i>git push</i> 
-command). Also, another reason to use CDS is that we are trying to 
+features as soon as they are production ready. In last two weeks, we deployed
+100+ commits in production, and a major release is scheduled to be launched
+within a few days comprising over 150+ commits. Those commits consists of
+changes to backend app, website, static files, database and many more. We have
+over a dozen different types of servers running e.g. webserver, code-checker
+server, log server, wiki server, realtime server, NoSQL server, etc. And all of
+them are running on multiple ec2 instance at any point of time. Our codebase is
+still tightly integrated as one single project with many different components
+required for each server. And when there are changes to codebase, all the
+related servers and components need to be updated when deploying in production.
+Doing that manually would have just driven us crazy, and would have been a
+total waste of time!
+         
+With such speed of work,
+we needed a automated deployment system along with automated testing.
+Our implementation of CDS helps the team to roll out features 
+in production with just a single command: <i>git push origin master</i>.
+Also, another reason to use CDS is that we are trying to 
 automate the crap out of everything and I see us going in right 
 direction.
 
@@ -64,15 +79,6 @@ Toolchain server back-end receives payload and filters commits based on branch a
 
         # Restore commits order
         commits.reverse()
-
-        # Remove those commits which are already in database.
-        for commit in commits:
-            try:
-                Revision.objects.get(node=commit['node'])
-                commits.remove(commit)
-            except ObjectDoesNotExist:
-                pass
-                
         return commits
 
 <br>
@@ -137,21 +143,6 @@ dependency algorithm.
 
         return groups_of_commits
 
-    def get_dependent_commits_of(commit, commits):
-        dependent_commits = []
-        commit_files = []
-        for f in commit['files']:
-            commit_files.append(f['file'])
-        for c in commits:
-            if c != commit:
-                c_files = []
-                for f in c['files']:
-                    c_files.append(f['file'])
-                dependent = not set(c_files).isdisjoint(set(commit_files))
-                if dependent:
-                    dependent_commits.append(c)
-        return dependent_commits
-
 <br>
 Top commit of each group is sent for testing to integration test 
 server via rabbitmq. First I wrote code which sent each commit for 
@@ -162,10 +153,12 @@ tests are run.
 
 Integration tests are run on integration test server. There is a separate 
 branch called test on which tests are run. Commits are cherry-picked 
-from master onto test after pulling from remote master branch. Integration 
-test server is basically a setup to deploy website for testing. If 
-tests are passed then commits are released in production otherwise test 
-branch is rolled back to previous stable commit.
+from master onto test branch. Integration 
+test server is a simulated setup to replicated production behavior. If 
+tests are passed then commits are put in release queue from where they are
+released in production. Otherwise test branch is rolled back to previous stable
+commit, and clean up actions are performed including notifying the developer
+whose commits failed the tests.
 
 <br>
 ####Git Branch Model
@@ -175,8 +168,9 @@ In previous section you might have noticed there are three branches
 that we are using, namely- master, test and release. Master is the one 
 where developer pushes its code. This branch can be unstable. Test 
 branch is for integration test server and release branch for 
-production servers. Release and test branch move parallel and their 
-head is behind master.
+production servers. Release and test branch move parallel and they are always
+stable. As we write more and more tests, the uncertainty of a bad commit being
+deployed in production will reduce exponentially.
 
 <br>
 ####Django Models
@@ -233,6 +227,7 @@ database.
         reqd_revisions = Revision.objects.filter(files__filepath__in=files_in_rev, id__lt=filter_id, status__health_status=False) 
         return reqd_revisions
 
+
 As told earlier in overview section, these commits are then cherry-
 picked onto test branch from master branch and process continues.
 
@@ -241,11 +236,17 @@ picked onto test branch from master branch and process continues.
 Commits that passed integration tests are now ready to be deployed but 
 before that there are few things to keep in mind when deploying code 
 on production like restarting webserver, deploying static files, 
-running database migrations etc. Did I tell you we are controlling 
+running database migrations etc. The toolchain code intelligently decides which
+servers to restart, whether to collect static files or run database migrations,
+and which servers to deploy on based on what changes were done in the commits.
+You might have realized we do all this on basis of types and categories of files
+changed/modified/deleted in the commits to be released.
+
+You might also have realized that we are controlling 
 deployment on production and test server from toolchain server(the one 
-which receives payload)? No. We are using [fabric](http://fabfile.org/) to serve this 
+which receives payload from bitbucket). We are using [fabric](http://fabfile.org/) to serve this 
 purpose. A great tool indeed for executing remote administrative 
-tasks.
+tasks!
 
     from fabric.api import run, env, task, execute, parallel, sudo
     @task
@@ -267,7 +268,15 @@ tasks.
         if result is True:
             init_deploy_default(config=config, restart=is_restart_required)
 
-Thats it!
+
+All this process takes about 2 minutes for deployment on all machines for a
+group of commits or single push. This made our life a lot easier,
+we don't fear now in pushing our code and we can see our feature or bug fix or
+anything else live in production in just a few mminutes.
+Undoubtedly, this will also help us in releasing new features without wasting
+much time. Now deploying is as simple as writing code and testing on local
+machine. We also deployed 100th commit in production a few days ago 
+using automated deployment, which stands testimony to the robustness of this system.
 
 <br>
 P.S. I am an undergraduate student at IIT Roorkee. You can find me
