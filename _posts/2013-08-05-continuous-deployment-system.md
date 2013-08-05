@@ -3,7 +3,7 @@ layout: post
 title: "Continuous Deployment System"
 description: ""
 category: 
-tags: [Continuous Deployment System, Fabric, RabbitMQ, Django]
+tags: [Continuous Deployment System, HackerEarth, Fabric, RabbitMQ, Django]
 ---
 {% include JB/setup %}
 
@@ -30,6 +30,12 @@ related servers and components need to be updated when deploying in production.
 Doing that manually would have just driven us crazy, and would have been a
 total waste of time!
          
+See the table of commits deployed on a single day, and that too on lighter day!
+
+<img src="/images/revisions_table.png" />
+<br>
+<br>
+
 With such speed of work,
 we needed a automated deployment system along with automated testing.
 Our implementation of CDS helps the team to roll out features 
