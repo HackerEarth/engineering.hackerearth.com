@@ -64,29 +64,33 @@ database query.
 
 Below is a sample Python code for reading hackerearth_status table:
 
-    import rethinkdb as r
+{% highlight python %}
+import rethinkdb as r
 
-    # connect to rethinkdb
-    r.connect(host='status-data-challenge.hackerearth.com', db='careerstack', port=28015).repl()
+# connect to rethinkdb
+r.connect(host='status-data-challenge.hackerearth.com', db='careerstack', port=28015).repl()
 
-    # get first 10 JSON data from hackerearth_status table
-    data = r.table('hackerearth_status').slice(0, 10).run()
+# get first 10 JSON data from hackerearth_status table
+data = r.table('hackerearth_status').slice(0, 10).run()
 
-    for d in data:
-        print d
+for d in data:
+    print d
+{% endhighlight %}
 
 It prints following output in the console:
 
-    {u'status': 200, u'response_received_time': 1374794680.909191, u'message': u'OK', u'request_time': 1374794680.889908, u'id': u'00004e52-2934-4446-850a-39414ab2e64e'}
-    {u'status': 200, u'response_received_time': 1375733282.5145938, u'message': u'OK', u'request_time': 1375733282.4913878, u'id': u'00019762-f0f7-4bf2-8a99-c9d6a148e647'}
-    {u'status': 200, u'response_received_time': 1374901211.485287, u'message': u'OK', u'request_time': 1374901211.444667, u'id': u'0003d0d1-b4fc-4efe-8bbb-566241bc19de'}
-    {u'status': 200, u'response_received_time': 1373712173.611913, u'message': u'OK', u'request_time': 1373712173.500822, u'id': u'0003e502-4a97-4214-9ebb-4264314c1523'}
-    {u'status': 200, u'response_received_time': 1376753907.3009229, u'message': u'OK', u'request_time': 1376753904.8444479, u'id': u'000608b2-529e-41de-956e-70b50ff8c585'}
-    {u'status': 200, u'response_received_time': 1374598010.706149, u'message': u'OK', u'request_time': 1374598008.899234, u'id': u'00078bfc-c9ac-4fce-a660-1a4bd6de6148'}
-    {u'status': 200, u'response_received_time': 1375150088.026571, u'message': u'OK', u'request_time': 1375150088.00546, u'id': u'000acc7f-f26d-499a-a395-d4c914fcf7c4'}
-    {u'status': 200, u'response_received_time': 1379057035.742864, u'message': u'OK', u'request_time': 1379057035.7246768, u'id': u'000b31df-9987-4f38-b0a9-61c659670317'}
-    {u'status': 200, u'response_received_time': 1374929387.17773, u'message': u'OK', u'request_time': 1374929387.126168, u'id': u'000b81e6-2e7e-491f-906a-c818c95a96f1'}
-    {u'status': 200, u'response_received_time': 1375804570.5828838, u'message': u'OK', u'request_time': 1375804570.4476259, u'id': u'000e3149-de7a-4b93-acb9-4eef5b030299'}
+{% highlight text %}
+{u'status': 200, u'response_received_time': 1374794680.909191, u'message': u'OK', u'request_time': 1374794680.889908, u'id': u'00004e52-2934-4446-850a-39414ab2e64e'}
+{u'status': 200, u'response_received_time': 1375733282.5145938, u'message': u'OK', u'request_time': 1375733282.4913878, u'id': u'00019762-f0f7-4bf2-8a99-c9d6a148e647'}
+{u'status': 200, u'response_received_time': 1374901211.485287, u'message': u'OK', u'request_time': 1374901211.444667, u'id': u'0003d0d1-b4fc-4efe-8bbb-566241bc19de'}
+{u'status': 200, u'response_received_time': 1373712173.611913, u'message': u'OK', u'request_time': 1373712173.500822, u'id': u'0003e502-4a97-4214-9ebb-4264314c1523'}
+{u'status': 200, u'response_received_time': 1376753907.3009229, u'message': u'OK', u'request_time': 1376753904.8444479, u'id': u'000608b2-529e-41de-956e-70b50ff8c585'}
+{u'status': 200, u'response_received_time': 1374598010.706149, u'message': u'OK', u'request_time': 1374598008.899234, u'id': u'00078bfc-c9ac-4fce-a660-1a4bd6de6148'}
+{u'status': 200, u'response_received_time': 1375150088.026571, u'message': u'OK', u'request_time': 1375150088.00546, u'id': u'000acc7f-f26d-499a-a395-d4c914fcf7c4'}
+{u'status': 200, u'response_received_time': 1379057035.742864, u'message': u'OK', u'request_time': 1379057035.7246768, u'id': u'000b31df-9987-4f38-b0a9-61c659670317'}
+{u'status': 200, u'response_received_time': 1374929387.17773, u'message': u'OK', u'request_time': 1374929387.126168, u'id': u'000b81e6-2e7e-491f-906a-c818c95a96f1'}
+{u'status': 200, u'response_received_time': 1375804570.5828838, u'message': u'OK', u'request_time': 1375804570.4476259, u'id': u'000e3149-de7a-4b93-acb9-4eef5b030299'}
+{% endhighlight %}
 
 The data format varies a little for *code_checker_status*,
 *celery_status*, and *rabbitmq_status*. They have more key-value data in message.
@@ -104,7 +108,13 @@ To see the data stored in *code_checker_status* table, copy-paste the following 
 the [Data Explore in Web UI](http://status-data-challenge.hackerearth.com:8080/#dataexplorer)
 and hit 'Run'.
 
-    r.db('careerstack').table('code_checker_status').slice(0, 1)
+{% highlight python %}
+r.db('careerstack').table('code_checker_status').slice(0, 1)
+{% endhighlight %}
+
+The data explorer and Web UI is completely exposed. This means anyone can
+delete the data too. But you are not advised to do so. In any case, the data is
+restored to original state every 10 minutes using a periodic asynchronous task.
 
 Quering data is very easy and intuitive in RethinkDB in multiple languages.
 For creating visualizaton in the frontend, we recommend using [d3js](http://d3js.org/),
