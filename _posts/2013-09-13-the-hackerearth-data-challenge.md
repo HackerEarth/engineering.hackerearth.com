@@ -43,7 +43,7 @@ The data is available in JSON format in RethinkDB. Following are the details of
 host, database and table:
 
 * Endpoint: **status-data-challenge.hackerearth.com**
-* Port: 28015
+* Port: 80
 * Database name: careerstack
 * Tables
   * **hackerearth_status**: for [HackerEarth webserver](http://www.hackerearth.com/)
@@ -68,7 +68,7 @@ Below is a sample Python code for reading hackerearth_status table:
 import rethinkdb as r
 
 # connect to rethinkdb
-r.connect(host='status-data-challenge.hackerearth.com', db='careerstack', port=28015).repl()
+r.connect(host='status-data-challenge.hackerearth.com', db='careerstack', port=80).repl()
 
 # get first 10 JSON data from hackerearth_status table
 data = r.table('hackerearth_status').slice(0, 10).run()
