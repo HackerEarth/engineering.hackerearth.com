@@ -34,7 +34,7 @@ We thought we will delay any scalability at this level till the single database
 could handle the load, and we will work on other high priority things. But that
 was not supposed to go as planned and we experienced a few downtimes. After
 that we did a rearchitecture of our application,
-[sharded the database](http://en.wikipedia.org/wiki/Shard_(database_architecture),
+<a href="http://en.wikipedia.org/wiki/Shard_(database_architecture)">sharded the database</a>,
 wrote [database routers](https://docs.djangoproject.com/en/dev/topics/db/multi-db/)
 and wrappers on top of django ORM, put HAProxy load balancer infront
 of the MySQL databases, and refactored our codebase to optimize it significantly.
