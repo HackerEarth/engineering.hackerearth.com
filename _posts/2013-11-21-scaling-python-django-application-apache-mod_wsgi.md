@@ -45,7 +45,7 @@ requests at 100 req/sec to the optimized machine, and also to one of the
 production machine. The results were unbelievable.
   
   
-#### Some level of optimized apache configuration
+#### Stats with optimized apache configuration
 
     Total: connections: 5000, requests: 4673, replies: 4626, test-duration: 64.938 s
 
@@ -64,7 +64,7 @@ metric further with errors ranging from 0-5 after further tweaking.
 But let's have a look at what happened on one of the production machine.
   
   
-#### Default apache configuration
+#### Stats with default apache configuration
 
     Total: connections 2024 requests 363 replies 0 test-duration 94.801 s
 
