@@ -127,12 +127,13 @@ length will increase drastically. To tackle this problem, we added a CodeSession
         end = models.DateTimeField()
 
 
-Now, total video length is calculated using formula-
+Now, total video length is calculated using formula:
 
-    **&Sigma;(session_end_time<sub>i</sub> - session_start_time<sub>i</sub>)**.
-
+**&Sigma;(session_end_time<sub>i</sub> - session_start_time<sub>i</sub>)**
+<br>
+<br>
 Time interval between successive sessions has been kept to atleast 2 minutes.
-
+<br>
 <br>
 ####<a name="play" style="color:#333333">Playing Video</a>
 
