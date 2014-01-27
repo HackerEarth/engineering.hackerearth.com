@@ -22,7 +22,6 @@ So I was given this task of implementing search at HackerEarth. I used Haystack 
 ####Basic settings of Haystack and Elasticsearch
 
 Haystack provides modular search for Django. It features a unified, familiar API that allows to plug in different search backends (such as Solr, Elasticsearch, Whoosh, Xapian, etc.) without having to modify your code.
-
 In the settings file:
 
     INSTALLED_APPS=(
