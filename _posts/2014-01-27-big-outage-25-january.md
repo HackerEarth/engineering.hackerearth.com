@@ -33,7 +33,6 @@ coding contests there.
     First, Thank You for HackerEarth!!  Its such a lucid platform for organizing
     online contests.
 <br>
-<br>
 ####How it went wrong
 Little did we know that there was a catastrophe waiting for us in
 the contest that was going to run at 9:30 PM. First let me assure you that the
@@ -88,7 +87,7 @@ analytics database, but rather rarely. This was something not expected. All the
 non-AJAX requests are logged in analytics database, and this was something to
 be worried about.
 <br>
-<br>
+  
 
 ####What we did
 1. We made the haystack thread-safe by using locking mechanisms.
