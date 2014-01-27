@@ -23,7 +23,7 @@ a college contest -
 on. Everything was smooth, the servers were sending replies happily and we
 didn't have to worry about anything.
 
-This is the email I received in the evening from Ravi from NIT Surathkal who handles the
+This is the email I received in the evening from Ravi from NIT Surat who handles the
 coding contests there.
 
     from: Ravi Ojha
