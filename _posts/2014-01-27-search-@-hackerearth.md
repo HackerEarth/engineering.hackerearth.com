@@ -19,6 +19,7 @@ So I was given this task of implementing search at HackerEarth. I used Haystack 
 
 - Search relevance
 
+<br>
 ####Basic settings of Haystack and Elasticsearch
 
 Haystack provides modular search for Django. It features a unified, familiar API that allows to plug in different search backends (such as Solr, Elasticsearch, Whoosh, Xapian, etc.) without having to modify your code.
@@ -44,7 +45,9 @@ In the settings file:
 
     HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+<br>
 ####Simple Search
+
 #####Creating Indexes
 
 As I was making global search so I has made different search app and created search_indexes.py there but it can also be created in the app whose model fields have to be indexed or searched.
@@ -66,6 +69,7 @@ from haystack import indexes
     
         #####python manage.py rebuild_index --settings=’settings file’
 
+<br>
 #####creates indexes
 As I wanted users to be searched by name, username and email
 
@@ -76,7 +80,7 @@ and similarly by multiple fields in challenges and problems also. So I made use_
          {{ object.email }}
 
 This makes a document containing all the fields which have to be searched for and this is the content of text field which is actually searched.
-
+<br>
 
 #####Partial Search And Multiple Models
 
@@ -93,75 +97,47 @@ So I wrote my custom autocomplete for this:
     def autocomplete(self, **kwargs):
 
        """
-
         Must be run against fields that are either ``NgramField`` or
-
        ``EdgeNgramField``.
-
        """
 
        import re
-
        # Include OR operator results in different fields and AND
-
        # operator for query bits in one field
-
        clone = self._clone()
 
        #query_bits = []
-
        q = None
 
        for field_name, query in kwargs.items():
-
            s = None
-
            if field_name is "email":
-
                list_tokens = query.split('@')
-
            else:
-
                list_tokens = re.split(';|,|\*|\n| ', query)
 
            for word in list_tokens:
-
                if word != '':
-
                    bit = clone.query.clean(word.strip())
 
                    kwargs = {
-
                        field_name: bit,
-
                    }
 
                    if s:
-
                            s = s & SQ(**kwargs)
-
                    else:
-
                            s = SQ(**kwargs)
-
                    #query_bits.append(SQ(**kwargs))
-
            if q:
-
                q  = q | s
-
            else:
-
                q = s
 
        # return clone.filter(reduce(operator.__or__, query_bits))
-
        if q:
-
                return clone.filter(q)
-
        else:
-
                return clone.filter(SQ())
 
 Searching first in name and then usernames and email only when its valid
@@ -174,19 +150,45 @@ Also email should be shown when its an exact match or its valid. So I validate e
 
 and then send it for search only when its a valid email.
 
+
 ####Search Relevance
 
 The most challenging part of search is bringing relevance to it. What is the use of search if it cannot give the results which are not relevant to the user.
 
 Here are the kind of relevancies I worked upon:-
 
-1. The people you are following should be above in the results.
+1. The people you are following should be above in the results. For this after
+the results are extracted using SearchQuerySet, all the users and their
+positions in the results are stored and then this user list is partitioned into
+followed and not followed people (Similar to quick sort partitioning algorithm) with followed people being first and then are stored back in the main results on the stored positions of users.
 
-2. The more you have visited a user, problem or challenge, the higher it should be in your results.
+2. The more you have visited a user, problem or challenge, the higher it should
+be in your results. For this after the users are ordered according to if they
+are followed or not followed, the results are extracted into 2 lists depending
+on whether they are users or challenges or problems. Non user results
+are sorted according to the number of times the requesting user has searched
+for those results. User results are separately sorted in its two categories - 
+followed and not followed. Then these results are properly placed back in the
+main results according to the positions of users and non users.
 
-3. The more popular a result is overall, the higher it should be in the results.
+3. The more popular a result is overall, the higher it should be in the
+results. I boosted the document according to their popularity.
+
+    prepare(self, obj):
+        data = super(GolfProblemIndex, self).prepare(obj)
+        data['boost'] = 1 + (obj.popularity/100)
+        return data
 
 4. Time sensitive results. For eg:- if a challenge is going on now or is about to happen in a few days and you are searching for something which is similar to its name then it should be at higher position in the results.
+   
+    def prepare(self, obj):
+        data = super(EventIndex, self).prepare(obj)
+        if obj.start and (
+            (datetime.datetime.now() - obj.start) > datetime.timedelta(10,0,0)
+            or  (obj.start - datetime.datetime.now()) > datetime.timedelta(15,0,0)):
+            data['boost'] = (4 + (2 multiplied by obj.popularity/100))/2
+        else:
+            data['boost'] = 1 + (obj.popularity/100)
+        return data   
 
-5. Related term frequency:- In all the results there are some terms which occur with the main term (main term which actually had a match with the query), these are called related terms. So I find all the results with this query match and also find top 10 related terms in the results and find their relative frequency. The results should be ordered according to the frequency of the related terms.:w
-
+5. Related term frequency:- In all the results there are some terms which occur with the main term (main term which actually had a match with the query), these are called related terms. So all the results with this query match and top 10 related terms in the results are found and then their relative frequency. The results are according to the frequency of the related terms.
