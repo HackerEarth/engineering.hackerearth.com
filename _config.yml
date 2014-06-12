@@ -1,5 +1,9 @@
 # exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 
+# This is the default format. 
+# For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink: /:categories/:year/:month/:day/:title 
+
 name: HackerEarth Engineering
 markdown: redcarpet
 highlighter: true
@@ -47,3 +51,5 @@ sharing :
 provider : 'tweet'
 provider : 'plusone'
 provide : 'like'
+
+production_url : http://engineering.hackerearth.com
