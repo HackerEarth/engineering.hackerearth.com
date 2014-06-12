@@ -2,7 +2,7 @@
 layout: post
 title: "Analytics for Challenges"
 description: "Detailed Analytics of data retrieved from challenge"
-category:
+category: 
 tags: [Challenge, Analytics, Google Charts]
 ---
 {% include JB/setup %}
@@ -66,12 +66,14 @@ for depicting the computed data
 The Line Chart(Google Chart Tools) is documented [here](https://developers.google.com/chart/interactive/docs/gallery/linechart).
 
 Google charts requires the JSAPI library, This library is loaded by:
-    
+{% highlight js %}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+{% endhighlight %}
 
 <br>
 The script given below loads the Google Visualization and the Chart libraries. This is also responsible for displaying the chart.
     
+    {% highlight js %}
     <script type="text/javascript">
         google.load("visualization", "1",{ callback : drawChart, packages:["corechart"]});
         function drawChart() {
@@ -102,46 +104,47 @@ The script given below loads the Google Visualization and the Chart libraries. T
     </script>
     
     <div id="submission-count-chart"></div>
-    
+    {% endhighlight %}
 <br>
 The *google.load* package name is "corechart"
-
+{% highlight js %}
     google.load("visualization", "1", {packages: ["corechart"]});
-    
+{% endhighlight %}
 <br>
 The visualization's class name is *google.visualization.LineChart*
-    
+{% highlight js %}
     var visualization = new google.visualization.LineChart(container);
-    
+{% endhighlight %}
 <br>
 The *drawChart()* function creates a [DataTable](https://developers.google.com/chart/interactive/docs/datatables_dataviews) and is populated with computed data. The required number of columns are added mentioning the data format
-    
+{% highlight js %}
     data.addColumn('number', 'Submissions');
-    
+{% endhighlight %}
 <br>
 For customizing the tooltip, an extra column was added and the 'role':'tooltip' is specified.
-
+{% highlight js %}
     data.addColumn({type:'string',role:'tooltip'});
-    
+{% endhighlight %}
 <br>
 The *option* object is used for customizing the chart to be displayed. The customizable option for a Line-Chart is available [**here**](https://developers.google.com/chart/interactive/docs/gallery/linechart#Configuration_Options).
 
 This instantiates an instance of chart class you want to use for e.g. LineChart, PieChar etc., by passing in some options. The Google chart constructors takes a single parameter: a reference to the DOM element in which to draw the visualization.
-
+{% highlight js %}
       var chart = new google.visualization.PieChart(document.getElementById('submission-count-chart'));
+{% endhighlight %}
 
 <br>
 Once the chart is ready, a HTML element is created to hold the particular chart.
-
+{% highlight html%}
     <div id="submission-count-chart"></div><div id="submission-count-chart"></div>
-    
+{% endhighlight %}
 <br>
 PieChart works on a similar principle, except for:
 
  - The visualization's class name is google.visualization.PieChart
-
+{% highlight js %}
         var visualization = new google.visualization.PieChart(container);
-    
+{% endhighlight %}
  - The Options for PieChart is documented [**here**](https://developers.google.com/chart/interactive/docs/gallery/piechart#Configuration_Options).
 
 While implementing Google Charts, I faced a weird problem, due to the use of google.load() after the loading of the charts the page would go black instantly, but the problem was solved by using callback parameter to google.load(). A nice blog-post can be read [here](http://jona.than.biz/blog/using-google-charts-api-inside-jquery-load/).

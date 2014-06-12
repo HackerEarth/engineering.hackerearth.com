@@ -87,7 +87,7 @@ came up with:
 
 This model stores the information of the scheduled task(task_id, name)
 and the information of the Model instance to which the task is assossiated.
-
+{% highlight python %}
         from django.contrib.contenttypes import generic
         from django.contrib.contenttypes.models import ContentType
         from django.db import models
@@ -116,13 +116,13 @@ and the information of the Model instance to which the task is assossiated.
                 object_id = instance.id
                 return ModelTask.objects.filter(content_type=content_type,
                         object_id=object_id, name=task.name)
-
+{% endhighlight %}
 <br>
 **A custom overridden task decorator 'model_task'**
 
 Overrides the methods : 'apply_async' & 'AsyncResult'
 And attaches a new method : 'exists_for'
-
+{% highlight python %}
         import types
 
         from django.db import models
@@ -158,7 +158,7 @@ And attaches a new method : 'exists_for'
 
                 return task_instance
             return dec
-
+{% endhighlight %}
 That's it.
 
 <br>
@@ -167,41 +167,44 @@ That's it.
 **Participation Model**
     
 This model contains the information of a User participating in a Event.
-    
+{% highlight python %}
         Class Participation(models.Model):
             user = models.ForeignKey(User)
             event = models.ForiegnKey(Event)
             ...
             ...
+{% endhighlight %}
 
 <br>
 Task for sending email to participant
-
+{% highlight python %}
         @model_task()
         def send_email_on_participation_complete(participation):
             code for sending email
             ...
             ...
+{% endhighlight %}            
 
 <br>
 Scheduling the task
-    
+{% highlight python %}
         duration = calculate_duration_in_seconds(participation)
 
         # The extra keyword argument 'instance' is necessary as it will create a 
         # ModelTask object.
         send_email_on_participation_complete.apply_async((participation,),
                 countdown=duration, instance=participation)
-
+{% endhighlight %}
 
 <br>
 Check if the task has already been scheduled assossiated with a participation object
-
+{% highlight python %}
         is_scheduled_before = send_email_on_participation_complete.exists_for(participation)
+{% endhighlight %}
 
 <br>
 Get the AsyncResult object
-
+{% highlight python %}
         # Returns the async_result object of the scheduled task that is assossiated
         # with given Model instance (participation in our case)
         async_result = send_email_on_participation_complete.AsyncResult(participation)
@@ -211,6 +214,7 @@ Get the AsyncResult object
 
         # Contains the return value of the task (None in our case)
         async_result.result
+ {% endhighlight %}
 
 <br>
 All this replaced the cron jobs, custom scripts and some manual tasks with a
