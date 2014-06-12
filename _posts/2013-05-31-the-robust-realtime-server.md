@@ -71,7 +71,7 @@ module](https://github.com/pika/pika)
 inside Tornado IO loop to connect with RabbitMQ and read messages from it.
 On client side I used [HTML5 WebSocket](http://www.html5rocks.com/en/tutorials/websockets/basics/)
 to connect to the tornado server. This basic implementation was completed in two days.
-
+{% highlight js %}
 #####Frontend *(code snippet)*
     ...
     function openWebSocketConnection() {
@@ -92,9 +92,11 @@ to connect to the tornado server. This basic implementation was completed in two
         };
     }
     ...
+{% endhighlight %}
 
 <br>
 #####Backend *(code snippet)*
+{% highlight js %}
     ...
     class RealtimeWebSocketHandler(websocket.WebSocketHandler):
 
@@ -142,7 +144,7 @@ to connect to the tornado server. This basic implementation was completed in two
                 if listener.name==message['name']:
                     listener.send(message)
     ...
-
+{% endhighlight %}
 <br>
 ####Testing locally
 Everything was working as expected in modern browsers but
@@ -156,7 +158,7 @@ HackerEarth webserver and realtime server (tornado) are on different top-level d
 (only supported in major browsers but more secure) or [JSONP](http://en.wikipedia.org/wiki/JSONP)
 long polling(supported in every browser but insecure). I eventually used both.
 Here is a code snippet:
-
+{% highlight js %}
 #####Frontend
     function connectToTornado() {
         // check for browser's websocket support
@@ -209,8 +211,9 @@ Here is a code snippet:
             ...
         });
     }
-
+{% endhighlight %}
 <br>
+{% highlight js %}
 #####Backend
     class RealtimeLongPollingHandler(web.RequestHandler):
 
@@ -236,7 +239,7 @@ Here is a code snippet:
             elif(self.transport=='cors'):
                 self.finish(message)
             self.application.pc.remove_listener(self)
-
+{% endhighlight %}
 <br>
 ####What if the client gets disconnected?
 On slow internet connections especially with browsers using long polling,
@@ -244,7 +247,7 @@ messages sometimes get lost. So I had to create a buffer to store unsent
 messages and when client(browser) reconnects, the server will look into
 the buffer for latest message and will send it back to client and then again it
 will listen for new messages from RabbitMQ. Here is code snippet:
-
+{% highlight js %}
 #####Reconnect with tornado  *(JavaScript)*
     function reconnectToTornado(callback) {
         // Sleep time is constant after 5 minutes
@@ -288,6 +291,7 @@ will listen for new messages from RabbitMQ. Here is code snippet:
                     self.remove(message)
             return newest_message
                 
+{% endhighlight %}
 <br>
 It was also taken care of that older messages don't replace the newer messages
 on browser if the delivery order is not sequential. I also wrote lot of

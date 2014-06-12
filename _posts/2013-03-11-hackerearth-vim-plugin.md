@@ -45,13 +45,15 @@ became a more solid reason to use it.
 Generally vim plugins start with few checks. In this case, it checks for
 VimL + Python support and also looks for HackerEarth API client key.
 Obviously, if there is some error, plugin should not be loaded.
-
+    {% highlight python %}
     " check for python
     if !has('python')
         echoerr "HackerEarth: Plugin needs to be compiled wuth python support."
         finish
     endif
+    {% endhighlight %}
 
+    {% highlight python %}
     " check for client key
     if exists("g:HackerEarthApiClientKey")
         let s:client_key = g:HackerEarthApiClientKey
@@ -59,12 +61,14 @@ Obviously, if there is some error, plugin should not be loaded.
         echoerr "You need to set client key in your vimrc file"
         finish
     endif
+    {% endhighlight %}
 
 <br>
 As said earlier, Python can easily be integrated with VimL. Python code inside
 VimFunction starts after python << EOF and ends before EOF. Here is an example
 on how to do it.
-
+    
+    {% highlight python %}
     function! s:VimFunction()
     python << EOF
     # write python code here
@@ -72,7 +76,7 @@ on how to do it.
     print "Hello World!"
     EOF
     endfunction
-
+    {% endhighlight%}
 <br>
 #### OOPS!
 I have written most of the plugin code in Python and I love using Object

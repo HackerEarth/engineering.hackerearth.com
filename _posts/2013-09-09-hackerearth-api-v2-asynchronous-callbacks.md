@@ -42,7 +42,8 @@ If you haven't already got your secret key, [register here](http://www.hackerear
 To make an asynchronous request, now you just need to pass 1 as a value
 to 'async' parameter, along with other required parameters. 
 
-    {% highlight python %}
+    {% highlight python%}
+    {% raw %}
     import urllib
 
     COMPILE_URL = 'http://api.hackerearth.com/code/compile/'
@@ -79,6 +80,7 @@ to 'async' parameter, along with other required parameters.
     print "post_data: ",post_data
     print
     print response.read()
+    {% endraw %}
     {% endhighlight %}
 
 <br>
