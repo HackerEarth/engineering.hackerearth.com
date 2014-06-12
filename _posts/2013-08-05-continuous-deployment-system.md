@@ -55,7 +55,7 @@ hook](https://confluence.atlassian.com/display/BITBUCKET/POST+hook+management) o
 
 <br>
 Toolchain server back-end receives payload and filters commits based on branch and neglects any commit other than from master branch or of type merge commit.
-{% highlight python %}
+
     def filter_commits(branch=settings.MASTER_BRANCH, all_commits=[]):
         """
         Filter commits by branch
@@ -86,11 +86,11 @@ Toolchain server back-end receives payload and filters commits based on branch a
         # Restore commits order
         commits.reverse()
         return commits
-{% endhighlight %}
+
 <br>
 Filtered commits are then grouped intelligently using a file
 dependency algorithm.
-{% highlight python %}
+
     def group_commits(commits):
         """
         Creates groups of commits based on file dependency algorithm
@@ -148,7 +148,6 @@ dependency algorithm.
                 groups_of_commits.append(commits_group_sorted)
 
         return groups_of_commits
-{% endhighlight %}
 
 <br>
 Top commit of each group is sent for testing to integration test 
