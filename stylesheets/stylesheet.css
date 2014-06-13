@@ -158,6 +158,7 @@ header h2 {
 #content-wrapper {
   border-top: solid 1px #fff;
   padding-top: 30px;
+  background: #fff;
 }
 
 #main-content {
@@ -235,7 +236,7 @@ pre {
   background: #fff;
   text-shadow: none;
   overflow: auto;
-  border: solid 1px #f2f2f2;
+  border: solid 1px #ddd;
 }
 pre code {
   color: #2879d0;
@@ -293,8 +294,8 @@ form {
 }
 
 #main-content h2 {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 22px;
+  font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 8px;
   color: #474747;
