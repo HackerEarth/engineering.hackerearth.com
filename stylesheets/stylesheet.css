@@ -55,6 +55,7 @@ body {
 }
 .nav-bar{
   height: 40px;
+  background: #fff;
 }
 
 .nav-bar ul{
