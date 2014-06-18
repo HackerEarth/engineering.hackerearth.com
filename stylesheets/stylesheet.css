@@ -249,6 +249,19 @@ ul, ol, dl {
   margin-bottom: 20px;
 }
 
+p.date{
+  text-align: right;
+  color: #848484;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 0.3em;
+  font-weight: 400;
+  letter-spacing: 1px;
+} 
+
+h2.post-heading{
+  font-size: 18px;
+}
 
 /* COMMON STYLES */
 
