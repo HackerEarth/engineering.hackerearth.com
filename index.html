@@ -13,7 +13,7 @@ description: Blog about engineering and technology at HackerEarth.
 	    {% for post in site.posts %}
 	    	{% if post.categories != "tips" %}
 	      <h2> &raquo; <a class="post-heading" href="{{ post.url }}">{{ post.title }}</a></h2>
-	      <p style="font-style:italic;"> {{ post.description }} </p>
+	      <p> {{ post.description }} </p>
 	      <p class="date">{{ post.date | date_to_string }}</p>
 	      <hr></hr>
 	      {% endif %}
