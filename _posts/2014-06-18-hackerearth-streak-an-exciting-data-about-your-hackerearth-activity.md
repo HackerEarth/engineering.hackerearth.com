@@ -10,7 +10,7 @@ tags: [HackerEarth, Algorithm, HackerEarth-Streak]
 {% include JB/setup %}
 
 We have been constantly adding features to our [HackerEarth Developer Profile](http://www.hackerearth.com/about/profile/), making it better with every new update.  
-One of the exciting data in it is HackerEarth Streak on the [HackerEarth Activity](www.hackerearth.com/users/akatsuki/activity/hackerearth/) page.
+One of the exciting data in it is HackerEarth Streak on the [HackerEarth Activity](http://www.hackerearth.com/users/akatsuki/activity/hackerearth/) page.
 
 This post explains how we process user data and compute such results. We split it into two parts:  
 
