@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Introducing CodePlayer - watch your code like a movie"
-description: ""
+description: "Ever thought of sharing solution of a coding problem in form of a video with
+someone, to teach them how you implemented the solution. Or, wanted to see..."
 category: 
 tags: [HackerEarth, Ace Editor, Django]
 ---

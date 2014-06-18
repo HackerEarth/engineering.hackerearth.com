@@ -1,7 +1,11 @@
 ---
 layout: post
 title: "HackerEarth API v2: Introducing asynchronous callbacks"
-description: ""
+description: "We had already published HackerEarth API v1 in February, 2012 at
+(http://developer.hackerearth.com).
+The API v1 was synchronous
+in nature. This means that your request kept hanging until the
+code..."
 category: 
 tags: [HackerEarth, API, Asynchronous, CompileCode, RunCode]
 ---

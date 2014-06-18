@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "The Robust Realtime Server"
-description: ""
+description: "This is going to be a long blog post but I promise you will find some interesting
+piece of engineering here, so stay till the end..."
 category: 
 tags: [Tornado, Realtime, nowjs, RabbitMQ]
 ---

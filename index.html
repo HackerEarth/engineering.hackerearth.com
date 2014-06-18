@@ -12,16 +12,19 @@ description: Blog about engineering and technology at HackerEarth.
 	  <ul class="posts">
 	    {% for post in site.posts %}
 	    	{% if post.categories != "tips" %}
-	      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+	      <h2> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></h2>
+	      <p style="font-style:italic;"> {{ post.description }} </p>
+	      <span>{{ post.date | date_to_string }}</span>
+	      <hr></hr>
 	      {% endif %}
 	    {% endfor %}
-	  </ul>
+	  </ul >
 	  
     	<h1>Tips</h1>
 	  <ul class="posts">
 	    {% for post in site.posts %}
 	    {% if post.categories contains 'tips' %}
-	      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+	      <h2><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></h2>
 	      {% endif %}
 	    {% endfor %}
   </ul>

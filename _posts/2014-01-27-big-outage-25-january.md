@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Post-mortem: The big outage on January 25, 2014"
-description: ""
+description: "25th January was a rather unfortunate day for us. The monthly challenge - January Jackpot 2014..."
 category: 
 tags: [HackerEarth, Challenges, Uptime, Outage]
 ---

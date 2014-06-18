@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Using Google Data APIs with django apps"
-description: ""
+description: "In order to use any of the Google APIs for your application, first you need to
+set up a project in the [Google Developer's..."
 caregory:
 tags: [Django, APIs, Google]
 ---

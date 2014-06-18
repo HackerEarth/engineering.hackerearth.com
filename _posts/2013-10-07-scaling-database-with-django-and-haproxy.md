@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Scaling database with Django and HAProxy"
-description: ""
+description: "we use MySQL database as the primary data store. We have
+experimented with a few NoSQL databases on the way, but the results have been..."
 category: 
 tags: [HackerEarth, Django, Database, MySQL, HAProxy, LoadBalancing]
 ---

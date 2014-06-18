@@ -1,7 +1,10 @@
 ---
 layout: post
 title: "Scaling Python/Django application with Apache and mod_wsgi"
-description: ""
+description: "HackerEarth is primarily based on
+Python & Django. And we use Apache with
+mod_wsgi for hosting the application. There is a general complaint that Apache
+sucks..."
 category: 
 tags: [HackerEarth, Apache, mod_wsgi, Scaling]
 ---

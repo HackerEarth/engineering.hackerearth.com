@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "Scheduling emails with celery in Django"
-description: ""
+description: "After a long journey with Django, you come to a place where you feel the need to
+get some tasks done asynchronously without any supervision of human. Some tasks
+need to be scheduled to run once at a particular time or after some time and..."
 category: 
 tags: [Celery, Scheduling tasks, Scheduling emails, Periodic tasks, Crontab, Django, RabbitMQ]
 ---

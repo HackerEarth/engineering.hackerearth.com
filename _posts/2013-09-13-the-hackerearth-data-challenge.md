@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "The HackerEarth Data Challenge"
-description: ""
+description: "40,000+ programmers use HackerEarth. Everyday, people from all over India and
+other countries submit code on HackerEarth, solve problems and participate in
+online coding tests..."
 category: 
 tags: [DataChallenge, HackerEarth, SystemStatus, RethinkDB]
 ---

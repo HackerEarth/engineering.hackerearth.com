@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Continuous Deployment System"
-description: ""
+description: "This is one of the coolest and important thing we recently built at HackerEarth. 
+What's so cool about it? Just have a little patience, you will soon..."
 category: 
 tags: [Continuous Deployment System, HackerEarth, Fabric, RabbitMQ, Django]
 ---

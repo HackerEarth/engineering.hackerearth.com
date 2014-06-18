@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Vim plugin to compile/run code using API"
-description: ""
+description: "I love Vim editor. And the idea of a plugin to compile and run code from my favorite
+code editor sounded exciting...."
 category: 
 tags: [Vim, Plugin, HackerEarth API]
 ---

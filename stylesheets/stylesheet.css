@@ -256,9 +256,9 @@ hr {
   height: 1px;
   line-height: 1px;
   margin-top: 1em;
-  padding-bottom: 1em;
-  border: none;
-  background: transparent url('../images/hr.png') 0 0 no-repeat;
+  border-color: #EEE -moz-use-text-color -moz-use-text-color;
+  border-style: solid none none;
+  /*background: transparent url('../images/hr.png') 0 0 no-repeat;*/
 }
 
 table {

@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "HackerEarth Streak: An exciting data about your HackerEarth activity"
-description: ""
+description: "Code Streak:  Maximum number of unique problems solved continuously
+ Day Streak: Maximum number of days such that one new problem is
+   solved each day..."
 category: 
 tags: [HackerEarth, Algorithm, HackerEarth-Streak]
 ---

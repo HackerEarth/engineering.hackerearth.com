@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Programming challenges, uptime, and mistakes in 2013"
-description: ""
+description: "HackerEarth hosted more than thousand
+contests in the year 2013 alone. Out of them, there were more than two..."
 category: 
 tags: [HackerEarth, Challenges, Uptime, Scaling, Architecture]
 ---
