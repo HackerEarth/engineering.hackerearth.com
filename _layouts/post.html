@@ -5,8 +5,27 @@ comments: true
 <h2>{{ page.title }}</h2>
 <p class="meta">{{ page.date | date_to_string }}</p>
 
-{{ content }}
+    {{ content }}
 
+    {% unless page.categories == empty %}
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      {% assign categories_list = page.categories %}
+      {% include JB/categories_list %}
+    </ul>
+    {% endunless %}  
+
+    {% unless page.tags == empty %}
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      {% assign tags_list = page.tags %}
+      {% include JB/tags_list %}
+    </ul>
+    {% endunless %}  
+
+    {% include JB/sharing %}
+     <hr>
+    {% include JB/comments %}
   <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_developer = 1;

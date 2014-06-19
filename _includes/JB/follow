@@ -1,11 +1,11 @@
 <div style="margin-top:15px;">
 <ul class="custom">
-  <li>
+  <li style="display:inline;">
     <a href="https://twitter.com/HackerEarth" class="twitter-follow-button"
     data-show-count="false" data-lang="en" data-size="small">Follow
     @HackerEarth</a>
   </li>
-  <li>
+  <li style="display:inline;">
     <iframe
     src="http://ghbtns.com/github-btn.html?user=HackerEarth&type=follow&size=small"
     allowtransparency="true" frameborder="0" width="145px" height="20px" scrolling="0"></iframe>
