@@ -16,31 +16,29 @@ twitter: HackerEarth
 # Set 'provider' to false to turn commenting off globally.
 #
 comments :
-provider : disqus
-disqus :
-  short_name : he-engineering
-livefyre :
-  site_id : 123
-intensedebate :
-  account : 123abc
-facebook :
-  appid : 109964005787822
-  num_posts: 5
-  width: 700
-  colorscheme: light
+  provider : disqus
+  disqus :
+    short_name : he-engineering
+  intensedebate :
+    account : 123abc
+  facebook :
+    appid : 109964005787822
+    num_posts: 5
+    width: 700
+    colorscheme: light
 
 # Settings for analytics helper
 # Set 'provider' to the analytics provider you want to use.
 # Set 'provider' to false to turn analytics off globally.
 #        
 analytics :
-provider : google 
-google : 
-    tracking_id : 'UA-39182005-1'
-getclicky :
-  site_id : 
-mixpanel :
-    token : '_MIXPANEL_TOKEN_'
+  provider : google 
+  google : 
+      tracking_id : 'UA-39182005-1'
+  getclicky :
+    site_id : 
+  mixpanel :
+      token : '_MIXPANEL_TOKEN_'
 
 # Settings for sharing helper. 
 # Sharing is for things like tweet, plusone, like, reddit buttons etc.
@@ -48,8 +46,45 @@ mixpanel :
 # Set 'provider' to false to turn sharing off globally.
 #
 sharing :
-provider : 'tweet'
-provider : 'plusone'
-provide : 'like'
+  provider : 'tweet'
+  provider : 'plusone'
+  provide : 'like'
 
 production_url : http://engineering.hackerearth.com
+
+# These paths are to the main pages Jekyll-Bootstrap ships with.
+# Some JB helpers refer to these paths; change theme here if needed.
+#
+archive_path: /archive.html
+categories_path : /categories.html
+tags_path : /tags.html
+
+
+# Settings for sharing 
+# Sharing is for things like tweet, plusone, hn upvotes, like, linkedin
+# Add a tweet button    => provider : tweet
+# Add a like button     => provider : like (you also need a facebook appid)
+# Add a plus one button   => provider : plusone
+# Add a HN button     => provider : hn
+# Add them all (i.e. hn + tweet + plusone + like) => provider : all
+# Set 'provider' to the sharing provider you want to use.
+# Set 'provider' to false to turn sharing off globally.
+#
+sharing :
+ provider : all
+ twitter :
+   size :
+   via :
+   count :
+facebook :
+   appid : 109964005787822
+   layout : button_count
+   font :
+   faces : false
+   width : 90
+googleplus :
+   size : medium
+   width :
+   annotation : bubble
+linkedin :
+   counter : right 

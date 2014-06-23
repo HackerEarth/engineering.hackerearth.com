@@ -7,6 +7,7 @@ comments: true
 
     {{ content }}
 
+
     {% unless page.categories == empty %}
     <ul class="tag_box inline">
       <li><i class="icon-folder-open"></i></li>
@@ -23,7 +24,9 @@ comments: true
     </ul>
     {% endunless %}  
 
-    {% include JB/sharing %}
+    <div class="post-sharing">
+     {% include JB/sharing %}
+    </div>
      <hr>
     {% include JB/comments %}
   <div id="disqus_thread"></div>
