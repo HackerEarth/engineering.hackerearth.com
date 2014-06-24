@@ -7,7 +7,6 @@ comments: true
 
     {{ content }}
 
-
     {% unless page.categories == empty %}
     <ul class="tag_box inline">
       <li><i class="icon-folder-open"></i></li>
@@ -24,11 +23,10 @@ comments: true
     </ul>
     {% endunless %}  
 
-    <div class="post-sharing">
-     {% include JB/sharing %}
-    </div>
+    {% include JB/sharing %}
      <hr>
     {% include JB/comments %}
+    <div class="inner clearfix">
   <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_developer = 1;
@@ -43,6 +41,6 @@ comments: true
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
+  </div>
   </div>
   
