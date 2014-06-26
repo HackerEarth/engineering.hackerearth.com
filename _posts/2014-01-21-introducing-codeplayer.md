@@ -18,7 +18,7 @@ Today, we are announcing the release of HackerEarth's CodePlayer that exactly
 does that.
 
 **tl;dr** 
-[Watch a demo code video](http://code.hackerearth.com/code/play/41dc84fbad4d49ac9d91593890b6d534/)
+[Watch a demo code video](http://www.hackerearth.com/code/play/41dc84fbad4d49ac9d91593890b6d534/)
 or [Make your own code video](#make-video).
 
 <br>
