@@ -251,16 +251,15 @@ ul, ol, dl {
 
 p.date{
   text-align: right;
-  color: #e8e8e8;
+  color: #aaa;
   font-size: 13px;
   text-transform: uppercase;
   margin-bottom: 0.3em;
-  font-weight: 400;
   letter-spacing: 1px;
 } 
 
 a.post-heading {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 /* COMMON STYLES */
@@ -270,7 +269,8 @@ hr {
   line-height: 1px;
   margin-top: 1em;
   border-color: #EEE -moz-use-text-color -moz-use-text-color;
-  border-style: solid none none;
+  border-style:  none none;
+  background-color: #e8e8e8;
   /*background: transparent url('../images/hr.png') 0 0 no-repeat;*/
 }
 
@@ -308,7 +308,7 @@ form {
 
 #main-content h2 {
   font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px;
   color: #474747;
@@ -564,3 +564,8 @@ footer a:hover {
   background: #57A957;
   border: 1px solid #4c964d;
   color: #FFF; }
+
+.hr-color {
+  background-color: #e8e8e8;
+  border-style: none;
+}
