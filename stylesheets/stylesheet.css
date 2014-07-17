@@ -70,7 +70,7 @@ body {
   display: inline;
 }
 ol, ul {
-  list-style: none;
+  margin-left: 20px;
 }
 blockquote, q {
   quotes: none;
@@ -563,8 +563,8 @@ footer a:hover {
 .tag_box a.active {
   background: #57A957;
   border: 1px solid #4c964d;
-  color: #FFF; }
-
+  color: #FFF;
+}
 .hr-color {
   background-color: #e8e8e8;
   border-style: none;
