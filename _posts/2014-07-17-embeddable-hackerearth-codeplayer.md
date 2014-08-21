@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Embeddable HackerEarth CodePlayer"
+title: "Embed Your Code Movie Anywhere"
 description: "Six months back we launched CodePlayer as an initiative to help programmers share their knowledge in form of video and also provide a useful tool for recruiters to analyze thought process of candidates.
 "
 category:
