@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Requests Module"
+title: "Using APIs with Python Requests Module"
 description: "How HackerEarth uses Python Requests to fetch data from various APIs [Tutorial]"
 category: 
 tags: [Requests, Python, Github, StackOverflow, API]
