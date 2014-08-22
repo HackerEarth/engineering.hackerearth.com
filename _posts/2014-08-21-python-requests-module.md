@@ -82,7 +82,6 @@ There's an builtin JSON decoder on which we heavily rely on
 
     >>> import requests
     >>> r = requests.get('https://github.com/timeline.json')
-<script src="https://gist.github.com/973705.js"></script>
     >>> r.json()
     [{u'actor_attributes': {u'name': u'Tin...
 
