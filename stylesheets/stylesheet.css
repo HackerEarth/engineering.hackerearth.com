@@ -568,3 +568,14 @@ footer a:hover {
   background-color: #e8e8e8;
   border-style: none;
 }
+
+.social-logo{
+  float:right; 
+  margin-right:14px;
+  line-height:1.5!important;
+  color:#d3d3d3;
+}
+
+.social-logo:hover{
+  color:#46535e;  
+}
