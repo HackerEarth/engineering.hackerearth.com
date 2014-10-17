@@ -135,9 +135,9 @@ The flow will remain same for other APIs. The only things that will change are:
 2. The GData client
     
 
-P.S. I am the developer at [HackerEarth](http://www.hackerearth.com). 
+P.S. I am a developer at [HackerEarth](http://www.hackerearth.com). 
 Reach out to me at
 virendra@hackerearth.com for any suggestion, bugs or even if you just want to
 chat! Follow me [@virendra2334](https://twitter.com/virendra2334)
 
-*Posted by Virendra Jain*
+*Posted by [Virendra Jain](http://www.hackerearth.com/virendra)*
