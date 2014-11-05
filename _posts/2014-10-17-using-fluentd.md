@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Aggregating Apache logs with Fluentd and Amazon S3"
-description: "HackerEarth project is hosted on Amazon EC2. At any given point of
+description: "HackerEarth infrastructure is hosted on Amazon services. At any given point of
 time many webservers are running concurrently serving thousands of requests."
 category:
 tags: [Apache, Logs, Fluentd, Amazon, S3, EC2]
