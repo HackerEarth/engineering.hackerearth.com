@@ -8,7 +8,7 @@ tags: [Apache, Logs, Fluentd, Amazon, S3, EC2]
 ---
 {% include JB/setup %}
 
-Hackerearth project is hosted on Amazon EC2. At any given point of time many
+HackerEarth infrastructure is hosted on Amazon services. At any given point of time many
 webservers are running concurrently serving thousands of requests. This
 generates tons of access and error logs on each server separately. The task
 here was to  parse the logs on all these webservers and store them at one place
