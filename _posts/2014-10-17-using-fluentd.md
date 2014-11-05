@@ -19,7 +19,7 @@ data. We tried to accomplish this using fluentd and Amazon S3.
 
 Fluentd does the following things:
 
-1. Continuosly tails apache log files.
+1. Continuously tails apache log files.
 2. Parses incoming entries into meaning fields like ip, address etc and buffers them.
 3. Writes the buffered data to Amazon S3 periodically.
 
@@ -77,7 +77,7 @@ configuration:
         time_slice_wait 10m
 
         buffer_chunk_limit 256m            # max size of a buffer chunk
-    </match> 
+    </match>
 
 This configuration is for the default apache access.log file and the filter for
 this is predefined in td-agent(i.e format apache2). If you want to use some
@@ -106,7 +106,7 @@ LogStash/Kibana to analyze all the requests that your web servers receive.
 
 This blog is mostly a reproduction of the official [fluentd
 blog](http://docs.fluentd.org/articles/apache-to-s3) with a little detailed
-expanation. 
+expanation.
 
 P.S. I am a developer at [HackerEarth](http://www.hackerearth.com)
 Reach out to me at
