@@ -113,4 +113,4 @@ Reach out to me at
 virendra@hackerearth.com for any suggestion, bugs or even if you just want to
 chat! Follow me [@virendra2334](https://twitter.com/virendra2334)
 
-*Posted by [Virendra Jain](http://www.hackerearth.com/virendra/)*
+*Posted by [Virendra Jain](http://www.hackerearth.com/users/virendra/)*
