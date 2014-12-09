@@ -58,9 +58,9 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-
+        <div class="inner-div">
           {{ content }}
-          
+        </div>
         </section>
         {% if page.url == "/index.html" %}
         <aside id="sidebar">
@@ -141,7 +141,7 @@
                             thumbnail = val.thumbnail;
                         }
 
-                        items.push("<li><a href='" + url + "?utm_source=blog&utm_medium=link&utm_campaign=content-marketing' target='_blank'><img src='" + thumbnail + "'><div class='title'>" + title + "</div><div class='start'><i class='fa fa-clock-o'></i> " + start + "</div><div class='clear'></div></a></li>");
+                        items.push("<li><a href='" + url + "?utm_source=engineering-blog&utm_medium=link&utm_campaign=content-marketing' target='_blank'><img src='" + thumbnail + "'><div class='title'>" + title + "</div><div class='start'><i class='fa fa-clock-o'></i> " + start + "</div><div class='clear'></div></a></li>");
                     }
 
                 });
