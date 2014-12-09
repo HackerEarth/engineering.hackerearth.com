@@ -220,6 +220,15 @@ header h2 {
   max-width: 100%;
 }
 
+.inner1 {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
 aside#sidebar {
   width: 100%;
   max-width: 350px;
