@@ -111,10 +111,11 @@ header {
 }
 
 .outer-image {
-  padding-top: 80px;
   padding-bottom: 4%;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, serif;
   background-size: 940px 300px;
+  position: relative;
+  top: 20px;
 }
 
 .blog-logo img {
