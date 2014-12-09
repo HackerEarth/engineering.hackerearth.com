@@ -108,6 +108,7 @@ a:hover {
 header {
   font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, serif;
   background: #323754  url(../images/headerOverlay.jpg) no-repeat center center;
+  background-size: cover;
 }
 
 .outer-image {
