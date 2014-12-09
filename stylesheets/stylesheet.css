@@ -211,6 +211,7 @@ header h2 {
 
 #main-content {
   width: 100%;
+  float: left;
   max-width: 700px;
   margin: auto;
 }
