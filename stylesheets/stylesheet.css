@@ -101,8 +101,10 @@ body {
 a {
   color: #2879d0;
 }
-a:hover {
-  color: #4c9cdf;
+
+
+.posts a:hover {
+ text-decoration: underline; 
 }
 
 header {
