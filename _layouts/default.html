@@ -15,6 +15,7 @@
 
     <title> {{ page.title }} </title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -28,23 +29,24 @@
  </head>
 
   <body>
-    <!-- <div id="content-wrapper"> -->
+    <header>
+     <!-- <div id="content-wrapper"> -->
     <div class="nav-bar">
       <div class="inner">
       <ul>
-        <li><a href="http://hackerearth.com" target="_blank"><img class="main-logo" src="/images/HE-logo.png"></a></li>
+        <li><a href="http://hackerearth.com" target="_blank"><img class="main-logo" src="/images/logo.png"></a></li>
         <li><a href="https://github.com/hackerearth" target="_blank"><i class="fa fa-github-square fa-lg social-logo"></a></i></li>
         <li><a href="http://twitter.com/HackerEarth" target="_blank"><i class="fa fa-twitter-square fa-lg social-logo"></a></i></li>
         <li><a href="http://facebook.com/HackerEarth" target="_blank"><i class="fa fa-facebook-square fa-lg social-logo"></a></i></li>
-        <li><a href="http://www.linkedin.com/company/hackerearth" target="_blank">><i class="fa fa-linkedin-square fa-lg social-logo"></a></i></li>
+        <li><a href="http://www.linkedin.com/company/hackerearth" target="_blank"><i class="fa fa-linkedin-square fa-lg social-logo"></a></i></li>
         <li><a href="https://plus.google.com/+Hackerearth" target="_blank"><i class="fa fa-google-plus-square fa-lg social-logo"></a></i></li>
       </ul>
-    </div>
-  </div>
-    <header>
-        <a href="http://engineering.hackerearth.com">
+        </div>
+      </div>
+   <a href="http://engineering.hackerearth.com">
           <div class="inner">
       <div class="outer-image">
+          <a class="blog-logo" href="http://engineering.hackerearth.com/" rel="home"><img src="/images/logo_he.png" alt="HackerEarth Blog"></a>
             <!-- <span></span> -->
             <h1> {{ site.name }} </h1>
             <h2>Code is beautiful</h2>
@@ -62,7 +64,11 @@
         </section>
         {% if page.url == "/index.html" %}
         <aside id="sidebar">
-          <div class="embed tweet">
+        <div class="challenges-title">Programming Challenges</div>
+          <div class="challenges">
+          </div>
+
+        <div class="embed tweet">
             <a class="twitter-timeline"  href="https://twitter.com/HackerEarth"  data-widget-id="475974208741064704">Tweets by @HackerEarth</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </aside>
@@ -106,5 +112,47 @@
             </li>
         </div>
       </footer>
+    <script>
+    jQuery(document).ready(function($) {
+        $.ajax({
+
+            type: 'GET',
+            url: 'http://www.hackerearth.com/api/events/upcoming/',
+            data: {
+                format: 'json'
+            },
+            dataType: 'jsonp',
+            success: function(results) {
+                console.log(results);
+                var items = [];
+                $.each(results, function(key, val) {
+                    if (!val.college) {
+                        if (val.challenge_type == "hiring") {
+                            thumbnail = "/images/hiring.jpg"
+                        } else if (val.challenge_type == "contest") {
+                            thumbnail = "/images/nonhiring.jpg "
+                        } else {
+                            thumbnail = "";
+                        }
+                        title = val.title;
+                        url = val.url;
+                        start = val.start_timestamp;
+                        if (val.thumbnail) {
+                            thumbnail = val.thumbnail;
+                        }
+
+                        items.push("<li><a href='" + url + "?utm_source=blog&utm_medium=link&utm_campaign=content-marketing' target='_blank'><img src='" + thumbnail + "'><div class='title'>" + title + "</div><div class='start'><i class='fa fa-clock-o'></i> " + start + "</div><div class='clear'></div></a></li>");
+                    }
+
+                });
+                $("<ul/>", {
+                    "class": "challenges-list",
+                    html: items.join("")
+                }).appendTo(".challenges");
+                console.log(items)
+            }
+        });
+    });
+</script>
     </body>
 </html>

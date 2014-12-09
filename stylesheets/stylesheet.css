@@ -27,12 +27,12 @@ article, aside, details, figcaption, figure, header, hgroup, menu, nav, section 
 }
 body {
   line-height: 1;
+  color: #252c33;
 }
 
 .main-logo{
-  height: 55px;
   position: relative;
-  top: -8px;
+  top: 6px;
 }
 /*.nav-bar img.main-logoy{
   height: 41px;
@@ -54,8 +54,13 @@ body {
   margin-left: 12px;
 }
 .nav-bar{
-  height: 40px;
-  background: #fff;
+  font-family: 'Open Sans',sans-serif;
+  width: 100%;
+  padding: 10px 0 0 0;
+  color: #fff;
+  float: left;
+  border-bottom: 1px solid #323754;
+  outline: 1px solid rgba(255,255,255,0.07);
 }
 
 .nav-bar ul{
@@ -90,36 +95,71 @@ body {
   background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-weight: 400;
-  color: #666;
+  color: #252c33;
 }
 
 a {
   color: #2879d0;
 }
 a:hover {
-  color: #2268b2;
+  color: #4c9cdf;
 }
 
 header {
   font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, serif;
-  background: #2e7bcf url(../images/header-bg.jpg) 0 0 repeat-x;
-  /*background: #2e7bcf url(../images/blog-image.png) 0 0 repeat-x;*/
+  background: #323754  url(../images/headerOverlay.jpg) no-repeat center center;
 }
 
 .outer-image {
-  padding-top: 40px;
-  padding-bottom: 12%;
+  padding-top: 80px;
+  padding-bottom: 4%;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, serif;
-  background: url(../images/blog-image.png) 0 0 repeat-x;
   background-size: 940px 300px;
 }
-/*header span{
-  padding-top: 40px;
-  padding-bottom: 40px;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, serif;
-  background: #2e7bcf url(../images/blog-image.png) 0 0 repeat-x;
-  border-bottom: solid 1px #275da1;
-}*/
+
+.blog-logo img {
+    line-height: 0;
+    display: block;
+    width: auto;
+    max-height: 120px;
+    margin: 0 auto;
+    border: #fff 1px solid;
+    border-radius: 7px;
+}
+
+//Challenge listing 
+.challenges-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.challenges-list li {
+  border-top: 1px solid #d5d5d5;
+  padding: 10px 0;
+  list-style: none;
+}
+
+.challenges-list li img {
+  width: 35%;
+  float: left;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+.challenges-list a {
+  text-decoration: none;
+}
+
+.challenges-list .title {
+  line-height: 1.6em;
+  font-size: 1.0rem;
+  color: rgb(74, 74, 74);
+}
+
+.start {
+    color: rgb(74, 74, 74);
+}
 
 header h1 {
   letter-spacing: -1px;
@@ -132,6 +172,12 @@ header h1 {
   top: 10px;
   position: relative;
   font-family: 'lato';
+}
+
+.challenges-title {
+    font-size: 30px;
+    letter-spacing: -2px;
+    margin-bottom: 5px;
 }
 
 header h2 {
@@ -150,8 +196,9 @@ header h2 {
 
 .inner {
   position: relative;
-  width: 940px;
+  width: 100%;
   margin: 0 auto;
+  max-width: 1100px;
 }
 
 #content-wrapper {
@@ -161,8 +208,9 @@ header h2 {
 }
 
 #main-content {
-  width: 690px;
-  float: left;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
 }
 
 #main-content img {
@@ -170,7 +218,8 @@ header h2 {
 }
 
 aside#sidebar {
-  width: 200px;
+  width: 100%;
+  max-width: 350px;
   padding-left: 20px;
   min-height: 504px;
   float: right;
@@ -341,6 +390,7 @@ form {
 
 p {
   margin-bottom: 20px;
+  color: #252c33;
 }
 
 a {
@@ -576,4 +626,14 @@ footer a:hover {
 
 .social-logo:hover{
   color:#46535e;  
+}
+
+.clear {
+    clear: both;
+}
+
+#disqus_thread {
+  margin: auto;
+  width: 100%;
+  max-width: 700px;
 }
