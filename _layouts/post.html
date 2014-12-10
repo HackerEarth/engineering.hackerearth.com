@@ -2,7 +2,7 @@
 layout: default
 comments: true
 ---
-<h2>{{ page.title }}</h2>
+<h2 class="page-title">{{ page.title }}</h2>
 <p class="meta">{{ page.date | date_to_string }}</p>
 
     {{ content }}
@@ -24,7 +24,6 @@ comments: true
     {% endunless %}  
 
     {% include JB/sharing %}
-     <hr>
     {% include JB/comments %}
     <div class="inner clearfix">
   <div id="disqus_thread"></div>

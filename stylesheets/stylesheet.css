@@ -33,20 +33,8 @@ body {
 .main-logo{
   position: relative;
   top: 6px;
+  height: 19px;
 }
-/*.nav-bar img.main-logoy{
-  height: 41px;
-  width: 105px;
-  float: left;
-  position: relative;
-  bottom: 8px;
-}
-
-.nav-bar img.social{
-  height:75px;
-  width: 75px;
-  float:right;
-}*/
 
 .social
 {
@@ -92,7 +80,6 @@ table {
 body {
   font-size: 15px;
   line-height: 1.5;
-  background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-weight: 400;
   color: #252c33;
@@ -639,7 +626,7 @@ footer a:hover {
 }
 
 .social-logo:hover{
-  color:#46535e;  
+  color:#fff;  
 }
 
 .clear {
@@ -650,4 +637,8 @@ footer a:hover {
   margin: auto;
   width: 100%;
   max-width: 700px;
+}
+
+.page-title {
+    font-size: 25px!important;
 }
