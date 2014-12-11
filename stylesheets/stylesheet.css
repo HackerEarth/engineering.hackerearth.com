@@ -89,11 +89,6 @@ a {
   color: #2879d0;
 }
 
-
-.posts a:hover {
- text-decoration: underline; 
-}
-
 header {
   font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, serif;
   background: #323754  url(../images/headerOverlay.jpg) no-repeat center center;
@@ -189,7 +184,7 @@ header h2 {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  max-width: 1100px;
+  max-width: 1200px;
 }
 
 #content-wrapper {
@@ -201,7 +196,7 @@ header h2 {
 #main-content {
   width: 100%;
   float: left;
-  max-width: 700px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -308,6 +303,33 @@ p.date{
 
 a.post-heading {
   font-size: 24px;
+}
+
+.posts a {
+    position: relative;
+    color: #2879d0;
+    text-decoration: none;
+}
+
+.posts a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color:#2879d0 ;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.posts a:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 /* COMMON STYLES */
