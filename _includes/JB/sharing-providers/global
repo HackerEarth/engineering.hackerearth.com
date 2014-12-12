@@ -6,7 +6,8 @@
 <li class="hn"><span id="hnews"></span>
 
 <!-- Twitter -->
-<li class="tw"><a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ page.title }}" data-via="{{ site.JB.sharing.twitter.via }}" data-related="{{ site.author.twitter }}" data-count="{{ site.JB.sharing.twitter.count }}" data-size="{{ site.JB.sharing.twitter.size }}">Tweet</a>
+<li class="tw"><a href="https://twitter.com/share" class="twitter-share-button"
+data-text="{{ page.title }} via @HackerEarth" data-via="{{ site.JB.sharing.twitter.via }}" data-related="{{ site.author.twitter }}" data-count="{{ site.JB.sharing.twitter.count }}" data-size="{{ site.JB.sharing.twitter.size }}">Tweet</a>
 
 <!-- Google+ -->
 <li class="gp"><div class="g-plusone" data-size="{{ site.JB.sharing.googleplus.size }}" data-annotation="{{ site.JB.sharing.googleplus.annotation }}" data-width="{{ site.JB.sharing.googleplus.width }}"></div>
