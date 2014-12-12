@@ -655,11 +655,6 @@ footer a:hover {
     clear: both;
 }
 
-#disqus_thread {
-  margin: auto;
-  width: 100%;
-  max-width: 700px;
-}
 
 .page-title {
     font-size: 25px!important;
