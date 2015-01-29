@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Making django-threadedcomments more powerful"
+title: "Building a powerful comment system"
 description: "Comments have become an integral part of our website. They are integrated
 almost everywhere-challenge, practice problem page etc. and soon will be added to few more pages"
 category:
@@ -9,7 +9,7 @@ tags: [Django, threadedcomments, Realtime, Pusher]
 {% include JB/setup %}
 
 In this post, I am going to briefly descibe the challenges we faced while building a powerful
-commenting system.
+comment system.
 
 
 Comments have become an integral part of our website. They are integrated almost everywhere - 
@@ -24,7 +24,7 @@ Here is what we did:
 * [Tagging people](#tagging)
 
 ### From the beginning ###
-Our commenting system is built using an open source django app, named [django-threadedcomments](https://github.com/HonzaKral/django-threadedcomments).
+Our comment system is built using an open source django app, named [django-threadedcomments](https://github.com/HonzaKral/django-threadedcomments).
 In threadedcomments, commenters can reply both to the original item, and reply to other comments as well.
 This open source app best suited our requirements in terms of UX, hence we decided to use it. But later we realised
 it was not powerful enough, and we decided to add our own features in it.
@@ -39,7 +39,7 @@ Below is the snippet which we can include in any django template to add comments
 
 Above single line of code renders complete comment list(including reply form) using [bigpipe](https://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919). Isn't it cool?
 
-One more reason I am calling our commenting system plug and play is that we can easily override most of the comments display logic,
+One more reason I am calling our comment system plug and play is that we can easily override most of the comments display logic,
 show comments differently on different pages. For example, comments appearing on a [note](http://www.hackerearth.com/notes/getting-started-with-the-sport-of-programming/) and [problem](http://www.hackerearth.com/problem/algorithm/big-p-and-math-15/) page needs to be shown differently
 based on the logic 'who is the moderator of the content'. This couldn't have been possible without django template [block tag](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#block).
 
