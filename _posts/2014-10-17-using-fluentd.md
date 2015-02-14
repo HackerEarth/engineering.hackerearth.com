@@ -108,9 +108,9 @@ This blog is mostly a reproduction of the official [fluentd
 blog](http://docs.fluentd.org/articles/apache-to-s3) with a little detailed
 expanation.
 
-P.S. I am a developer at [HackerEarth](http://www.hackerearth.com)
+P.S. I am a developer at [HackerEarth](https://www.hackerearth.com)
 Reach out to me at
 virendra@hackerearth.com for any suggestion, bugs or even if you just want to
 chat! Follow me [@virendra2334](https://twitter.com/virendra2334)
 
-*Posted by [Virendra Jain](http://www.hackerearth.com/users/virendra/)*
+*Posted by [Virendra Jain](https://www.hackerearth.com/users/virendra/)*
