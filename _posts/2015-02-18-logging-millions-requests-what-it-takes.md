@@ -100,7 +100,7 @@ service DataTransporter {
 [Useful reference for setting up a kafka cluster.](http://www.michael-noll.com/blog/2013/03/13/running-a-multi-broker-apache-kafka-cluster-on-a-single-node/)
 
 
-## Pipeline Mangager Server ##
+## Pipeline Manager Server ##
 
 This server manages the consumption of request log messages from the Kafka topics, storing them in MongoDB and then later moving them to Amazon S3 as well as [Amazon Redshift](http://aws.amazon.com/redshift/).
       MongoDB acts merely as a staging area for the data consumed from the Kafka topics and this data is transferred to S3 at hourly intervals. Every file that is saved in S3 is loaded into Amazon Redshift which is a data warehouse solution that can scale to petabytes of data. We use Amazon Redshift for analyzing/metrics calculation from request log data.
