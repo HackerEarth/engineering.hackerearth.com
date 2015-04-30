@@ -58,7 +58,7 @@
 
     <div id="content-wrapper">
       <div class="inner clearfix">
-        <section id="main-content">
+          <section id="main-content"{% if page.url != "/index.html" %} class="float-none"{% endif %}>
         <div class="inner-div">
           {{ content }}
         </div>
