@@ -124,9 +124,9 @@
             },
             dataType: 'jsonp',
             success: function(results) {
-                console.log(results);
+                // console.log(results);
                 var items = [];
-                $.each(results, function(key, val) {
+                $.each(results.response, function(key, val) {
                     if (!val.college) {
                         if (val.challenge_type == "hiring") {
                             thumbnail = "/images/hiring.jpg"
@@ -150,7 +150,7 @@
                     "class": "challenges-list",
                     html: items.join("")
                 }).appendTo(".challenges");
-                console.log(items)
+                // console.log(items)
             }
         });
     });
