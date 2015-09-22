@@ -32,7 +32,7 @@ body {
 .main-logo{
   position: relative;
   top: 6px;
-  height: 19px;
+  height: 30px;
 }
 
 .social
@@ -108,8 +108,6 @@ header {
     width: auto;
     max-height: 120px;
     margin: 0 auto;
-    border: #fff 1px solid;
-    border-radius: 7px;
 }
 
 //Challenge listing 
