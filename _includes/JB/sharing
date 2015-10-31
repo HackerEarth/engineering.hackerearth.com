@@ -15,7 +15,7 @@
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 
-		<div style="float:left; margin-right:15px;">
+		<div style="float:left; margin-left:32px; margin-top: -2px;">
 		<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -27,8 +27,8 @@
 		<div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="lucida grande"></div>
 		</div>
 
-		<div style="float:left;">
-        <g:plusone href="{{ page.url }}" size="medium"></g:plusone></div>
+		<div style="float:left; margin-left: 20px">
+        <g:plusone href="{{ page.url }}" size="medium"></g:plusone>
 		<script type="text/javascript">
 		  (function() {
 		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
