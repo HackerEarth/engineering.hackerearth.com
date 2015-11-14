@@ -11,7 +11,7 @@ tags: [Assessment, Data Analysis, Recruiter, Question Library]
 We, at HackerEarth, cater a huge number of questions in [Assessment tool](http://hackerearth.com/recruit/assessment/).
 Recruiters can choose from wide varieties of Multiple Choice and Programming/Coding questions to assess candidates.
 Every week or two, new questions are added to the Questions Library.
-As the time passed, thousands of questions got stacked up and recruiters started to have a hard time figuring out what questions choose from such a huge library.
+As the time passed, thousands of questions got stacked up and recruiters started to have a hard time figuring out what questions to choose from such a huge library.
 
 We, developers, work closely with our sales team to understand recruiters’ needs.
 Sometimes we directly get in touch with recruiters to provide on call technical support and
@@ -112,7 +112,7 @@ That’s all with the data structure, let’s move on to Health calculation.
 
 The three factors that we consider while generating health can be obtained through `ProblemUsageData` model as follows:
 
-First comes `accuracy`, which as simple ass this:
+First comes `accuracy`, which as simple as this:
 
 {% highlight python %}
 
@@ -120,7 +120,7 @@ accuracy = (users_solved)*100/users_attempted)
 
 {% endhighlight %}
 
-Next, we have `times_used`, to which we multiply a some constant which can be found through following graph.
+Next, we have `times_used`, to which we multiply some constant which can be found through following graph.
 Pick the range according to question `accuracy` and look for the respective multiplier.
 This graph was generated after a lot of hit and trial and it will be different for different types of question such as Multiple Choice, Programming/Coding etc.
 
