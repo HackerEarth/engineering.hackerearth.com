@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Logging Javascript errors in production"
-description: "Implementation of errorception javascript logger on HackerEarth"
+description: "Integration of errorception javascript logger on HackerEarth to catch issues in production."
 category:
 tags: [JavaScript, Logger, Error, Logging, HackerEarth, Errorception, Fastly]
 ---
@@ -113,5 +113,5 @@ References:
 
 * * *
 
-*Send an email to support@hackerearth.com regarding any bugs or suggestions.*  
+*Send an email to support@hackerearth.com for any bugs or suggestions.*  
 *Posted by [Shivindera Singh](https://www.hackerearth.com/@shivindera).*
