@@ -88,7 +88,9 @@ An example for the view decorator is given below -
         def decorator(f):
             @wraps(f)
             def _ab_views(request, *args, **kwargs):
-                ctx = f(request, *args, **kwargs)
+                # if you want to do something with the dict returned
+                # by the view, you can do it here.
+                # ctx = f(request, *args, **kwargs)
                 view = None
                 try:
                     if user_is_logged_in():
