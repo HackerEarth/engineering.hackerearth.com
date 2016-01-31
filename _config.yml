@@ -6,8 +6,7 @@ permalink: /:categories/:year/:month/:day/:title
 
 name: HackerEarth Engineering
 markdown: redcarpet
-highlighter: true
-pygments: true
+highlighter: pygments
 github: HackerEarth
 twitter: HackerEarth
 
@@ -87,4 +86,4 @@ googleplus :
    width :
    annotation : bubble
 linkedin :
-   counter : right 
+   counter : right
