@@ -120,8 +120,8 @@ that the newly defined ``CustomSessionStore`` class can be used.
             # between. We inserted the ':' delimiter in between for easy
             # segregation of the two components of the session_key. If an old
             # session is found we copy its data to the new style session class and cycle
-            # its key. The ``cycle_key`` method internally calls the
-            # ``_get_new_session_key`` which now will generate a session key in
+            # its key. The cycle_key method internally calls the
+            # _get_new_session_key which now will generate a session key in
             # the new format but the old data will remain intact. All this
             # hassle is for preserving user authentication state when we deploy this code.
             # If we change the keys directly, users' existing sessions will get lost and
