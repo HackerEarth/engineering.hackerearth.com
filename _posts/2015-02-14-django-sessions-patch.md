@@ -17,19 +17,19 @@ packages for the purpose of user authentication and session management:
 - [django-redis-sessions](https://github.com/martinrusev/django-redis-sessions):
 Allows storage of user session data in [redis](https://github.com/antirez/redis)(a memory based data store that writes on disk) for fast retrieval. We used MySQL earlier for this purpose but the retrieval became very slow as number of users grew.
 
-
 Django sessions are simple dictionaries which look something like this:
 
-    {
-        '_session_cache': {
-            '_auth_user_id': 2L,
-            '_auth_user_backend': 'allauth.account.auth_backends.AuthenticationBackend',
-        },
-        '_session_key': '44617f83e234b6aa7e632abb8b44b906',
-        'modified': False,
-        'accessed': True
-    }
-
+```python
+{
+    '_session_cache': {
+        '_auth_user_id': 2L,
+        '_auth_user_backend': 'allauth.account.auth_backends.AuthenticationBackend',
+    },
+    '_session_key': '44617f83e234b6aa7e632abb8b44b906',
+    'modified': False,
+    'accessed': True
+}
+```
 The ``_session_cache`` contains the information about the user who is logged in, the
 backend that is used for user authentication(since we do not use django's
 default authentication backend, the value is different here). Also if you set
@@ -77,23 +77,25 @@ The session objects in django are abstracted using a class called
 responsible for generating session_keys. We define our own
 ``CustomSessionStore`` which only overrides the above mentioned method.
 
-    from django.contrib.session.backends.db import SessionStore
+```python
+from django.contrib.session.backends.db import SessionStore
 
-    class CustomSessionStore(SessionStore):
+class CustomSessionStore(SessionStore):
 
-        def _get_new_session_key(self):
-            session_key = super(CustomSessionStore, self)._get_new_session_key()
+    def _get_new_session_key(self):
+        session_key = super(CustomSessionStore, self)._get_new_session_key()
 
-            # If the user's information is present in the session, get it and
-            # inject it inside the session key, else inject a random string to
-            # keep the session key pattern consistent
-            if '_auth_user_id' in self._session:
-                user_id = self._session.get('_auth_user_id')
-                encoded_user_id = user_encoder_function(user_id)
-                session_key =   '%s:%s' %(encoded_user_id, session_key)
-            else:
-                session_key = '%s:%s' % (some_random_string, session_key)
-            return session_key
+        # If the user's information is present in the session, get it and
+        # inject it inside the session key, else inject a random string to
+        # keep the session key pattern consistent
+        if '_auth_user_id' in self._session:
+            user_id = self._session.get('_auth_user_id')
+            encoded_user_id = user_encoder_function(user_id)
+            session_key =   '%s:%s' %(encoded_user_id, session_key)
+        else:
+            session_key = '%s:%s' % (some_random_string, session_key)
+        return session_key
+```
 
 - Overriding django Session middleware
 
@@ -102,56 +104,58 @@ session object on the request as well as setting the session cookie on the
 response object. We only need to override the ``process_request`` function so
 that the newly defined ``CustomSessionStore`` class can be used.
 
-    from django.conf import settings
-    from django.contrib.session.middleware import SessionMiddleware
+```python
+from django.conf import settings
+from django.contrib.session.middleware import SessionMiddleware
 
-    class CustomSessionMiddleware(SessionMiddleware):
+class CustomSessionMiddleware(SessionMiddleware):
 
-        def process_request(self, request):
+    def process_request(self, request):
 
-            # settings.SESSION_ENGINE is the path to your session store class.
-            # It will be the path to CustomSessionStore in this case.
-            engine = import_module(settings.SESSION_ENGINE)
+        # settings.SESSION_ENGINE is the path to your session store class.
+        # It will be the path to CustomSessionStore in this case.
+        engine = import_module(settings.SESSION_ENGINE)
 
-            # session_key name is defined in the settings file
-            session_key = request.COOKIES.get(settings.SESSION_COOKIE_NAME, None)
+        # session_key name is defined in the settings file
+        session_key = request.COOKIES.get(settings.SESSION_COOKIE_NAME, None)
 
-            # Earlier the session_key was a single string with no delimiters in
-            # between. We inserted the ':' delimiter in between for easy
-            # segregation of the two components of the session_key. If an old
-            # session is found we copy its data to the new style session class and cycle
-            # its key. The cycle_key method internally calls the
-            # _get_new_session_key which now will generate a session key in
-            # the new format but the old data will remain intact. All this
-            # hassle is for preserving user authentication state when we deploy this code.
-            # If we change the keys directly, users' existing sessions will get lost and
-            # they will get logged out resulting in an unpleasant experience.
-            if session_key is not None and len(session_key.split(':')) != 2:
-                old_session = SessionStore(session_key=session_key)
-                old_data = old_session.load()
-                request.session = engine.CustomSessionStore(session_key=session_key)
-                request.session._session_cache = old_session.load()
-                request.session.cycle_key()
-            else:
-                request.session = engine.CustomSessionStore(session_key=session_key)
-
+        # Earlier the session_key was a single string with no delimiters in
+        # between. We inserted the ':' delimiter in between for easy
+        # segregation of the two components of the session_key. If an old
+        # session is found we copy its data to the new style session class and cycle
+        # its key. The cycle_key method internally calls the
+        # _get_new_session_key which now will generate a session key in
+        # the new format but the old data will remain intact. All this
+        # hassle is for preserving user authentication state when we deploy this code.
+        # If we change the keys directly, users' existing sessions will get lost and
+        # they will get logged out resulting in an unpleasant experience.
+        if session_key is not None and len(session_key.split(':')) != 2:
+            old_session = SessionStore(session_key=session_key)
+            old_data = old_session.load()
+            request.session = engine.CustomSessionStore(session_key=session_key)
+            request.session._session_cache = old_session.load()
+            request.session.cycle_key()
+        else:
+            request.session = engine.CustomSessionStore(session_key=session_key)
+```
 
 ###Conclusion
 
 All the sessions for a given user_id can be fetched using the following pseudo
 code:
 
-    redis_conn = get a redis connection
-    encoded_user_id = user_encoder_function(user_id)
-    # This pattern represents any key starting with encoded_user_id followed by
-    # a ':' and any string after that, which is how are sessions are store in
-    # redis.
-    key_pattern = encoded_user_id + ':*'
-    keys = redis_conn.keys(key_pattern)
-    for key in keys:
-        session = redis_conn.get(key)
-        # Do something with the sesssion
-
+```python
+redis_conn = get a redis connection
+encoded_user_id = user_encoder_function(user_id)
+# This pattern represents any key starting with encoded_user_id followed by
+# a ':' and any string after that, which is how are sessions are store in
+# redis.
+key_pattern = encoded_user_id + ':*'
+keys = redis_conn.keys(key_pattern)
+for key in keys:
+    session = redis_conn.get(key)
+    # Do something with the sesssion
+```
 
 This approach helped us solve a lot of problems like deleting all user sessions
 on password change, keeping track of active user sessions to name a few.
