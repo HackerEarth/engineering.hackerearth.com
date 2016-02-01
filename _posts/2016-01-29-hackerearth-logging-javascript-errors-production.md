@@ -7,11 +7,11 @@ tags: [JavaScript, Logger, Error, Logging, HackerEarth, Errorception, Fastly]
 ---
 {% include JB/setup %}
 
-We had implemented a javascript logger to capture the pesky issues our users faced and had problems when using our site. When we came up with the idea, we thought it would be just a five minute job where we would just have to add a snippet and we would be done, but as we all know, nothing is simple when it comes to real world production issues.
+We had implemented a javascript logger to capture the pesky issues our users faced and had problems when using the site. When we came up with the idea, we thought it would be just a five minute job where we would just have to add a snippet and would be done, but as it is well know, nothing is simple when it comes to real world production issues.
 
-After analyzing a lot of loggers, we decided to use **errorception** as our javascript logger. The reason was simple, it was simple in its approach and it provided the data we needed. This was the easy part, next came the part of integration, and yes there was a snippet which we just had to paste in our base javascript file, but one thing we had forgotten, CORS.
+After analyzing a lot of loggers, we decided to use **errorception** as our javascript logger. It was simple in its approach and it provided the data we needed. This was the easy part, next came the part of integration, and yes there was a snippet which we just had to paste in our base javascript file, but one thing we had forgotten, CORS.
 
-We host our static files on S3 and they are served via fastly, now because the static files are served through another domain, the error tracking snippet can’t log the errors on those files because window.onerror does not return the necessary stack trace and information and hence, comes CORS.
+We host our static files on S3 and they are served via fastly, because of which they are delivered through another domain. The error tracking snippet could not log the errors because 'window.onerror' would not return the necessary stack trace and information.
 
 Many of you may have heard about CORS, it is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the resource originated. For security reasons, browsers restrict cross-origin HTTP requests initiated from within scripts. The only way to solve this and get errors to be posted to errorception was to allow CORS in the header of the static files.
 
