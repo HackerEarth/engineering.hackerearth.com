@@ -170,6 +170,6 @@ This is just one of the ways you can do A/B testing using Django. You can always
 
 Feel free to comment below or ping us at [support@hackerearth.com](mailto:support@hackerearth.com) if you have any suggestions!  
 
-*Posted by [Arindam Mani Das](http://hack.re/arindam/).*  
+*Posted by [Arindam Mani Das](http://hck.re/arindam/).*  
 *Follow me [@arindammanidas](http://twitter.com/arindammanidas)*
 
