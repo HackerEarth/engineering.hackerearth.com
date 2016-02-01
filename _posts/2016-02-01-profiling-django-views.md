@@ -259,37 +259,37 @@ function.
 
 ```python
 class SQLCounter(object):
-    @staticmethod
-    def clear_data():
-        self.current_code = ''
-        self.check = False
-        self.data = defaultdict(list)
-        self.hit_count = defaultdict(int)
+    @classmethod
+    def clear_data(cls):
+        cls.current_code = ''
+        cls.check = False
+        cls.data = defaultdict(list)
+        cls.hit_count = defaultdict(int)
 
-    @staticmethod
-    def before(activity, lineno, colno):
-        self.check = True
-        self.current_code = ("line no {:<4}: {}".format(lineno, activity),
+    @classmethod
+    def before(cls, activity, lineno, colno):
+        cls.check = True
+        cls.current_code = ("line no {:<4}: {}".format(lineno, activity),
                 lineno)
-        self.hit_count[self.current_code] += 1
+        cls.hit_count[cls.current_code] += 1
 
-    @staticmethod
-    def after(activity, lineno, colno):
-        self.check = False
+    @classmethod
+    def after(cls, activity, lineno, colno):
+        cls.check = False
 
-    @staticmethod
-    def insert(data):
-        self.data[self.current_code].append(data)
+    @classmethod
+    def insert(cls, data):
+        cls.data[cls.current_code].append(data)
 
-    @staticmethod
-    def current_func(func):
-        self.func = func
+    @classmethod
+    def current_func(cls, func):
+        cls.func = func
 
-    @staticmethod
-    def show_data():
-        if not self.data:
+    @classmethod
+    def show_data(cls):
+        if not cls.data:
             return
-        data = sorted(self.data.items(),key=lambda a: a[0][1])
+        data = sorted(cls.data.items(),key=lambda a: a[0][1])
         table = []
         headers = ['Location', 'Hit', 'Queries', 'Time (ms)', 'Avg Time (ms)']
         total_tm = 0.0
@@ -301,7 +301,7 @@ class SQLCounter(object):
             tm = sum(k['time'] for k in qdata)
             total_tm += tm
             avg_tm = tm / qs
-            hit = self.hit_count[current_code]
+            hit = cls.hit_count[current_code]
             table.append([activity, hit, qs, tm, avg_tm])
         print "Total SQL queries: {},  Total time: {} ms".format(
                 total_qs, total_tm)
