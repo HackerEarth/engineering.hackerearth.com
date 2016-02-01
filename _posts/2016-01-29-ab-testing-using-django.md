@@ -38,12 +38,14 @@ We went out to grab some pizza and beer, and when we got back we came up with th
 
 To begin with, we had to categorize our users into buckets. So all our users were assigned a bucket number ranging from 1 to 120. This numbering is not strict and the range can be arbitrary or as per your needs. Next, we defined two constants - the first one specifies which view a user is routed to, and the second one specifies the fallback or primary view. The tuples in the first constant are the bucket numbers assigned to users. The primary view in the second constant will be used when we do not want to A/B test on anonymous users. 
 
-    AB_TEST = {
-            tuple(xrange(1,61)): 'example_app.views.view_a',
-            tuple(xrange(61,121)): 'example_app.views.view_b',
-        }
-    
-    AB_TEST_PRIMARY = 'example_app.views.view_a'
+```python
+AB_TEST = {
+        tuple(xrange(1,61)): 'example_app.views.view_a',
+        tuple(xrange(61,121)): 'example_app.views.view_b',
+    }
+
+AB_TEST_PRIMARY = 'example_app.views.view_a'
+```
 
 Next we wrote two decorators which we could wrap around views - one for handling views and the other for handling templates. In the first scenario, the decorator would take a dictionary of views i.e. the first constant that we defined, a primary view i.e. the second constant, and a boolean value which specifies if anonymous users should be A/B tested as well.
 
@@ -73,70 +75,73 @@ Now, the A/B will work perfectly for anonymous users as well. Once an anonymous 
 
 An example for the view decorator is given below -
 
-    """
-    Decorator to A/B test different views.
-    Args:
-        primary_view:       Fallback view.
-        anon_sticky:        Determines whether A/B testing should be performed on   
-                            anonymous users as well.
-        view_dict:          A dictionary of views(as string) with buckets as keys.
-    """
-    def ab_views(
-            primary_view=None,
-            anon_sticky=False,
-            view_dict={}):
-        def decorator(f):
-            @wraps(f)
-            def _ab_views(request, *args, **kwargs):
-                # if you want to do something with the dict returned
-                # by the view, you can do it here.
-                # ctx = f(request, *args, **kwargs)
-                view = None
-                try:
-                    if user_is_logged_in():
-                        view = _get_view(request, f, view_dict, primary_view)
-                    else:
-                        redis = initialize_redis_obj()
-                        view = _get_view_anonymous(request, redis, f, view_dict,
-                                primary_view, anon_sticky)
-                except:
-                    view = primary_view
-                view = str_to_func(view)
-                return view(request, *args, **kwargs)
-    
-            def _get_view(request, f, view_dict, primary_view):
-                bucket = get_user_bucket(request)
-                view = get_view_for_bucket(bucket)
-                return view
-    
-            def _get_view_anonymous(request, redis, f, view_dict,
-                    primary_view, anon_sticky):
-                view = None
-                if anon_sticky:
-                    cookie = get_cookie_from_request(request)
-                    if cookie:
-                        view = get_value_from_redis(cookie)
-                    else:
-                        view = random.choice(view_dict.values())
-                        set_cookie_value_in_redis(cookie)
+```python
+"""
+Decorator to A/B test different views.
+Args:
+    primary_view:       Fallback view.
+    anon_sticky:        Determines whether A/B testing should be performed on   
+                        anonymous users as well.
+    view_dict:          A dictionary of views(as string) with buckets as keys.
+"""
+def ab_views(
+        primary_view=None,
+        anon_sticky=False,
+        view_dict={}):
+    def decorator(f):
+        @wraps(f)
+        def _ab_views(request, *args, **kwargs):
+            # if you want to do something with the dict returned
+            # by the view, you can do it here.
+            # ctx = f(request, *args, **kwargs)
+            view = None
+            try:
+                if user_is_logged_in():
+                    view = _get_view(request, f, view_dict, primary_view)
                 else:
-                    view = primary_view
-                return view
-    
-            return _ab_views
-        return decorator
+                    redis = initialize_redis_obj()
+                    view = _get_view_anonymous(request, redis, f, view_dict,
+                            primary_view, anon_sticky)
+            except:
+                view = primary_view
+            view = str_to_func(view)
+            return view(request, *args, **kwargs)
 
+        def _get_view(request, f, view_dict, primary_view):
+            bucket = get_user_bucket(request)
+            view = get_view_for_bucket(bucket)
+            return view
+
+        def _get_view_anonymous(request, redis, f, view_dict,
+                primary_view, anon_sticky):
+            view = None
+            if anon_sticky:
+                cookie = get_cookie_from_request(request)
+                if cookie:
+                    view = get_value_from_redis(cookie)
+                else:
+                    view = random.choice(view_dict.values())
+                    set_cookie_value_in_redis(cookie)
+            else:
+                view = primary_view
+            return view
+
+        return _ab_views
+    return decorator
+```
 The noteworthy piece of code here is the function str*_*to*_*func(). This returns a view object from a view path (string).
 
-    def str_to_func (func_string):
-        func = None
-        func_string_splitted = func_string.split('.')
-        module_name = '.'.join(func_string_splitted[:-1])
-        function_name = func_string_splitted[-1]
-        module = import_module(module_name)
-        if module and function_name:
-            func = getattr(module, function_name)
-        return func
+```python
+def str_to_func (func_string):
+    func = None
+    func_string_splitted = func_string.split('.')
+    module_name = '.'.join(func_string_splitted[:-1])
+    function_name = func_string_splitted[-1]
+    module = import_module(module_name)
+    if module and function_name:
+        func = getattr(module, function_name)
+    return func
+```
 
 We can write another decorator for A/B testing multiple templates using the same view in a similar way. Instead of passing a view dictionary, pass a template dictionary and return a template.
     
@@ -144,14 +149,16 @@ We can write another decorator for A/B testing multiple templates using the same
 
 Now, let’s assume that we have already written the ‘A’ and ‘B’ views which are to be A/B tested. Let’s call them ‘view_a’ and ‘view_b’. To get the entire thing working, we will write a new view. Let’s call this view as ‘view_ab’. We will wrap this view with one of the decorators we wrote above and create a new url to point to this new view. You may refer to the code snippet below -
 
-    @ab_views(
-            primary_view=AB_TEST_PRIMARY,
-            anon_sticky=True,
-            view_dict=AB_TEST,
-            )
-    def view_ab(request):
-        ctx = {}
-        return ctx
+```python
+@ab_views(
+        primary_view=AB_TEST_PRIMARY,
+        anon_sticky=True,
+        view_dict=AB_TEST,
+        )
+def view_ab(request):
+    ctx = {}
+    return ctx
+```
 
 *Just for the sake of convenience we require that this new view returns a dictionary.*
 
