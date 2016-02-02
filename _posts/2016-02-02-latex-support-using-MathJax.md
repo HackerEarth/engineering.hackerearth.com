@@ -32,7 +32,8 @@ We use pagedown editor throughout our site. It has a preview section which displ
 
 Pagedown editor has feature called hooks. This is a mechanism for plugging external text processors in between various steps of markdown processing. We have written a hook for typesetting Latex macros. This is chained to the hooks at the end, after all the markdown processing is completed. This hook takes markdown processed content as input and spits out Latex typesetted content.
 
-```javascript
+{% highlight javascript %}
+
 function renderLatex(text) {
     var invisible_div = document.createElement("div");
     invisible_div.style.cssText = "display:hidden";
@@ -49,7 +50,8 @@ function renderLatex(text) {
     child_node = document.body.removeChild(elem);
     return child_node.innerHTML;
 }
-```
+
+{% endhighlight %}
 
 This function creates an invisible div, sets the input text the to this div, queues this div in MathJax queue. Then MathJax typesets the div.
 
@@ -67,13 +69,14 @@ The way MathJax works, we can only typeset the Latex content only after it has l
 
 This bit is easy. After the page loads completely, ask MathJax to render the all the latex content in the page. This can be achieved by following piece of code.
 
-```javascript
+{% highlight javascript %}
+
 <script type="text/javascript">
     window.addEventListener("load", function() {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             });
 </script>
-```
+{% endhighlight %}
 
 **Asynchronous:**
 
@@ -81,13 +84,14 @@ In this case, instead of queueing the whole page for typesetting, we queue only 
 
 This is the function for typesetting divs.
 
-```javascript
+{% highlisth javascript %}
+
 function latexifyAjaxDiv(div) {
     setTimeout(function() {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, div[0]]);
     }, 10);
 }
-```
+{% endhighlight %}
 
 This function is called in ajax utility functions, right after setting content to the divs.
 
