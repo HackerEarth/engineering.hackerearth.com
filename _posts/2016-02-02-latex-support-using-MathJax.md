@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Beautiful Math Symbols
-description: HackerEarth now renders math symbols using LaTex macro using
-MathJax javascript library.
-category: front-end
-tags:['latex', 'javascript', 'front end', 'HackerEarth']
+title: "Beautiful Math Symbols"
+description: "HackerEarth now renders math symbols using LaTex macro using
+MathJax javascript library."
+category:
+tags: [latex, javascript, front-end, HackerEarth]
 ---
 {% include JB/setup %}
 
