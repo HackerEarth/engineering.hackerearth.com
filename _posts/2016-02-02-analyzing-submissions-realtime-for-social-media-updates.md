@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Analyzing submissions in real time for social media updates"
-description: "Story: How we made a real-time app automate marketing"
+description: "Story: How we made a real-time app to automate marketing"
 category:
 tags: [Databases, Marketing, Tweets]
 ---
