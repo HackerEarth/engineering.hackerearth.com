@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Beautiful Math Symbols"
-description: "HackerEarth now renders math symbols using LaTex macro using
-MathJax javascript library."
+description: "Supporting LaTex for writing math symbols on HackerEarth"
 category:
 tags: [latex, javascript, front-end, HackerEarth]
 ---
