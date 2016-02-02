@@ -84,7 +84,7 @@ In this case, instead of queueing the whole page for typesetting, we queue only 
 
 This is the function for typesetting divs.
 
-{% highlisth javascript %}
+{% highlight javascript %}
 
 function latexifyAjaxDiv(div) {
     setTimeout(function() {
