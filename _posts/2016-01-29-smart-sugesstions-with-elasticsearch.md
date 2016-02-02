@@ -22,13 +22,14 @@ We use Elasticsearch to index millions of documents with various fields. Two hur
 Elasticsearch uses **analyzers** that help in achieving good relevence, but only if used in a witty manner. It also allows us to build our own custom analyzers. So by assaying the user input, astute analyzers can be built to increase relevance.
 A simple example for a document can be something like,
 
-    { 
-        ‘_id’ : AVJUN6QaLYvICHZxvYEq,
-        ‘username’: ‘ksrvtsa’,
-        ‘location’: ‘Bangalore’,
-        ‘hobbies’: [‘music’, ‘reading’, ‘hiking’],
-    }
-
+```python
+{ 
+    '_id' : 'AVJUN6QaLYvICHZxvYEq',
+    'username': 'ksrvtsa',
+    'location': 'Bangalore',
+    'hobbies': ['music', 'reading', 'hiking'],
+}
+```
 ### So what are analyzers? ###
 An analyzer converts the text to be indexed and creates lookups for finding the text when needed using appropriate search terms. An analyzer is composed of a tokenizer that
 splits your text into multiple tokens which is followed by many token filters which modify, delete or add new tokens. The tokenizer can be preceded by character filters which
