@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Smart suggestions with Django, Elasticsearch and Haystack"
-description: "Making smart suggestions!"
+description: "Giving relevant suggestions using Elasticsearch and Haystack in Django"
 category:
 tags: [Indexing, Suggestions, Data]
 ---
