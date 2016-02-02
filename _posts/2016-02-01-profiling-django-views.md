@@ -3,7 +3,7 @@ layout: post
 title: "Profiling django views for SQL queries"
 description: "We created a SQL profiler for python functions which tells what
 exact expressions inside the function body triggers some network call like SQL
-queries by manipulating AST (Abstarct Syntax Trees) of function code."
+queries by manipulating AST (Abstract Syntax Trees) of function code."
 category:
 tags: [Django, Profiling, Python AST, AST manipulation]
 ---
