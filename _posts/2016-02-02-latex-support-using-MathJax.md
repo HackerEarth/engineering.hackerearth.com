@@ -94,5 +94,6 @@ This function is called in ajax utility functions, right after setting content t
 
 This approach makes almost all the pages in our site Latex compatible.
 
+*Posted by [Pradeepkumar Gayam](http://hck.re/in3xes/)*
 
-
+*Thanks to [Ravi Ojha](http://hackerearth.com/users/akatsuki) for improving it*
