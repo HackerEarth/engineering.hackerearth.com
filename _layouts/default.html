@@ -4,6 +4,47 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Facebook tags -->
+    <meta property="fb:app_id" content="190817380995032" />
+    {% if page.title %}
+    <meta property="og:title" content="{{ page.title }}" />
+    {% else %} 
+    <meta property="og:title" content="Features and Updates at HackerEarth" />
+    {% endif %}
+    <meta property="og:image" content="/images/og-image.png" />
+    {% if page.description %}
+    <meta property="og:description" content="{{ page.description }}"/>
+    {% else %}
+    <meta property="og:description" content="Engineering updates at HackerEarth"/>
+    {% endif %}
+    {% if page.url == "/index.html" %}
+    <meta property="og:url" content="http://engineering.hackerearth.com{{ site.url }}" />
+    {% else %}
+    <meta property="og:url" content="http://engineering.hackerearth.com{{ site.url }}{{ page.url }}" />
+    {% endif %}
+    <meta property="og:site_name" content="HackerEarth"/>
+    {% if page.url == "/index.html" %}
+    <meta property="og:type" content="website"/>
+    {% else %}
+    <meta property="og:type" content="article"/>
+    {% endif %}
+    <!-- end Facbook tags -->
+
+    <!-- Twitter tags -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@HackerEarth"/>
+    {% if page.url == "/index.html" %}
+    <meta name="twitter:url" content="http://engineering.hackerearth.com"/>
+    {% endif %}
+    {% if page.title %}
+    <meta name="twitter:title" content="{{ page.title }}"/>
+    {% else %}
+    <meta name="twitter:title" content="{{ site.title }}"/>
+    {% endif %}
+    <!-- end Twitter tags -->
+
+
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/pygment_trac.css" media="screen" />
