@@ -7,14 +7,14 @@ tags: [Email-Infrastructure,MySQL, MongoDB, RabbitMQ]
 ---
 {% include JB/setup %}
 
-At hackerearth we send emails keep our users updated on upcoming challenges and
+At hackerearth we send emails to keep our users updated on upcoming challenges and
 their activities, for example, when a user successfully solves a problem,
 receives test-invitation, updates on user comments. Basically whenever
-it’s appropriate.
+it is appropriate.
 
 ### Architecture ###
-It’s takes lot of computational power to send emails in such a large quantities
-synchronously. So we implemented an asynchronous architecture to send emails.
+It takes lot of computational power to send emails in such large quantities
+synchronously. So we have implemented an asynchronous architecture to send emails.
 
 Here’s brief overview of how the architecture:
 
@@ -24,10 +24,10 @@ Step 3: Consume the metadata, recreate the email object and deliver.
 
 
 The diagram below shows high level architecture of emailing system. The solid
-line represent the data flow between different components. The dotted line
+line represents the data flow between different components. The dotted line
 represents the communications.
-Hackerearth email infrastructure consists of mysql database, mongo database,
-rabbitmq queues.
+Hackerearth email infrastructure consists of MySQL database, MongoDB database,
+RabbitMQ queues.
 
 
 <br />
@@ -39,10 +39,10 @@ rabbitmq queues.
 
 **Step 1 - Construct email:**
 
-There are two different email by construct
+There are two different type of emails.
 
-1. Text-Plain text emails
-2. Html-Emails with rich interface using html elements. These emails are made
+1. Text - Plain text emails
+2. Html - Emails with rich interface using html elements. These emails are made
 using django templates
 
 API used by hackerearth developers for sending email -
@@ -73,7 +73,7 @@ Mail object
 ```
 
 
-The below models is used for storing the serialized mail object and
+Model below is used for storing the serialized mail object and
 additional data.
 
 ```python
@@ -113,7 +113,7 @@ We queue the following metadata in the queue as a json object:
 
 **Step 3 - Reconstruct and deliver:**
 
-We run delivery workers, which consume the metadata from queues,
+We run delivery workers, which consume metadata from queues,
 reconstruct email object and deliver it.
 
 These workers consumes the messages from rabbitmq queues and fetches the
@@ -121,15 +121,14 @@ message object from Message model(explained in the section above),
 deserializes the data to reconstruct the sendgrid Mail object.
 
 We run different number of workers depending on the volume of emails in
-each queue. 
+each queue.
 
-This is where if we implement final checks which help us to make decision
+Before sending email we do final checks which help us to make decision
 whether to deliver the email or not. For example, if the email id is
-blacklisted, if the emails non-zero number of receivers. This helps to
-distribute the load(?)
+blacklisted, if the emails have non-zero number of receivers.
 
 After request is sent to sendgrid for delivering the email, these email
-objects are logged into a mongodb to maintain the history of delivered
+objects are logged into a MongoDB to maintain the history of delivered
 emails.
 
 ###A/B Test In Emails###
