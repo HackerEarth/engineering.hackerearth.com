@@ -16,7 +16,7 @@ it is appropriate.
 It takes lot of computational power to send emails in such large quantities
 synchronously. So we have implemented an asynchronous architecture to send emails.
 
-Here’s brief overview of how the architecture:
+Here is brief overview of the architecture:
 
 Step 1: Construct an email and save the serialized email object in database.<br/>
 Step 2: Queue the metadata for later consumption.<br/>
