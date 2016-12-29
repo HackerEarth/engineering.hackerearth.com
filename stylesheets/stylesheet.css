@@ -110,7 +110,7 @@ header {
     margin: 0 auto;
 }
 
-//Challenge listing 
+//Challenge listing
 .challenges-list {
   margin: 0;
   padding: 0;
@@ -296,7 +296,7 @@ p.date{
   text-transform: uppercase;
   margin-bottom: 0.3em;
   letter-spacing: 1px;
-} 
+}
 
 a.post-heading {
   font-size: 24px;
@@ -428,19 +428,28 @@ blockquote {
   padding: 0 0 0 30px;
 }
 
-ul {
-  /*list-style: disc inside;*/
-  /*padding-left: 20px;*/
-}
-
-ol {
-  list-style: decimal inside;
-  padding-left: 3px;
-}
-
 dl dd {
   font-style: italic;
   font-weight: 100;
+}
+
+ul {
+   list-style-type: disc;
+   list-style-position: inside;
+}
+ol {
+   list-style-type: decimal;
+   list-style-position: inside;
+}
+ul ul, ol ul {
+   list-style-type: circle;
+   list-style-position: inside;
+   margin-left: 15px;
+}
+ol ol, ul ol {
+   list-style-type: lower-latin;
+   list-style-position: inside;
+   margin-left: 15px;
 }
 
 footer {
@@ -638,14 +647,14 @@ footer a:hover {
 }
 
 .social-logo{
-  float:right; 
+  float:right;
   margin-right:14px;
   line-height:2.2!important;
   color:#d3d3d3;
 }
 
 .social-logo:hover{
-  color:#fff;  
+  color:#fff;
 }
 
 .clear {
