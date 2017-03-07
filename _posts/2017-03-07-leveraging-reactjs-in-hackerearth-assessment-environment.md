@@ -57,7 +57,7 @@ We knew it was still going to take some time to load the heavy ReactJS vendor fi
 
 <img src="/images/loading-test-interface.jpg" alt="Loading Test Interface Image" />
 
-This gave us enough time to load all heavy js files and make some ajax calls. The json returned by ajax call was less than 100 KB for 30 questions. This was pretty good! This was pretty good! We let React do what it does best and render the json on the client side.
+This gave us enough time to load all heavy js files and make some ajax calls. The json returned by ajax call was less than 100 KB for 30 questions. This was pretty good! We let React do what it does best and render the json on the client side.
 
 Another beautiful feature of ReactJS is its ability to bind the rendered elements with the state of the elements. If we want to update the content or child elements of any element, we just update the state of the parent element and React will re-render the component. We will use the words element and component interchangeably; component refers to the js code of the html element.
 
