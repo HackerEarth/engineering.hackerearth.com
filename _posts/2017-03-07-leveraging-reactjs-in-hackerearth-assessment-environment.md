@@ -101,7 +101,7 @@ Conclusions from the above discussion:
  - We can try improving the initial load time, maybe we can create chunks of vendors depending on the type of test. For instance, if there are no programming questions in a test, we can avoid creating vendor files for ace.js.
  - We can update the question in realtime while the candidate is taking the test. For instance, due to some reason, let's say a question description was altered in the backend by test admin, we ask the candidate to reload the page. If we can push the change to all test taking candidates and update the state of that child, the test taking experience can be further enhanced.
 
-If you'd like to have a first-hand experience of the test environment, go ahead and take [this](https://www.hackerearth.com/relapse/) test. Let us know your feedback and how we can improve furhter.
+If you'd like to have a first-hand experience of the test environment, go ahead and take [this](https://www.hackerearth.com/challenge/test/react-test/) test. Let us know your feedback and how we can improve furhter.
 
 [Evíva!](http://en.wiktionary.org/wiki/evviva#Descendants)
 
