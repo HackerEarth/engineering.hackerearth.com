@@ -98,6 +98,7 @@ Which is why, you get something like this when you try running a GUI app on a he
 $ glxgears
 Error: couldn't open display (null)
 ```
+
 _**Note**: glxgears is just a GUI app that we'll utilise for the purpose of this demo._
 
 So how _does_ one go about running GUI apps on a headless server? Enter **Xvfb**.
@@ -173,7 +174,7 @@ NoVNC is a VNC client using HTML5 (Web Sockets, Canvas). The project is availabl
 
 Connecting to a VNC server from javascript is as simple as:
 
-```javascript
+{% highlight javascript %}
 // Initialise rfb object(refer to the modules documentation in the project)
 var rfb = new RFB({'target': document.getElementById('noVNC_canvas'});
 // Initialise host and port of the VNC server
@@ -181,7 +182,7 @@ var host = 'localhost';
 var port = 5900;
 // Establish session. On success, this starts drawing on #noVNC_canvas.
 rfb.connect(host, port);
-```
+{% endhighlight %}
 
 With the VNC Server process running, if you try establishing a connection from the noVNC client, it will fail with the following error.
 
@@ -205,10 +206,10 @@ WebSocket server settings:
 
 Consequently, we update our noVNC client to instead connect to the websocket port.
 
-```javascript
+{% highlight javascript %}
 // port 5900 is no longer relevant to the client
 var port = 6080; 
-```
+{% endhighlight %}
 
 The noVNC client should now be able to establish a connection.
 
@@ -244,12 +245,12 @@ In order to start an emulator, you need to first define at least one AVD. While 
 
 2. qemu - We configure the emulator to utilise _kvm_ which results in a great performance boost.
 
-```bash
+{% highlight bash %}
 # Point to the running Xvfb process
 DISPLAY=:1
 # Start emulator
 emulator -avd <name-of-predefined-avd> -no-boot-anim -nojni -netfast -gpu swiftshader -qemu -enable-kvm
-```
+{% endhighlight %}
 
 _**Note**: As we saw in the Running GUI apps on Headless Server section, we need to point the **DISPLAY** to the running Xvfb process first._
 
@@ -311,7 +312,7 @@ We were now able to perform operations like:
 
 And here's a simple bash script that incorporates all of the components, to finally expose a websocket that a noVNC client can connect to.
 
-```bash
+{% highlight bash %}
 # Start Xvfb at DISPLAY :1
 Xvfb :1 -screen 0 1024x768x24 > xvfb.log 2>&1 &
 # Point DISPLAY to virtual X Server
@@ -322,7 +323,7 @@ emulator -avd Nexus_5X_API_24 -gpu swiftshader -no-boot-anim -nojni -netfast -qe
 x11vnc -display :1 -quiet -nopw -rfbport 5900 -bg -o vnc.log
 # Proxy websocket traffic to raw tcp traffic
 websockify -D :6080 :5900 > websockify.log 2>&1
-```
+{% endhighlight %}
 
 _**Note**:This is a grossly oversimplified version. Because there are so many moving parts, we need to ensure each of these processes have been initialised and are in running state before starting the next one._
 
@@ -332,7 +333,7 @@ The entire setup can be considered as one unit, which we will refer to as an _en
 
 And here's the thrift definition for _Droid Service_.
 
-```thrift
+{% highlight thrift %}
 enum ErrCode {
   DEFAULT = 0,
   NO_DROIDS_AVAILABLE = 1,
@@ -360,7 +361,7 @@ service DroidService {
    bool run_operation(1: string endpoint_id, 2: string operation, 3: string apk_url) throws (
           1: ApplicationException ae),
 }
-```
+{% endhighlight %}
 
 #### Scaling out
 
@@ -378,7 +379,7 @@ We employed the [Apache Zookeeper](https://zookeeper.apache.org/) project to thi
 
 And here's the thrift definition for the _Master Droid Service_
 
-```thrift
+{% highlight thrift %}
 enum ErrCode {
   DEFAULT = 0,
   NO_DROIDS_AVAILABLE = 1,
@@ -415,7 +416,7 @@ service DroidKeeper {
 
    oneway void release_endpoint_for_user(1: string user),
 }
-```
+{% endhighlight %}
 
 ### What's next?
 
