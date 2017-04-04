@@ -375,7 +375,7 @@ We employed the [Apache Zookeeper](https://zookeeper.apache.org/) project to thi
 2. Scaling up is simply a matter of starting another _Droid Service_
 3. A _Master Droid Service_ simply directs RPC calls to the relevant _Droid Service_ and relays the response back to external clients(for eg. a Django app).
 
-<img style="display: block; margin: 0 auto;" src="/images/app-stream-droid-master.png" alt=Droid Master Overview" title="App Stream Cluster"/>
+<img style="display: block; margin: 0 auto;" src="/images/app-stream-droid-master.png" alt="Droid Master Overview" title="App Stream Cluster"/>
 
 And here's the thrift definition for the _Master Droid Service_
 
