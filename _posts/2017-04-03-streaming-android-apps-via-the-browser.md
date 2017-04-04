@@ -9,7 +9,7 @@ tags: [Android, VNC, RFB, Server Client Architecture, Distributed Systems, RPC, 
 
 HackerEarth prides itself in it's scalable & automated evaluation system. What was initially designed keeping standard programming problems in mind (check this [post](http://hck.re/nwL0iJ) out), gradually evolved to accommodate a plethora of problem types across various tech domains.
 
-| Currently supported Problem Types   | 
+| **Currently supported Problem Types**   | 
 | 				:---:   			  |
 | _Programming_   					  |
 | _Frontend_      					  |
@@ -236,6 +236,23 @@ We pretty much stuck to the procedure defined in the [docs](https://developer.an
 - Internal Storage and SD card size can be defined as well
 - Set the GPU option to auto to dynamically choose between a hardware/software renderer
 
+#### Starting the emulator
+
+In order to start an emulator, you need to first define at least one AVD. While there are multiple parameters that can be specified, we will concern ourselves with only 2 of them.
+
+1. [gpu](https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu) - We use a software renderer called _swiftshader_. We use this because the host machine does not have a dedicated GPU.
+
+2. qemu - We configure the emulator to utilise _kvm_ which results in a great performance boost.
+
+```bash
+# Point to the running Xvfb process
+DISPLAY=:1
+# Start emulator
+emulator -avd <name-of-predefined-avd> -no-boot-anim -nojni -netfast -gpu swiftshader -qemu -enable-kvm
+```
+
+_**Note**: As we saw in the Running GUI apps on Headless Server section, we need to point the **DISPLAY** to the running Xvfb process first._
+
 ---
 ### Sizing up the machine
 
@@ -292,3 +309,117 @@ We were now able to perform operations like:
 
 <img style="display: block; margin: 0 auto;" src="/images/app-stream-components.png" alt="Component Overview" title="App Stream Component Overview"/>
 
+And here's a simple bash script that incorporates all of the components, to finally expose a websocket that a noVNC client can connect to.
+
+```bash
+# Start Xvfb at DISPLAY :1
+Xvfb :1 -screen 0 1024x768x24 > xvfb.log 2>&1 &
+# Point DISPLAY to virtual X Server
+export DISPLAY=:1
+# Start emulator for a pre-defined avd
+emulator -avd Nexus_5X_API_24 -gpu swiftshader -no-boot-anim -nojni -netfast -qemu -enable-kvm > emulator.log 2>&1 &
+# Start a VNC server and point it to the same display
+x11vnc -display :1 -quiet -nopw -rfbport 5900 -bg -o vnc.log
+# Proxy websocket traffic to raw tcp traffic
+websockify -D :6080 :5900 > websockify.log 2>&1
+```
+
+_**Note**:This is a grossly oversimplified version. Because there are so many moving parts, we need to ensure each of these processes have been initialised and are in running state before starting the next one._
+
+The entire setup can be considered as one unit, which we will refer to as an _endpoint_ hereon. We built a [Thrift](https://thrift.apache.org/) service that provisions such _endpoints_, along with exposing certain other primitives like - Installing/uninstalling of apks, Flushing of the _Activity Stack_, etc.
+
+<img style="display: block; margin: 0 auto;" src="/images/app-stream-worker-service.png" alt="App Stream Thrift Service" title="App Stream Thrift Service Overview"/>
+
+And here's the thrift definition for _Droid Service_.
+
+```thrift
+enum ErrCode {
+  DEFAULT = 0,
+  NO_DROIDS_AVAILABLE = 1,
+}
+
+struct ConnParams {
+  1: string host,
+  2: string port,
+  3: optional string password,
+}
+
+exception ApplicationException {
+  1: string msg,
+  2: optional i32 code = ErrCode.DEFAULT,
+}
+
+service DroidService {
+   void ping(),
+
+   string get_package_name(1: string apk_url) throws (
+          1: ApplicationException ae),
+
+   ConnParams get_endpoint(1: string endpoint_id),
+
+   bool run_operation(1: string endpoint_id, 2: string operation, 3: string apk_url) throws (
+          1: ApplicationException ae),
+}
+```
+
+#### Scaling out
+
+In _Sizing up the machine_ we saw that we could run at most **6 emulators** on a machine with those specs. We had to be able to accommodate more _endpoints_ by [horizontally scaling](http://searchcio.techtarget.com/definition/horizontal-scalability) up.
+
+We employed the [Apache Zookeeper](https://zookeeper.apache.org/) project to this effect. One of it's usecases lies in centrallized configuration management, which provides recipes for designing [distributed systems](https://en.wikipedia.org/wiki/Distributed_computing).
+
+##### Concepts
+
+1. Each _Droid Service_ is configured to attach itself to ZooKeeper on startup
+2. Scaling up is simply a matter of starting another _Droid Service_
+3. A _Master Droid Service_ simply directs RPC calls to the relevant _Droid Service_ and relays the response back to external clients(for eg. a Django app).
+
+<img style="display: block; margin: 0 auto;" src="/images/app-stream-droid-master.png" alt=Droid Master Overview" title="App Stream Cluster"/>
+
+And here's the thrift definition for the _Master Droid Service_
+
+```thrift
+enum ErrCode {
+  DEFAULT = 0,
+  NO_DROIDS_AVAILABLE = 1,
+}
+
+struct DroidRequest {
+  1: string user,
+  2: optional string apk_url,
+  3: optional string op,
+}
+
+struct ConnParams {
+  1: string host,
+  2: string port,
+  3: optional string password,
+}
+
+exception ApplicationException {
+  1: string msg,
+  2: optional i32 code = ErrCode.DEFAULT,
+}
+
+service DroidKeeper {
+   void ping(),
+
+   string get_package_name(1: string apk_url) throws (
+          1: ApplicationException ae),
+
+   ConnParams get_endpoint_for_user(1: string user) throws (
+          1: ApplicationException ae),
+
+   bool interact_with_endpoint(1: DroidRequest dr) throws (
+          1: ApplicationException ae),
+
+   oneway void release_endpoint_for_user(1: string user),
+}
+```
+
+### What's next?
+
+- Leveraging [VirtualGL](http://www.virtualgl.org/) and exploring the [TurboVNC](http://www.turbovnc.org/) project to spin emulators that use host GPUs.
+- Parameterize AVD creation so as to specify [API Levels](https://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels). 
+
+*Posted by [Vishal Gowda](https://www.hackerearth.com/@cartmanboy1991)* &middot; *[@VishalGowdaN](https://twitter.com/VishalGowdaN)* &middot; *[GitHub](https://github.com/farthVader91)*
