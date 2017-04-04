@@ -59,7 +59,7 @@ Straight off, you can identify serious cons to this approach.
 3. Error-prone bookkeeping while updating scores(more pronounced when evaluating 100s of submissions)
 4. No means of running automated tests
 
-This was _tedious_ and **not** _scalabe_.
+This was _tedious_ and **not** _scalable_.
 
 ## The Fix
 
@@ -139,7 +139,7 @@ A VNC implementation comprises of:
 2. **Client(or viewer)**: The program that watches, controls, and interacts with the server. The client controls the server.
 3. **Protocol**: The Server and Client talk using the RFB protocol.
 
-Various implementations for VNC Servers and clients exist. We opted for the [x11vnc](https://en.wikipedia.org/wiki/X11vnc) server.
+Various implementations for VNC Servers and clients exist. Most VNC Servers create their own virtual X Display. But we already had that covered by using Xvfb. We simply needed to export and existing X Server, which is why we opted for the [x11vnc](https://en.wikipedia.org/wiki/X11vnc) server.
 
 Here's how you'd start an x11vnc server pointing to a [DISPLAY](http://gerardnico.com/wiki/linux/display) at :1.
 
