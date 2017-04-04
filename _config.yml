@@ -6,7 +6,7 @@ permalink: /:categories/:year/:month/:day/:title/
 
 name: HackerEarth Engineering
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 github: HackerEarth
 twitter: HackerEarth
 
