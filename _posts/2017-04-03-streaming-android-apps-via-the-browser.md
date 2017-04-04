@@ -333,7 +333,7 @@ The entire setup can be considered as one unit, which we will refer to as an _en
 
 And here's the thrift definition for _Droid Service_.
 
-{% highlight thrift %}
+{% highlight python %}
 enum ErrCode {
   DEFAULT = 0,
   NO_DROIDS_AVAILABLE = 1,
@@ -379,7 +379,7 @@ We employed the [Apache Zookeeper](https://zookeeper.apache.org/) project to thi
 
 And here's the thrift definition for the _Master Droid Service_
 
-{% highlight thrift %}
+{% highlight python %}
 enum ErrCode {
   DEFAULT = 0,
   NO_DROIDS_AVAILABLE = 1,
