@@ -9,7 +9,7 @@
     <meta property="fb:app_id" content="190817380995032" />
     {% if page.title %}
     <meta property="og:title" content="{{ page.title }}" />
-    {% else %} 
+    {% else %}
     <meta property="og:title" content="Features and Updates at HackerEarth" />
     {% endif %}
     <meta property="og:image" content="/images/og-image.gif" />
@@ -21,7 +21,7 @@
     {% if page.url == "/index.html" %}
     <meta property="og:url" content="http://engineering.hackerearth.com{{ site.url }}" />
     {% else %}
-    <meta property="og:url" content="http://engineering.hackerearth.com{{ site.url }}{{ page.url }}" />
+    <meta property="og:url" content="http://engineering.hackerearth.com{{ page.url }}" />
     {% endif %}
     <meta property="og:site_name" content="HackerEarth"/>
     {% if page.url == "/index.html" %}
@@ -42,6 +42,8 @@
     {% else %}
     <meta name="twitter:title" content="{{ site.title }}"/>
     {% endif %}
+
+    <meta name="twitter:image" content="/images/og-image.gif" />
     <!-- end Twitter tags -->
 
 
@@ -56,7 +58,7 @@
 
     <title> {{ page.title }} </title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -66,7 +68,7 @@
       ga('create', 'UA-39182005-1', 'auto');
       ga('send', 'pageview');
 
-    </script>  
+    </script>
  </head>
 
   <body>
@@ -84,7 +86,7 @@
       </ul>
         </div>
       </div>
-     
+
       <div class="inner1">
           <div class="outer-image">
           <a class="blog-logo" href="http://engineering.hackerearth.com/" rel="home"><img src="/images/logo_he.png" alt="HackerEarth Blog"></a>
@@ -125,27 +127,27 @@
                 &copy; 2014 <a href="http://www.hackerearth.com" target="_blank" class="no-color">HackerEarth</a>
                 <span class="separator">&middot;</span>
             </li>
-            <li> 
-                <a href="http://www.hackerearth.com/about/" target="_blank" class="no-color">About</a> 
+            <li>
+                <a href="http://www.hackerearth.com/about/" target="_blank" class="no-color">About</a>
                 <span class="separator">&middot;</span>
             </li>
-            <li> 
+            <li>
                 <a href="http://developer.hackerearth.com"
-                    target="_blank" class="no-color">API</a> 
+                    target="_blank" class="no-color">API</a>
                 <span class="separator">&middot;</span>
             </li>
-            <li> 
-                <a href="http://blog.hackerearth.com" class="no-color" target="_blank">Blog</a> 
+            <li>
+                <a href="http://blog.hackerearth.com" class="no-color" target="_blank">Blog</a>
                 <span class="separator">&middot;</span>
             </li>
-            <li> 
+            <li>
                 <a
                     href="http://webchat.freenode.net/?channels=hackerearth&uio=d4"
-                    class="no-color" target="_blank">#hackerearth (IRC)</a> 
+                    class="no-color" target="_blank">#hackerearth (IRC)</a>
                 <span class="separator">&middot;</span>
             </li>
-            <li> 
-                <a href="http://code.hackerearth.com" class="no-color" target="_blank">CodeTable</a> 
+            <li>
+                <a href="http://code.hackerearth.com" class="no-color" target="_blank">CodeTable</a>
                 <span class="separator">&middot;</span>
             </li>
              <li>
