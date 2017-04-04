@@ -7,7 +7,7 @@ tags: [Android, VNC, RFB, Server Client Architecture, Distributed Systems, RPC, 
 ---
 {% include JB/setup %}
 
-HackerEarth prides itself in it's scalable & automated evaluation system. What was initially designed keeping standard programming problems in mind (check this [post](http://hck.re/nwL0iJ) out), gradually evolved to accommodate a plethora of problem types across various tech domains.
+HackerEarth prides itself in it's scalable & automated evaluation system. What was initially designed keeping standard programming problems in mind (check this [post](http://engineering.hackerearth.com/2013/03/12/100000-strong/) out), gradually evolved to accommodate a plethora of problem types across various tech domains.
 
 | **Currently supported Problem Types**   | 
 | 				:---:   			  |
