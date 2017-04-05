@@ -105,4 +105,4 @@ If you'd like to have a first-hand experience of the test environment, go ahead 
 
 [Evíva!](http://en.wiktionary.org/wiki/evviva#Descendants)
 
-*Posted by [Ravi Ojha](http://hck.re/ravi/)* &middot; *[@raviojha21](https://twitter.com/raviojha21)* &middot; *[Rookie's Lab](http://rookieslab.com/)*
+*Posted by [Ravi Ojha](http://hck.re/ravi/)* &middot; *[@ivarojha](https://twitter.com/ivarojha)* &middot; *[Rookie's Lab](http://rookieslab.com/)*
