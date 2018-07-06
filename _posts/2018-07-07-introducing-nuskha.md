@@ -137,7 +137,7 @@ The icons map had a name, character, and tags. So, whenever an input was given, 
 
 ### End product
 
-<video width="100%" height="auto" autoplay loop muted>
+<video width="100%" height="auto" autoplay loop muted controls>
     <source src="/videos/he_nuskha.mp4" type="video/mp4">
     <source src="/videos/he_nuskha.ogg" type="video/ogg">
     Your browser does not support the video tag.
