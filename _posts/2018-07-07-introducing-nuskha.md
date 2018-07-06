@@ -21,7 +21,7 @@ Our development was inspired from Bootstrap. But, we still had miles to go befor
 
 To be a part of something that will impact the whole organization was exciting for the bunch of us. After rejecting Kriya Kalaap, Kalakari, Retro, Tattva, Lipstick, and many more, we named our nascent framework **Nuskha**.
 
-####*“The name ‘Nuskha’ is inspired by one of the art deities "Nuska" from the Mesopotamian mythology. The word ‘Nuskha’ is a Hindi word which translates to ‘formula’ in English - a formula to create or build something.”*
+####_“The name ‘Nuskha’ is inspired by one of the art deities "Nuska" from the Mesopotamian mythology. The word ‘Nuskha’ is a Hindi word which translates to ‘formula’ in English - a formula to create or build something.”_
 
 <p></p>
 Old Nuskha helped but was still inefficient. We did not have any [**React**](https://reactjs.org/){:target="_blank"} components. We had started developing one of our products in **React** (version 16+) while the other product was in the transitioning phase. With strict deadlines for other important tasks, we were unable to contribute much to Nuskha and inevitably the implementation of the same components in different projects was duplicated. We needed a better framework to unify the components. We needed it for consistency, ease of use, and faster development. Yes, we also wanted to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself){:target="_blank"} up our code base.
