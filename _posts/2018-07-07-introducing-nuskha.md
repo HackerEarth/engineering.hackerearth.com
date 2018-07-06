@@ -11,7 +11,7 @@ tags: [Framework, ReactJS, HackerEarth]
 
 We at Hackerearth created a single-page document with common and special **CSS** classes to make layouts, grids, buttons, inputs, tables, tooltips, and form elements in late 2017. That was our first attempt to develop on our own front-end framework.
 
-Old Nuskha Screens:
+Old Nuskha screens:
 <img src="/images/old-nuskha-screens.gif" alt="Old nuskha screens" />
 
 >Framework is a platform, foundation on which ready software solutions are built, in this particular case – web interfaces. For this purpose front-end framework consists of ready components, which are used by a developer when working on a project. What is more, aforementioned components, if necessary, can be modified or adjusted to current needs. - [Merix Studio](https://www.merixstudio.com/blog/front-end-frameworks-introduction-part-1/){:target="_blank"}
@@ -24,7 +24,7 @@ To be a part of something that will impact the whole organization was exciting f
 ####*“The name ‘Nuskha’ is inspired by one of the art deities "Nuska" from the Mesopotamian mythology. The word ‘Nuskha’ is a Hindi word which translates to ‘formula’ in English - a formula to create or build something.”*
 
 <p></p>
-Old Nuskha helped but was still inefficient. We did not have any [**React**](https://reactjs.org/){:target="_blank"} components. We had started developing one of our products in **React** (version 16+) while the other product was in the transitioning phase. With strict deadlines for other important tasks, we were unable to contribute much to Nuskha and inevitably the implementation of the same components in different projects, were duplicated. We needed a better framework to unify the components. We needed it for consistency, ease of use, and faster development. Yes, we also wanted to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself){:target="_blank"} up our code base.
+Old Nuskha helped but was still inefficient. We did not have any [**React**](https://reactjs.org/){:target="_blank"} components. We had started developing one of our products in **React** (version 16+) while the other product was in the transitioning phase. With strict deadlines for other important tasks, we were unable to contribute much to Nuskha and inevitably the implementation of the same components in different projects was duplicated. We needed a better framework to unify the components. We needed it for consistency, ease of use, and faster development. Yes, we also wanted to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself){:target="_blank"} up our code base.
 
 Fast forward to few months, as the tradition at [HackerEarth](https://www.hackerearth.com){:target="_blank"} goes, we had our internal hackathon scheduled. The timing was perfect. I paired up with Akanksha, another Frontend Engineer at HackerEarth, this time to build Nuskha 2.0 which will eventually be known as Nuskha.
 
@@ -33,7 +33,7 @@ Fast forward to few months, as the tradition at [HackerEarth](https://www.hacker
 
 During one of our Product All-Hands meeting, we learned about the ‘easiest’ way to use our own HackerEarth icon fonts that had been created recently. The process was as follows:
 
-1. A designer gives the Invision file to the developer
+1. A designer gives the Invision file to the developer.
 2. The developer copies the unicode for the icon that they intend to use.
 3. The developer then searches the icon class in the PDF file (which contains the icons list) provided to them.
 
@@ -46,7 +46,7 @@ A small change needed in the font size or color required thorough inspection fro
 
 ### What we built
 
-The idea was simple. We wanted to create a Single Page Application (SPA) where all the common **React** components would be linked in the sidebar. Their individual pages would give details about how to use them along with **React** and **HTML** codes. Their expected props and associated details would be shown in the table. We had our own icon fonts. We wanted to make these components and icons searchable. The basic interface design was to have a header, a sidebar, and a body section.
+The idea was simple. We wanted to create a Single Page Application (SPA) where all the common **React** components would be linked in the sidebar. Their individual pages would give details about how to use them along with **React** and **HTML** codes. Their expected props and associated details would be shown in the table. We had our own icon fonts. We wanted to make these components and icons searchable. The basic interface design was to have a header, sidebar, and body section.
 
 #### Creating the app architecture
 
@@ -65,7 +65,7 @@ We started building different pages for common components such as buttons and ic
 
 Every page was supposed to show all the use cases of the component as examples. For example, in case of buttons, we showed all the 13 different types of buttons. Another important task was to display all the **`proptypes`**. This was displayed in a table, which was another common element.
 
-We were building these pages for developers , and therefore, the most important section was how to use these components. We planned to show the implementation of the component along with the code. Earlier, we thought of providing editable code but later went on to implement multiple read-only editors due to limited time and to avoid confusion.
+We were building these pages for developers, and therefore, the most important section was how to use these components. We planned to show the implementation of the component along with the code. Earlier, we thought of providing editable code but later went on to implement multiple read-only editors due to limited time and to avoid confusion.
 
 We implemented two editors. One showed a pure **HTML** implementation while the other showed the **React** implementation. To implement the editor, we used the [**`Brace`**](https://github.com/thlorenz/brace){:target="_blank"} editor. The basic config for the **React** editor was as follows:
 
