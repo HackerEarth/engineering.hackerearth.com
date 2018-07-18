@@ -9,7 +9,7 @@ tags: [Framework, ReactJS, HackerEarth]
 
 ### History
 
-We at Hackerearth created a single-page document with common and special **CSS** classes to make layouts, grids, buttons, inputs, tables, tooltips, and form elements in late 2017. That was our first attempt to develop on our own front-end framework.
+We at HackerEarth created a single-page document with common and special **CSS** classes to make layouts, grids, buttons, inputs, tables, tooltips, and form elements in late 2017. That was our first attempt to develop on our own front-end framework.
 
 Old Nuskha screens:
 <img src="/images/old-nuskha-screens.gif" alt="Old nuskha screens" />
