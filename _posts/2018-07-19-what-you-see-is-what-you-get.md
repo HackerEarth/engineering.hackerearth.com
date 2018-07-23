@@ -9,12 +9,12 @@ tags: [CKEditor, WYSIWYG editor, HackerEarth]
 ### Introduction
 HackerEarth has grown into a platform that serves a huge number of customers for technical assessment. To make this possible, we try our best to make the platform as easy-to-use as it can get.
 
-At several places in our Recruiter Dashboard, we used to have a [Markdown](https://en.wikipedia.org/wiki/Markdown) editor to allow users to edit free text. There have been multiple times when many of our recruiters have struggled to create content using the Markdown editor. They need not to worry anymore. After many such requests to improve this, we came up with a fix. Say hello to **CKEditor**—The well-known [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG), Rich Text editor.
+At several places in our Recruiter Dashboard, we used to have a [Markdown](https://en.wikipedia.org/wiki/Markdown) editor to allow users to edit free text. There have been multiple times when many of our recruiters have struggled to create content using the Markdown editor. They need not to worry anymore. After many such requests to improve this, we came up with a fix. Say hello to **CKEditor** (version 4)—The well-known [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG), Rich Text editor.
 
 ![Hackerearth - WYSIWYG vs Markdown](/images/wysiwyg_vs_markdown.jpg)
 
 ### Why CKEditor?
-In the battle of the titans (of WYSIWYG editing) between [CKEditor](https://ckeditor.com/) and [TinyMCE](https://www.tinymce.com/), we decided to go with CKEditor because of the following reasons:
+In the battle of the titans (of WYSIWYG editing) between [CKEditor](https://ckeditor.com/ckeditor-4/) and [TinyMCE](https://www.tinymce.com/), we decided to go with CKEditor because of the following reasons:
 - It has a huge community of active developers. The strength of the community around an open source project is strongly related to the project's success.
 - As compared to TinyMCE, it provides better support for the following:
     - Multiple languages
