@@ -54,7 +54,8 @@ whenever a response comes for a request, check if the
 response has that custom header which contains the UUID. If yes, then collect
 the data from url `/scooby/get-data/<uuid>/` in same domain.
 
-This is the code of middleware:
+This is the code of middleware
+(You can skip directly to [Further improvements](#improvements) section if you are not interested in code):
 
 ```python
 import uuid
@@ -165,7 +166,7 @@ data regarding those plugins.
 We added the plugin for SQL queries with same pattern.
 
 
-## Improvements
+## <a id="improvements"></a>Further improvements
 
 After this was build in hackathon, there have been many additions to this package later on.
 
