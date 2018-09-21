@@ -190,7 +190,7 @@ scooby.log("foo", "bar")
 
 ## Screenshot
 
-Here is the screenshot of how SQL queries looks in chrome-extension.
+Here is the screenshot of how SQL queries look in chrome-extension.
 <img src='/images/scooby-ext-screenshot.png' />
 
 In the right panel under **SQL** tab, you can see stacktraces of all different queries.
@@ -208,8 +208,8 @@ If you are using Django as the backend framework, give this profiler a try.
 We would be glad to hear the feedback.
 
 * The Python package is available in PYPI as name of
-`django-scooby-profiler`. This is the link
-[https://pypi.org/project/django-scooby-profiler/](https://pypi.org/project/django-scooby-profiler/).
+`django-scooby-profiler`. This is the github link
+[https://github.com/shhaumb/django-scooby-profiler](https://github.com/shhaumb/django-scooby-profiler).
 That page contains the documentation of how you can integrate it with your
 project.
 * The chome extension is available in chrome web store
