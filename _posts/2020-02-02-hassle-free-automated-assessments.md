@@ -53,7 +53,7 @@ The new skill-based test creation flow involves a stepwise process where bare mi
 <img src="/images/skill-based-test-screen1.0.png" alt="Screen 1 depicting skills dropdown and experience buttons" />
 
 1. **Skills dropdown** - Since the definition of profile required by different companies and geographies do not overlap, skill is the primary domain used for tests by the recruiters.
-- In the new flow, users can search for a set of skills they desire. The list will be in alphabetical order and will autocomplete on typing
+- In the new flow, users can search for a set of skills they desire. The list will be in alphabetical order and will auto-complete on typing
 - Multiple skills can be selected
 - Selecting one skill is compulsory
 - The list has to be exhaustive. In case the skill entered by the user does not match any from the list, the user cannot himself add the skill.
@@ -345,7 +345,7 @@ The algorithm that we use to populate initial set of questions is a complex one.
 Our internal algorithm tries to create a test of 90 min duration first, however if there are not enough questions then it will fall back to 75, 60, 45 minutes in order. These are the durations with which we had started and had the following restrictions or limitations:
 
 
-* It will never auto generate a test less than 45 min
+* It will never auto-generate a test less than 45 min
 * A test’s actual configuration can be displayed +5 or -10 min
 * If too many skills are added the duration can be longer than 90 min
 * The duration would alter if the initial load of skill set is changed
@@ -359,7 +359,7 @@ Of course, the above logic is just **the tip of the logic ice-berg** that we use
 With this feature in place, we aspire to add a few differentiating aspects to it as well.
 
 1. Give the option to save a custom profile, based upon the skills selected 
-2. Auto select the languages in which the candidate can code while creating test questions
+2. Auto-select the languages in which the candidate can code while creating test questions
 3. Warn if sufficient questions are not added or if too many questions are present
 4. Suggest skills based on the current skill selected in the dropdown while configuring a test
 5. Allow the user to request for the skill from the interface in case the skill is absent in the platform
@@ -369,7 +369,7 @@ With this feature in place, we aspire to add a few differentiating aspects to it
 
 ...
 
-I will also take this opportunity to thank **Jagannadh Vangala** aka **Jaggu** for being the perfect ally and burning the midnight oil with me for completing this project.
+I will also take this opportunity to thank **Jagannadh Vangala** aka **Jaggu** for being the perfect ally in completing this project.
 
 *Adios amigos!*
 
