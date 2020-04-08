@@ -3,11 +3,9 @@ layout: post
 title: "Hassle-free automated assessments"
 description: "A simplified and automated skill-based test creation"
 category:
-tags: [ReactJS, React Select, React Data Grid, Stylus, Webpack, HackerEarth]
+tags: [ReactJS, React Select, Stylus, Webpack, HackerEarth]
 ---
 {% include JB/setup %}
-
-### Why revamp
 
 The test creation flow in the current product had some major problems such as
 
@@ -38,7 +36,7 @@ The design was implemented keeping in mind all the requirements. The idea was to
 
 ### Benefits of the new design
 
-1. Uses profile driven approach to test candidates better when auto-generating a test in HackerEarth Assessments
+1. Profile-driven approach to test candidates better when auto-generating a test in HackerEarth Assessments
 2. Scalable system
 3. Better user controls and freedom
 4. User friendly jargons and actions
@@ -74,8 +72,7 @@ After selecting the skills and experience, the user is shown the summary of the 
 
 
 1. **Test name**
-- Default name is based on the first selected skill plus “Test”
-  - Assumption is that the recruiter would choose the first skill as the most important one and to reduce the effort needed to type
+- Default name is based on the first selected skill plus “Test”. This was an assumption based on the philosophy that the recruiter would usually choose the first skill as the most important one. This implementation helped to reduce the effort needed to type the heading always
 - The name would be inline editable
 - The interface will not allow to have empty test name
 
@@ -103,7 +100,7 @@ In general scenario, with our unique algorithm, the default test duration would 
 
 ### What we build
 
-The new skill-based test creation was a complex implementation. Around 5000+ lines of code were added to get the feature up and running without bugs. I would try to be precise in explaining the front-end engineering behind it.
+The new skill-based test creation was a complex implementation. Around 5,000+ lines of code was added to get the feature up and running without bugs. I would try to be precise in explaining the front-end engineering behind it.
 
 #### The app architecture
 
@@ -132,7 +129,7 @@ Based on the new interface, the following components were required:
 
 **Disabled create test link**
 <br/>
-We have planned to restrict the new skill-based test creation to few customers at first. Moreover, in case of API or server failure, a recruiter should not have access to the test creation modal. Hence, separated out this component.
+We have planned to restrict the new skill-based test creation to few customers at first. Moreover, in case of API or server failure, a recruiter should not have access to the test creation modal but should be able to create a blank test. Hence, separated out this component.
 
 
 **Modal**
@@ -177,11 +174,11 @@ render() {
 {% endhighlight %}
 
 
-The important part was to create a separate component for options dropdown. The `Select` component provided by the package, expects a prop `optionComponent`. The component `CustomSelectOption` was used for that. It was responsible for handling mouse events like `mousemove`, `mouseenter` and `mousedown`. The `options` object, containing the selected status of every option, was provided as `props` by the parent component `SkillsInputContainer`.
+The prominent aspect was to create a separate component for options dropdown. The `Select` component provided by the package, expects a prop `optionComponent`. The component `CustomSelectOption` was used for that. It was responsible for handling mouse events like `mousemove`, `mouseenter` and `mousedown`. The `options` object, containing the selected status of every option, was provided as `props` by the parent component `SkillsInputContainer`.
 
 `SkillsInputContainer` was responsible for handling skills and experience selections, providing a link to create a blank test and showing statuses such as “You can add more than one skill to your test” and “Maximum number of skills selected. Please remove existing skills to add more”.
 
-We use [`Stylus`](http://stylus-lang.com/){:target="_blank"} for writing `CSS`. We already had custom design for input fields, but the design for this particular use case was a bit different. And since we were using common code from the `React Select` package, we had to overwrite many default `CSS` code to make the component as per the design.
+We use [`Stylus`](http://stylus-lang.com/){:target="_blank"} for writing `CSS`. We already had custom design for input fields, but the design for this particular use case was a bit different. As we were using common code from the `React Select` package, we had to overwrite most of the default `CSS` code to make the component as per the design.
 
 
 {% highlight css %}
@@ -281,7 +278,8 @@ Notifies which question set was updated along with test duration update.
 
 **Test summary container**
 <br/>
-We used our own UI framework, [`Nuskha`](http://engineering.hackerearth.com/2018/07/07/introducing-nuskha/){:target="_blank"} which is build on top of [`React Data Grid`](https://adazzle.github.io/react-data-grid/){:target="_blank"} for building out tables.
+We used our own UI framework, [**Nuskha**](http://engineering.hackerearth.com/2018/07/07/introducing-nuskha/){:target="_blank"}, for building out tables. We had to follow a particular HTML structure to build the required table.
+
 <img src="/images/skill-based-test-table.png" alt="Alert bar" />
 
 Basic structure to generate a table with 2 rows:
@@ -333,7 +331,7 @@ In the above code snippet, `action-icons-container` contains two icons blocks *v
 
 **Question set table**
 <br/>
-For recruiters, we had kept the options to edit an existing question set and add a new question set. While editing or creating a question set, they can update skills, question type such as MCQ and Programming, and question counts for each difficulty levels. The interface will take care of the duration update.
+For recruiters, we had kept the options to edit an existing question set and add a new question set. While editing or creating a question set, they can update skills, question type such as MCQ and Programming, and question counts for each difficulty levels. The interface take care of the duration update.
 
 If a recruiter is mistakenly trying to override and existing set, we prompt them for confirmation to save the hassles.
 <img src="/images/skill-based-test-question-set.png" alt="Question set" />
@@ -351,7 +349,7 @@ Our internal algorithm tries to create a test of 90 min duration first, however 
 * The duration would alter if the initial load of skill set is changed
 
 
-Of course, the above logic is just **the tip of the logic ice-berg** that we use to auto-generate a skill-based test.
+Of course, the above logic is just **the tip of the logics ice-berg** that we use to auto-generate a skill-based test.
 
 
 ### Aspirations
@@ -359,7 +357,7 @@ Of course, the above logic is just **the tip of the logic ice-berg** that we use
 With this feature in place, we aspire to add a few differentiating aspects to it as well.
 
 1. Give the option to save a custom profile, based upon the skills selected 
-2. Auto-select the languages in which the candidate can code while creating test questions
+2. Auto-select the languages in which the candidate can code while generating test questions
 3. Warn if sufficient questions are not added or if too many questions are present
 4. Suggest skills based on the current skill selected in the dropdown while configuring a test
 5. Allow the user to request for the skill from the interface in case the skill is absent in the platform
@@ -369,7 +367,7 @@ With this feature in place, we aspire to add a few differentiating aspects to it
 
 ...
 
-I will also take this opportunity to thank one of the great engineers that I have worked with, **Jagannadh Vangala** aka **Jaggu** for being the perfect ally in diligently completing this project.
+I will also take this opportunity to thank one of the great engineers that I have worked with, **Jagannadh Vangala** aka **Jaggu** for being the perfect ally in diligently completing this project together.
 
 *Adios amigos!*
 
