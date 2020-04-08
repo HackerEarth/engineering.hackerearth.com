@@ -14,7 +14,8 @@ Both Engineering blog and news blog have the same setup instructions. Please fol
 
 2.  Clone the repository once you have access:
 
-``` git clone https://github.com/HackerEarth/engineering.hackerearth.com.git
+``` 
+git clone https://github.com/HackerEarth/engineering.hackerearth.com.git
 ```
 
 3. As mentioned above we use Jekyll to power our news/engineering blog, install Jekyll using the following command:
@@ -28,21 +29,21 @@ sudo apt install jekyll
 
 4. If you are unable to install jekyll, install rouge first
 ```
-$ sudo gem install rouge
+sudo gem install rouge
 ```
 
 5. You may need to install kramdown also.
 ```
-$ sudo gem install kramdown
+sudo gem install kramdown
 ```
 
 6. Start the server by executing:
 ```
-$ jekyll serve # It will start the server on: http://127.0.0.1:4000
+jekyll serve # It will start the server on: http://127.0.0.1:4000
 ```
 To start the server on different port execute:
 ```
-$ jekyll serve --port=5001 # It will start the server on: http://127.0.0.1:5001
+jekyll serve --port=5001 # It will start the server on: http://127.0.0.1:5001
 ```
 
 7. Server should be running now so setup is complete.
