@@ -3,7 +3,7 @@ layout: post
 title: "Introducing Nuskha"
 description: "How an internal hackathon led to our own front-end framework"
 category:
-tags: [Framework, ReactJS, HackerEarth]
+tags: [Framework, ReactJS, Webpack, Redux, HackerEarth]
 ---
 {% include JB/setup %}
 

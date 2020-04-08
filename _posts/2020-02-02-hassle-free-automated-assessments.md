@@ -3,7 +3,7 @@ layout: post
 title: "Hassle-free automated assessments"
 description: "A simplified and automated skill-based test creation"
 category:
-tags: [ReactJS, HackerEarth, React Select, React Data Grid, Stylus, Webpack]
+tags: [ReactJS, React Select, React Data Grid, Stylus, Webpack, HackerEarth]
 ---
 {% include JB/setup %}
 
@@ -11,11 +11,11 @@ tags: [ReactJS, HackerEarth, React Select, React Data Grid, Stylus, Webpack]
 
 The test creation flow in the current product had some major problems such as
 
-**1. Profile driven**<br/>This was a major loophole in the product. I could select a profile say front-end engineer and create an auto-generated test for the candidates. However, in most of the cases, the questions generated will only be from HTML, CSS and Javascript. So, if a recruiter wanted to generate questions for a front-end engineer profile to test React skill, they had to add them manually from our questions library or theirs.
+**1. Profile driven**<br/>Earlier to this, we had test creation based on job profiles, which was restrictive as the skills were tightly coupled to the roles and were not customizable by the recruiters. Like in case, I could select a profile say front-end engineer and the questions generated will only be from HTML, CSS and Javascript. So, if a recruiter wanted to generate questions for a front-end engineer profile to test `React` skill, they had to add them manually from our questions library or theirs.
 
-**2. Complex structure**<br/>Surprisingly, we missed to provide an intuitive stepwise test creation flow and had polluted the interface with unwanted form elements.
+**2. Complex structure**<br/>Surprisingly, we missed to provide an intuitive step-wise test creation flow and had polluted the interface with unwanted form elements.
 
-**3. Inefficient algorithm**<br/>The algorithm used for generating the questions was inefficient. For example, there was no logic to get mixed questions from the HackerEarth questions library and their own questions library.
+**3. Inefficient algorithm**<br/>The algorithm used for generating the questions was inefficient. For example, there was no logic to get a variety of mixed questions either from the HackerEarth questions library or their own questions library or both.
 
 **4. Restricted question types**<br/>Scope to include more question types such as SQL and front-end project was in demand and the interface was already bloated.
 
@@ -281,7 +281,7 @@ Notifies which question set was updated along with test duration update.
 
 **Test summary container**
 <br/>
-We used our own UI library, [`Nuskha`](http://engineering.hackerearth.com/2018/07/07/introducing-nuskha/){:target="_blank"} which is build on top of [`React Data Grid`](https://adazzle.github.io/react-data-grid/){:target="_blank"} for building out tables.
+We used our own UI framework, [`Nuskha`](http://engineering.hackerearth.com/2018/07/07/introducing-nuskha/){:target="_blank"} which is build on top of [`React Data Grid`](https://adazzle.github.io/react-data-grid/){:target="_blank"} for building out tables.
 <img src="/images/skill-based-test-table.png" alt="Alert bar" />
 
 Basic structure to generate a table with 2 rows:
@@ -369,7 +369,7 @@ With this feature in place, we aspire to add a few differentiating aspects to it
 
 ...
 
-I will also take this opportunity to thank **Jagannadh Vangala** aka **Jaggu** for being the perfect ally in completing this project.
+I will also take this opportunity to thank one of the great engineers that I have worked with, **Jagannadh Vangala** aka **Jaggu** for being the perfect ally in diligently completing this project.
 
 *Adios amigos!*
 
