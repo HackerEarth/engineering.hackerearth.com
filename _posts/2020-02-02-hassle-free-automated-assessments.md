@@ -7,15 +7,15 @@ tags: [ReactJS, React Select, Stylus, Webpack, HackerEarth]
 ---
 {% include JB/setup %}
 
-The test creation flow in the current product had some major problems such as
+Our older test creation flow had several inherent problems associated with it:
 
-**1. Profile driven**<br/>Earlier to this, we had test creation based on job profiles, which was restrictive as the skills were tightly coupled to the roles and were not customizable by the recruiters. Like in case, I could select a profile say front-end engineer and the questions generated will only be from HTML, CSS and Javascript. So, if a recruiter wanted to generate questions for a front-end engineer profile to test `React` skill, they had to add them manually from our questions library or theirs.
+**1. Profile driven**<br/>Earlier to this, we had test creation based on job profiles (role-based), which was restrictive as the skills were tightly coupled to the roles and were not customizable by the recruiters. For example, I could select a profile say front-end engineer and the questions generated will only be from HTML, CSS and Javascript. So, if a recruiter wanted to generate questions for a front-end engineer profile to test `React` skill, they had to add them manually from our questions library or theirs.
 
-**2. Complex structure**<br/>Surprisingly, we missed to provide an intuitive step-wise test creation flow and had polluted the interface with unwanted form elements.
+**2. Complex UI**<br/>The older interface was filled with unwanted form elements and had almost no provision to support newer question types. We somehow missed to provide a scalable and an intuitive step-by-step test creation flow that catered to the needs of our non-technical recruiters.
 
-**3. Inefficient algorithm**<br/>The algorithm used for generating the questions was inefficient. For example, there was no logic to get a variety of mixed questions either from the HackerEarth questions library or their own questions library or both.
+**3. Rigid algorithm**<br/>The algorithm we used for selecting the test questions was relatively rigid, so there was a limited scope in picking questions from a mix of skills and of varied difficulties, either from the HackerEarth's questions library or from the company's library or both.
 
-**4. Restricted question types**<br/>Scope to include more question types such as SQL and front-end project was in demand and the interface was already bloated.
+**4. Restricted question types**<br/>Though there was a demand from our customers to include additional question types such as SQL, front-end project and Java project questions to the test creation flow, we could not accommodate them as the interface was already bloated.
 
 <video width="100%" height="auto" autoplay loop muted controls>
     <source src="/videos/old_test_creation.mp4" type="video/mp4">
@@ -25,22 +25,22 @@ The test creation flow in the current product had some major problems such as
 
 ### Design
 
-Based on the feedback and research data, it was important to improve the old flow in accord to the correct persona of our users. More focus was put on enterprise talent acquisition teams. We found out that in general scenario, such teams are bound by the following:
+Based on the customer feedback and research data, it was important for us to improve the old flow in accord to the correct persona of our users. More focus was put on enterprise talent acquisition teams. We found out that in general scenario, such teams are bound by the following:
 
 1. **Want** - To hire good people with minimum effort and time
 2. **Capabilities** - Familiar with the technical terms and the skills needed for a role
 3. **Limitations** - Have low technical knowledge
 
-The design was implemented keeping in mind all the requirements. The idea was to keep the interface minimal and distraction free, so to attenuate the cognitive load for the recruiter.
+The new design was implemented keeping in mind all the requirements. The idea was to keep the interface minimal and distraction free, so to attenuate the cognitive load for the recruiter.
 
 
 ### Benefits of the new design
 
-1. Profile-driven approach to test candidates better when auto-generating a test in HackerEarth Assessments
+1. Skill-driven approach to test candidates better when auto-generating a test in HackerEarth Assessments
 2. Scalable system
-3. Better user controls and freedom
+3. Better user controls and flexibility
 4. User friendly jargons and actions
-5. Focuses on persona of a non-tech test creator
+5. Focuses on persona of a non-tech test administrator
 
 
 ### Features of the new flow
@@ -51,19 +51,18 @@ The new skill-based test creation flow involves a stepwise process where bare mi
 <img src="/images/skill-based-test-screen1.0.png" alt="Screen 1 depicting skills dropdown and experience buttons" />
 
 1. **Skills dropdown** - Since the definition of profile required by different companies and geographies do not overlap, skill is the primary domain used for tests by the recruiters.
-- In the new flow, users can search for a set of skills they desire. The list will be in alphabetical order and will auto-complete on typing
+- In the new flow, users can search for a set of skills they desire. The list will be in alphabetical order and will auto-suggest on typing
 - Multiple skills can be selected
-- Selecting one skill is compulsory
-- The list has to be exhaustive. In case the skill entered by the user does not match any from the list, the user cannot himself add the skill.
+- The recruiter should select atleast one skill to auto-generate a test
 
-2. **Experience** - Experience is one of the prime components in a job description. We are starting out with the following options and based upon the feedback may alter or add more in the next version.
+2. **Experience** - Years of experience is one of the prime components in a job description. We are starting out with the following options and based upon the customers' feedback, we may alter or add more in the next version.
 - 0-3 years
 - 4-6 years
 - More than 6 years
 
-The selected experience will be 0-3 years by default initially.
+The default selected option would be 0-3 years of experience.
 
-The above mentioned inputs are sufficient to auto-generate a test for the user.
+The above mentioned inputs are sufficient to auto-generate a test.
 
 ### Screen #2
 <img src="/images/skill-based-test-screen2.0.png" alt="Screen 2 depicting summary table" />
@@ -72,14 +71,13 @@ After selecting the skills and experience, the user is shown the summary of the 
 
 
 1. **Test name**
-- Default name is based on the first selected skill plus “Test”. This was an assumption based on the philosophy that the recruiter would usually choose the first skill as the most important one. This implementation helped to reduce the effort needed to type the heading always
+- Default name is based on the first selected skill appended by the text “Test” i.e. `<First skill name> Test`. This was an assumption based on the philosophy that the recruiter would usually choose the first skill as the most important one. This implementation helped to reduce the effort needed to type the heading always
 - The name would be inline editable
 - The interface will not allow to have empty test name
 
 2. **Experience**
 - This cannot be changed in this step
-- Assumption is that the need for it would be only in case of a wrong selection in the first step and therefore in those few cases they can start afresh.
-- In the next version, we will add a dropdown to change the experience in the skill page.
+- Assumption is that the need for it would be only in case of a wrong selection in the first step. Therefore, the user has to start afresh if they want to change the value.
 
 3. **Duration**
 <br/>
@@ -89,7 +87,7 @@ In general scenario, with our unique algorithm, the default test duration would 
 - When a question set is added
 
 4. **Test summary table**
-- No of skills selected and question type count in a question set
+- Number of skills selected and the question type count in a question set
 - The user can edit or delete an already added question set
 - The user can add a new question set. For adding a set, the user is asked to select the following information in a sequence in a separate screen:
   - Skill such as Java, Python or Basic Programming
@@ -121,7 +119,7 @@ const testCreationConfigGenerator = new WebpackConfigGenerator({
 {% endraw %}
 {% endhighlight %}
 
-`WebpackConfigGenerator` is our own implementation which is a class consisting of various methods to handle the default configuration such as `entry`, `output` and `module loaders`. The `isExternal` criteria checks if the modules are from `node_modules` directory or any other external library. So, with the above config, we get 2 JS files *viz.* `test-creation.js` and `vendors.js` and dependent CSS files.
+`WebpackConfigGenerator` is our in-house implementation. It is a class consisting of various methods to handle the default configuration such as `entry`, `output` and `module loaders`. The `isExternal` criteria checks if the modules are from `node_modules` directory or any other external library. So, with the above config, we get 2 JS files *viz.* `test-creation.js` and `vendors.js` and dependent CSS files.
 
 #### Building the interface
 
@@ -267,12 +265,12 @@ We use [`Stylus`](http://stylus-lang.com/){:target="_blank"} for writing `CSS`. 
 
 **Editable heading**
 <br/>
-By default, the test name is created using the first skill selected by the user and the string “Test”. In case the recruiter wants to edit the test name, they can click the heading and edit. This component also handled the case if the recruiter clears the test name. In such case, the default name populates again immediately when the input is focused out.
+By default, the test name is created using the first skill selected by the user. In case the recruiter wants to edit the test name, they can click the heading and edit. This component also handles the case if the recruiter clears the test name. In such case, the default name populates again immediately when the input is focused out.
 
 
 **Alert**
 <br/>
-Notifies which question set was updated along with test duration update.
+Notifies which question set was updated along with the test duration update.
 <img src="/images/skill-based-test-alert.png" alt="Alert bar" />
 
 
@@ -331,7 +329,7 @@ In the above code snippet, `action-icons-container` contains two icons blocks *v
 
 **Question set table**
 <br/>
-For recruiters, we had kept the options to edit an existing question set and add a new question set. While editing or creating a question set, they can update skills, question type such as MCQ and Programming, and question counts for each difficulty levels. The interface take care of the duration update.
+For recruiters, we had kept the options to edit an existing question set and add a new question set. While editing or creating a question set, they can update skills, question type such as MCQ and Programming, and question counts for each difficulty level. The interface take care of the duration update.
 
 If a recruiter is mistakenly trying to override and existing set, we prompt them for confirmation to save the hassles.
 <img src="/images/skill-based-test-question-set.png" alt="Question set" />
@@ -340,12 +338,12 @@ If a recruiter is mistakenly trying to override and existing set, we prompt them
 ### The secret sauce
 The algorithm that we use to populate initial set of questions is a complex one. We use parameters such as experience levels, skills selected by the recruiter, difficulty levels, and types of skills selected to display a summary table with appropriate question sets.
 
-Our internal algorithm tries to create a test of 90 min duration first, however if there are not enough questions then it will fall back to 75, 60, 45 minutes in order. These are the durations with which we had started and had the following restrictions or limitations:
+Our internal algorithm tries to create a test of 90 min duration first, however if there are not enough questions then it will fall back to 75, 60, 45 minutes in that order. These are the durations with which we had started and had the following restrictions or limitations:
 
 
-* It will never auto-generate a test less than 45 min
+* It will never auto-generate a test with duration less than 45 min
 * A test’s actual configuration can be displayed +5 or -10 min
-* If too many skills are added the duration can be longer than 90 min
+* If too many skills are added the duration can go beyond 90 min
 * The duration would alter if the initial load of skill set is changed
 
 
@@ -363,7 +361,7 @@ With this feature in place, we aspire to add a few differentiating aspects to it
 5. Allow the user to request for the skill from the interface in case the skill is absent in the platform
 6. Ability to create random sets
 7. Ability to use questions from the recruiter’s library
-8. Ability to change the experience in the test summary page
+8. Ability to change the years of experience in the test summary page
 
 ...
 
