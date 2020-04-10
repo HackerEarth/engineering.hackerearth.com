@@ -31,7 +31,7 @@ Based on the customer feedback and research data, it was important for us to imp
 2. **Capabilities** - Familiar with the technical terms and the skills needed for a role
 3. **Limitations** - Have low technical knowledge
 
-The new design was implemented keeping in mind all the requirements. The idea was to keep the interface minimal and distraction free, so to attenuate the cognitive load for the recruiter.
+The new design was implemented keeping in mind all the requirements by our star designer, [**Neha Singh**](http://nehadesign.co.in/){:target="_blank"}. The idea was to keep the interface minimal and distraction free, so to attenuate the cognitive load for the recruiter.
 
 
 ### Benefits of the new design
