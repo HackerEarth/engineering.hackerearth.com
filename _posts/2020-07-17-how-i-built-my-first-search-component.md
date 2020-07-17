@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How I built my first search component in React"
-description: "This is not about HackerEarth!"
+description: "From the vault of my memories before joining HackerEarth"
 category:
 tags: [ReactJS]
 ---
