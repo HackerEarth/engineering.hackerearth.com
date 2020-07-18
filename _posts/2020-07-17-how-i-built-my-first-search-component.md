@@ -425,7 +425,7 @@ export default connect(
 {% endraw %}
 {% endhighlight %}
 
-*Note: That Dan Abramov story is made up. Do not believe everything that you read on the internet.*
+*Note: That Dan Abramov story is made-up. Do not believe everything that you read on the internet.*
 
 * Header: It was divided into 3 parts viz. the logo, the search field and the links container.
 
