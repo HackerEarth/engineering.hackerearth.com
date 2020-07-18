@@ -33,8 +33,8 @@ While building apps using Redux architecture, one should be cognizant of its thr
 
 >In computer programming, a pure function is a function that has the following properties:
 >
-> * Its return value is the same for the same arguments (no variation with local static variables, non-local variables, mutable reference arguments or input streams from I/O devices).
-> * Its evaluation has no side effects (no mutation of local static variables, non-local variables, mutable reference arguments or I/O streams).
+> * Its return value is the same for the same arguments
+> * Its evaluation has no side effects
 
 In our case, a single module (file) was created to include action types, reducers and action creators. The flow was - when the user inputs something in the search field, we will take that value and pass it through an action creator which will fetch the results from the server for the queried string and return an action type along with the result. There was also a service layer in the middle, which handled the caching and server errors.
 
@@ -313,7 +313,7 @@ class SearchInput extends Component {
         this.search_debounce_timer = window.setTimeout(function () {
             _Search.searchTextChange(inputValue, true);
         }, 500);
-    };    
+    };
 
     render() {
         const {search, Search} = this.props;
