@@ -1,4 +1,5 @@
 ---
+author: Sayan Chowdhury
 layout: post
 title: "Analytics for Challenges"
 description: "Detailed Analytics of data retrieved from challenge"

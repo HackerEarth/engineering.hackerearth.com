@@ -1,4 +1,5 @@
 ---
+author: Vishal Gowda
 layout: post
 title: "Streaming Android applications via the browser"
 description: "Comprehensive guide to setting up remote emulators and interacting with them from the browser"

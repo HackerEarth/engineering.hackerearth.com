@@ -1,4 +1,5 @@
 ---
+author: Virendra Jain
 layout: post
 title: "Aggregating Apache logs with Fluentd and Amazon S3"
 description: "HackerEarth infrastructure is hosted on Amazon services. At any given point of

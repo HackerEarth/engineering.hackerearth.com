@@ -1,4 +1,5 @@
 ---
+author: Chandransh Srivastava
 layout: post
 title: "Hassle-free automated assessments"
 description: "A simplified and automated skill-based test creation"

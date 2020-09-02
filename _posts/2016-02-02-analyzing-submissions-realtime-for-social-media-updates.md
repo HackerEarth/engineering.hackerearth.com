@@ -1,4 +1,5 @@
 ---
+author: Sreeram Boyapati
 layout: post
 title: "Analyzing submissions in real time for social media updates"
 description: "Story: How we made a real-time app to automate marketing"

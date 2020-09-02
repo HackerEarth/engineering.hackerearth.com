@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "Scaling database with Django and HAProxy"
 description: "we use MySQL database as the primary data store. We have

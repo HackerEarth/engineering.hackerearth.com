@@ -1,4 +1,5 @@
 ---
+author: Ravi Ojha
 layout: post
 title: "Leveraging ReactJS in HackerEarth Assessment Environment"
 description: "How we leveraged ReactJS to build a faster and interactive programming assessment environment"

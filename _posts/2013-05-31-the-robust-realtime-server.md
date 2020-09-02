@@ -1,4 +1,5 @@
 ---
+author: Lalit Khattar
 layout: post
 title: "The Robust Realtime Server"
 description: "This is going to be a long blog post but I promise you will find some interesting

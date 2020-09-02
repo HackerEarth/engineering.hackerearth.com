@@ -1,4 +1,5 @@
 ---
+author: Kaushik Kumar
 layout: post
 title: "Sending emails to our half million and growing user community"
 description: "Email infrastructure at HackerEarth."

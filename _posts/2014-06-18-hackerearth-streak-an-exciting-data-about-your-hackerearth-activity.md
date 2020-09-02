@@ -1,4 +1,5 @@
 ---
+author: Ravi Ojha
 layout: post
 title: "HackerEarth Streak: An exciting data about your HackerEarth activity"
 description: "Code Streak:  Maximum number of unique problems solved continuously

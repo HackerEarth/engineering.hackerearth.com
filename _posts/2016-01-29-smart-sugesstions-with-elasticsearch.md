@@ -1,4 +1,5 @@
 ---
+author: Karthik Srivatsa
 layout: post
 title: "Smart suggestions with Django, Elasticsearch and Haystack"
 description: "Giving relevant suggestions using Elasticsearch and Haystack in Django"

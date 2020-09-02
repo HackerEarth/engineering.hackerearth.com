@@ -1,4 +1,5 @@
 ---
+author: Arindam Mani Das
 layout: post
 title: "A/B testing using Django"
 description: "How to implement a basic A/B testing framework in Django."

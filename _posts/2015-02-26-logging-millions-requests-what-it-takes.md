@@ -1,4 +1,5 @@
 ---
+author: Praveen Kumar
 layout: post
 title: "Logging millions of requests everyday and what it takes"
 description: "HackerEarth's web servers handle millions of requests every day. These request

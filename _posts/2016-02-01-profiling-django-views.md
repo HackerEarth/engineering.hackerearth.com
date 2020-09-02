@@ -1,4 +1,5 @@
 ---
+author: Shubham Jain
 layout: post
 title: "Profiling django views for SQL queries"
 description: "We created a SQL profiler for python functions which tells what

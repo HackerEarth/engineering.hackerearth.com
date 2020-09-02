@@ -1,4 +1,5 @@
 ---
+author: Pradeep Kumar
 layout: post
 title: "Beautiful Math Symbols"
 description: "Supporting LaTex for writing math symbols on HackerEarth"

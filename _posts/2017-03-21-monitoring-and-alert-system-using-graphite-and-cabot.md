@@ -1,4 +1,5 @@
 ---
+author: Karthik Srivatsa
 layout: post
 title: "Monitoring and alert system using Graphite and Cabot"
 description: "Setting up an alert and monitoring system for a product using Graphite and Cabot"

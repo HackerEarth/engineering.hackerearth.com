@@ -1,4 +1,5 @@
 ---
+author: Shubham Jain
 layout: post
 title: "Profiling Django views with Scooby profiler"
 description: "With scooby profiler, you can debug SQL/Memcache queries while serving requests in Django.

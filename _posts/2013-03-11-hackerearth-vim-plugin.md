@@ -1,4 +1,5 @@
 ---
+author: Lalit Khattar
 layout: post
 title: "Vim plugin to compile/run code using API"
 description: "I love Vim editor. And the idea of a plugin to compile and run code from my favorite

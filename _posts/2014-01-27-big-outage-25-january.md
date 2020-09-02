@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "Post-mortem: The big outage on January 25, 2014"
 description: "25th January was a rather unfortunate day for us. The monthly challenge - January Jackpot 2014..."

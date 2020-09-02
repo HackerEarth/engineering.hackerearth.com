@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "HackerEarth Technology Stack"
 description: "Description of technology used by us in building HackerEarth."

@@ -1,4 +1,5 @@
 ---
+author: Lalit Khattar
 layout: post
 title: "Building a powerful comment system"
 description: "Comments have become an integral part of our website. They are integrated

@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "The HackerEarth Data Challenge"
 description: "40,000+ programmers use HackerEarth. Everyday, people from all over India and

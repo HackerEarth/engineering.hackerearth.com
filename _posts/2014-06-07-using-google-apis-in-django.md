@@ -1,4 +1,5 @@
 ---
+author: Virendra Jain
 layout: post
 title: "Using Google Data APIs with django apps"
 description: "In order to use any of the Google APIs for your application, first you need to

@@ -1,4 +1,5 @@
 ---
+author: Shivindera Singh
 layout: post
 title: "Logging Javascript errors in production"
 description: "Integration of errorception javascript logger on HackerEarth to catch issues in production."

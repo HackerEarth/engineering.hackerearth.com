@@ -1,4 +1,5 @@
 ---
+author: Sayan Chowdhury
 layout: post
 title: "Using APIs with Python Requests Module"
 description: "How HackerEarth uses Python Requests to fetch data from various APIs [Tutorial]"

@@ -1,4 +1,5 @@
 ---
+author: Shubham Jain
 layout: post
 title: "Scheduling emails with celery in Django"
 description: "After a long journey with Django, you come to a place where you feel the need to

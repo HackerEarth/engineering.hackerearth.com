@@ -1,4 +1,5 @@
 ---
+author: Virendra Jain
 layout: post
 title: "Patching django sessions to control user sessions"
 description: "HackerEarth uses django framework at its heart. We use two third

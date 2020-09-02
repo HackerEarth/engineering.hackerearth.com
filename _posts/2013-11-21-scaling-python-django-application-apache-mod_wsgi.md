@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "Scaling Python/Django application with Apache and mod_wsgi"
 description: "HackerEarth is primarily based on

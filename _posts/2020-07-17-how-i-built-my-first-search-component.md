@@ -1,4 +1,5 @@
 ---
+author: Chandransh Srivastava
 layout: post
 title: "How I built my first search component in React"
 description: "From the vault of my memories before joining HackerEarth"

@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "HackerEarth API v2: Introducing asynchronous callbacks"
 description: "We had already published HackerEarth API v1 in February, 2012 at

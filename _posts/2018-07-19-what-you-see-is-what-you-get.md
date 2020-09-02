@@ -1,4 +1,5 @@
 ---
+author: Himanshu Malhotra
 layout: post
 title: "What you see is what you get!"
 description: "Integration of WYSIWYG editor in HackerEarth's Recruit platform"

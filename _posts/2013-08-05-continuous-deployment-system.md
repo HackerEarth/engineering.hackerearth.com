@@ -1,4 +1,5 @@
 ---
+author: Lalit Khattar
 layout: post
 title: "Continuous Deployment System"
 description: "This is one of the coolest and important thing we recently built at HackerEarth. 

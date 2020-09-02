@@ -1,4 +1,5 @@
 ---
+author: Vivek Prakash
 layout: post
 title: "Programming challenges, uptime, and mistakes in 2013"
 description: "HackerEarth hosted more than thousand
