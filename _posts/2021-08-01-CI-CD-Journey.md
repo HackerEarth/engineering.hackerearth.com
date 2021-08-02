@@ -35,9 +35,10 @@ The key tenets of following agile to push consistent smaller pieces of software 
 > - You can perform push-button deployments of any version of the software to any environment on demand"
 > <br> &mdash; <cite>Martin Fowler</cite>
 
- 
-## CI to CD in 3 steps
+__When it all began__ <br>
+<img src="/images/cd-dilbert.png" alt="Funny Dilbert quote" />
 
+## CI to CD in 3 steps
 We decided to redraw the lines to achieve Continuous Delivery. The first step to achieve Continuous Delivery is Continuous Integration. Continuous Integration is the art of integrating different sources into a single outcome and evaluate if the combination of changes work without issues.
 
 1. This has to be done frequently and the feedback should be close to point of failure. <br>   
@@ -91,14 +92,14 @@ We were actively using SCM to version code. But now extended to environment conf
 
 ## The Ephiphany
 
-**CD is a paradigm shift. Change does not happen overnight** <br>
-Embracing Continuous Deployment is a behaviroual shift. The team should move away from large deployments to smaller shorter release cycles. This also means establishing a sturdy safety net to catch failures at each step.  
+**CD is a paradigm shift. Change does not happen overnight**
+  : Embracing Continuous Deployment is a behaviroual shift. The team should move away from large deployments to smaller shorter release cycles. This also means establishing a sturdy safety net to catch failures at each step.  
 **Embrace DevOps culture** <br>
-This requires the teams to abolish silos and work as cross-functional teams. Treat your test code and test infrastructure as first class citizens. <br>
+  : This requires the teams to abolish silos and work as cross-functional teams. Treat your test code and test infrastructure as first class citizens. <br>
 **Invest on Feature Flags** <br>
-Feature flags/Feature toggles have been in use for a while. Start using these to push changes to trunk without affecting customer usage. Avoid long running feature branches. <br>
+    Feature flags/Feature toggles have been in use for a while. Start using these to push changes to trunk without affecting customer usage. Avoid long running feature branches. <br>
 **Improve - continuously** <br>
-Start measuring your build and deploy metrics. Pick up north start metric around each tenet and work towards moving the needle. Celebrate small wins, every input to get there counts.
+    Start measuring your build and deploy metrics. Pick up north start metric around each tenet and work towards moving the needle. Celebrate small wins, every input to get there counts.
 
 ## Accelerate!
 
