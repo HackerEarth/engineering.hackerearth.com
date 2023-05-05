@@ -87,11 +87,11 @@
 
 .footer-bottom-wrap {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
     margin: 40px 0 20px;
-}
-
-.footer-bottom-wrap {
     color: #5C6486;
     font-size: 16px;
     font-weight: 500;
@@ -102,8 +102,14 @@
     flex-direction: column;
     margin-top: 31px;
 }
+
 .copyright {
-    color:#5C6486 ;
+    color: #5C6486;
+}
+
+.social-icon {
+    display: flex;
+    gap: 15px;
 }
 
 
@@ -137,4 +143,3 @@
         margin-bottom: 20px;
     }
 }
-
