@@ -1,0 +1,145 @@
+/*---- Footer CSS -----*/
+.footer-container {
+    max-width: 1400px;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.footer-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 80px;
+}
+
+.footer-wrap .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 15px;
+    margin-right: 20px;
+}
+
+.footer-wrap .contact {
+    color: #2F89FC;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+
+}
+
+.footer-wrap li {
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: .3px;
+    margin-bottom: 10px;
+}
+
+
+.footer-link {
+    color: #2F89FC;
+}
+
+.footer-wrap .contact {
+    margin-bottom: 30px;
+}
+
+.footer-wrap .footer-menu {
+    flex: 0 0 15%;
+    text-align: left;
+}
+
+.footer-wrap .footer-menu:nth-child(4) {
+    flex: 0 0 20%;
+}
+
+.footer-wrap .footer-menu {
+    color: #5C6486;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin: 0 0 30px;
+}
+
+.footer-wrap .footer-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-wrap .footer-menu {
+    margin-bottom: 12px;
+}
+
+.footer-wrap .footer-menu {
+    color: #6B769B;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+}
+
+.footer-wrap .footer-menu {
+    color: #2F89FC;
+}
+
+.footer-bottom-wrap {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    margin: 40px 0 20px;
+    color: #5C6486;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.link-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 31px;
+}
+
+.copyright {
+    color: #5C6486;
+}
+
+.social-icon {
+    display: flex;
+    gap: 15px;
+}
+
+
+/*----- Media css ------*/
+@media (min-width: 768px) {
+    .flexitem-wrap #leftwrap {
+        flex: 0 0 50%;
+    }
+
+    .flexitem-wrap #rightwrap {
+        flex: 0 0 48%;
+    }
+
+    #globe-animation svg {
+        margin-top: -50px;
+    }
+}
+
+@media (max-width: 991px) {
+
+
+    .footer-wrap {
+        display: block;
+    }
+
+    .footer-wrap .footer-menu {
+        margin-top: 30px;
+    }
+
+    .footer-wrap .footer-menu h4 {
+        margin-bottom: 20px;
+    }
+}
