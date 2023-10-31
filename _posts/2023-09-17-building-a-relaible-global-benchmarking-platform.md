@@ -10,25 +10,25 @@ tags: [Lambda, DDSketch, AWS, HackerEarth, ETL, MapReduce]
 
 ### Introduction
 
-HackerEarth has lots of candidates getting evaluated on a daily basis. We have feature which benchmarks candidates across the platform.Benchmarking is the process of creating the profile of the ideal candidate for a position, and then measuring all candidates against that profile.  
-
-To benchmark candidate skills against our million of candidates, We decided to move away from our regular cron solution to build a more reliable and accurate data pipeline.To support this we created a new data ingestion flow and data read flow. We moved away from our deterministic algorithms to probablistic algorithms with [DDSketch](https://github.com/DataDog/sketches-py).
+HackerEarth has lots of candidates getting evaluated on a daily basis. We have a feature that benchmarks candidates across the platform. Benchmarking is the process of creating the profile of the ideal candidate for a position, and then measuring all candidates against that profile.
+To benchmark candidate skills against our millions of candidates, we decided to move away from our regular cron solution to build a more reliable and accurate data pipeline. To support this, we created a new data ingestion flow and data read flow. We moved away from our deterministic algorithms to probabilistic algorithms with [DDSketch](https://github.com/DataDog/sketches-py).
 
 ### Problem
 
-Our old benchmarking solution was trying to compute to global benchmarking of a candidate on the fly by calculate solve percentage of the individual skills and return the geometrical mean of all the skill benchmarks. we handle very large volumes of data every day. Analyzing this data itself—for example, calculating a quantile was optimal in terms of resources.
+Our old benchmarking solution was trying to compute the global benchmarking of a candidate on the fly by calculating the solve percentage of the individual skills and returning the geometric mean of all the skill benchmarks. We handle huge volumes of data every day. Analyzing this data itself—for example, calculating a quantile was optimal in terms of resources.
 
 
 ### Solution
 
-We came up with the solution that computes an approximate quantile from a compressed representation of that data. We first need to appropriately summarize that data without incurring an excessive loss of fidelity. We do this by creating a sketch. Sketch algorithms generate sketches: smaller, more manageable data structures, from which we can calculate some properties of the original data.
+We came up with a solution that computes an approximate quantile from a compressed representation of that data. We first need to appropriately summarize that data without incurring an excessive loss of fidelity. We do this by creating a sketch. Sketch algorithms generate sketches: smaller, more manageable data structures, from which we can calculate some properties of the original data.
 
-We considered various algorithms to accurately compute percentiles on noisy, large-scale realtime data which we were receiving from candidates skill scores. We considered using Tdigest and DDSketch. For our use case DDSketch served the purpose.We did a POC and compared the accuaracy of both the algorithms as show below to come up with finalised algorithm.
+We considered various algorithms to accurately compute percentiles on noisy, large-scale, real-time data that we were receiving from candidates' skill scores. We considered using Tdigest and DDSketch. For our use case, DDSketch served the purpose.We did a POC and compared the accuracy of both the algorithms as shown below to come up with a finalized algorithm.
+
 
 
 ### POC results and observations
 
-We compared the actual percentile ranges in comparison to the two probabilistic approaches we mentioned(DDSketch and T-DIgest), and these were the results. Note: we have run these tests on the random samples of data from the POC point of view.
+We compared the actual percentile ranges in comparison to the two probabilistic approaches we mentioned(DDSketch and T-DIgest), and these were the results. Note: we have run these tests on the random data samples from the POC point of view.
 
 
 ```python
@@ -98,11 +98,12 @@ Time taken to add samples to DDSketch: 298.89 ms
 Time taken to add samples to TDigest:  7243 ms -> 7.243 sec
 ```
 
-Based on above calculation we can see that for same sample size (100000) of data DDSketch  298.89 ms to calculate the sketch with deviation of <0.6% from actual percentile and TDigest takes 7.243 sec with 0.2% deviation from actual percentile.
 
-Serialized object size Comparision:
+Based on the above calculation, we can see that for same sample size (100000) of data DDSketch 298.89 ms to calculate the sketch with deviation of <0.6% from actual percentile and TDigest takes 7.243 sec with 0.2% deviation from actual percentile.
 
+Serialized object size Comparison:
 As sketch or digest objects will be stored as serialized files, we also calculated the size of the objects
+
 
 ```python
 Sample size: 1000
@@ -121,17 +122,19 @@ Size of serialized TDigest: 22049 bytes, at relative accuracy(0.01)
 
 ### POC Conclusion
 
-Based on above calculation we can conclude that TDigest gives less deviation to accurate percentiles in comparison to DDSketch, consuming more memory and time. Whereas in our case we can afford to have accuracy with deviation close to 1% , time and memory plays important role in faster calcualtions of sketches. 
+Based on the above calculation, we can conclude that TDigest gives less deviation to accurate percentiles in comparison to DDSketch, consuming more memory and time. Whereas in our case, we can afford to have accuracy with deviation close to 1%, time and memory plays an important role in faster calculations of sketches.
 
-Hence we went with DDSketch algorithm which takes a nominal time and memory for creating sketches.
+Hence, we went with the DDSketch algorithm which takes a nominal time and memory for creating sketches.
+
 
 ### Data Ingestion Pipeline (Improved Architechture)
 
-Now that we know that we need to create sketch we needed to create new sketches for every new data point regularly coming from millions of candidates taking test at our platform, We needed a data ingestion pipeline for updation of these sketches in near realtime.
+Now that we know that we need to create sketches, we need to create new sketches for every new data point regularly coming from millions of candidates taking tests at our platform. We needed a data ingestion pipeline for updation of these sketches in near real time.
 
-We built a data pipeline to update the sketch. Individual candidate skill and scores were stored in dynamo DB. Participation end triggers the data from Dynamo db to the map-reduce flow, the candidates skill data is consumed by reducer SQS queue. Reducer lambda then takes data in batches of 10000 or 5 mins time interval and reduces the data to skill wise scores. These messages are then consumed by SQS FIFO queue which groups the data based on problem template and skills. This data is again consumed by the sketch update lambda which generates the new sketch and merges the new skill sketch with the old sketch and then calculates the percentile threshold. This flow inturn is consumed by SQS queue which updates the data in sql table.
+We built a data pipeline to update the sketch. Individual candidate skills and scores were stored in dynamo DB. Participation end triggers the data from Dynamo db to the map-reduce flow ;  the candidates skill data is consumed by reducer SQS queue. Reducer lambda takes data in batches of 10000 or 5 mins time intervals and reduces the data to skill-wise scores. These messages are then consumed by the SQS FIFO queue, which groups the data based on problem template and skills. This data is again consumed by the sketch update lambda, which generates the new sketch, merges the new skill sketch with the old sketch, and then calculates the percentile threshold. This flow in turn is consumed by the SQS queue which updates the data in the SQL table.
 
-Model for Storing the percentile threshold :
+
+Model for Storing the Percentile Threshold:
 
 ```python
 
@@ -189,6 +192,6 @@ digest.update_from_dict(digest_dict)
 
 ### Conclusion
 
-We built **global_benchmarking** to reliably and effectively run resource-intensive and time-intensive percentile calculation asynchronously in the background. It is now responsible for running asynchronous flows for supporting benchamrking analysis on 1 million or more candidates. This is a benifical insights for enabling recruiter making best decisions as well as enabling candidates improve thier skillset.
+We built **global_benchmarking** to reliably and effectively run resource-intensive and time-intensive percentile calculations asynchronously in the background. It is now responsible for running asynchronous flows for supporting benchmarking analysis on 1 million or more candidates. This is a beneficial insight for enabling recruiters to make best decisions as well as enabling candidates to improve their skill set.
 
 Posted by [Raunak choudhary] (https://www.linkedin.com/in/raunak-chowdhary-b49406b1)
